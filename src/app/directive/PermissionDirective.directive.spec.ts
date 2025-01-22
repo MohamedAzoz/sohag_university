@@ -1,4 +1,4 @@
-import { ViweDirective } from './viwe.directive';
+import { ViweDirective } from './PermissionDirective.directive';
 
 describe('ViweDirective', () => {
   it('should create an instance', () => {
