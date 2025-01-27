@@ -1,13 +1,12 @@
 import { Component, AfterViewInit} from '@angular/core';
 import { CarouselComponent } from '../carousel/carousel.component';
-import { CollegeComponent } from '../../college/college.component';
 import { SliderComponent } from "../slider/slider.component";
-import { ArticlesComponent } from '../articles/articles.component';
+import { CollegesComponent } from '../colleges/colleges.component';
 
 declare const bootstrap: any;
 @Component({
   selector: 'app-container',
-  imports: [CarouselComponent, CollegeComponent, SliderComponent,ArticlesComponent],
+  imports: [CarouselComponent, CollegesComponent, SliderComponent],
   templateUrl: './container.component.html',
   styleUrl: './container.component.css'
 })

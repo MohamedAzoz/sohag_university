@@ -1,0 +1,38 @@
+<!-- @if (isBoolen()) {
+@if (name!=undefined ) {
+  <div class="col-10 py-2 d-flex justify-content-center">
+  <h3 class="fw-bold text-dark"> {{name}}</h3>
+  </div>
+} -->
+
+<!-- @if (id=='summarys') { -->
+  @for (item of summarys; track item) {
+   <div class="col-10 py-2">
+     <a style="background-color: #77A0F2;"
+        class="btn text-light w-100 ">{{item.title}}</a>
+   </div>
+     }
+<!-- } -->
+<!-- @else if (id=='reviews') {
+  @for (item of review; track item) {
+   <div class="col-10 py-2">
+     <a style="background-color: #77A0F2;"
+        class="btn text-light w-100 ">{{item.title}}</a>
+   </div>
+     }
+}@else if (id=='tests') {
+  @for (item of test; track item) {
+   <div class="col-10 py-2">
+     <a style="background-color: #77A0F2;"
+        class="btn text-light w-100 ">{{item.title}}</a>
+   </div>
+     }
+}@else if (id=='exams') {
+  @for (item of exam; track item) {
+   <div class="col-10 py-2">
+     <a style="background-color: #77A0F2;"
+        class="btn text-light w-100 ">{{item.title}}</a>
+   </div>
+     }
+} -->
+<!-- } -->

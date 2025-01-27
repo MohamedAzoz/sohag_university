@@ -1,4 +1,6 @@
-import { Component , AfterViewInit} from '@angular/core';
+import { Component , AfterViewInit, OnInit} from '@angular/core';
+import { AppHomeService } from '../../../service/app-home.service';
+import { Carousel } from '../../../models/carousel';
 declare const bootstrap: any;
 
 @Component({
@@ -7,7 +9,18 @@ declare const bootstrap: any;
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.css'
 })
-export class CarouselComponent implements AfterViewInit {
+export class CarouselComponent implements AfterViewInit ,OnInit {
+  carousels!:Carousel[]
+  constructor(
+    private carousel_Service:AppHomeService
+  ){
+
+  }
+  ngOnInit(): void {
+   this.carousel_Service.getCarousels().subscribe((data)=>{
+      this.carousels=data
+   })
+  }
 
   ngAfterViewInit(): void {
     // Carousel

@@ -30,6 +30,32 @@ a {
     opacity: 1;
 }
 
+.All {
+  font-size: 1.5vw;
+  font-weight: bold;
+}
+
+.All2 {
+  font-size: 1.5vw;
+  font-weight: bolder;
+}
+
+.All3 {
+  font-size: 1vw;
+  font-weight: bolder;
+}
+
+.All1 {
+  font-size: 1.7vw;
+  font-weight: bold;
+}
+.pro {
+  font-weight: bold;
+  font-size: 1.3vw;
+  direction: rtl;
+  /* animation: viwedisplay 0.8s forwards; */
+}
+
 
 /* @keyframes lft {
     from {

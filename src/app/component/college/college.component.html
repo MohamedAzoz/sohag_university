@@ -1,27 +1,59 @@
-<!-- @for (data of all; track data) { -->
-  <div
-          class="col-11 col-sm-3 color d-flex align-items-center justify-content-center py-3 py-sm-1 my-3 my-sm-0 All"
-          data-bs-toggle="tooltip"
-          data-bs-placement="top"
-          data-bs-custom-class="custom-tooltip"
-          data-bs-title="كلية التربية بجامعة سوهاج تعد من الكليات الأساسية التي تهدف إلى إعداد معلمين مؤهلين للتدريس في مختلف المراحل
-          التعليمية. تأسست الكلية في عام 2007، وهي تسعى لتحقيق التميز في التعليم والتدريب التربوي من خلال برامج أكاديمية متميزة وشراكات مع المدارس والمؤسسات التعليمية."
-        >
-          <a
-            href="التربية.html"
-            target="_blank"
-            class="col-12 d-flex flex-column align-items-center justify-content-center"
-          >
-            <img
-              class="col-4 col-sm-6 mx-auto d-block"
-              src="372937.svg"
-              alt="التربية"
-            />
-            <p
-              class="All1 d-none row d-sm-flex justify-content-center align-items-center"
-            >
-              التربية
-            </p>
-          </a>
+@if (departments) {
+<div class="container-ms|md|lg|xl|xxl w-100">
+  <header style="background-color: #0540F2;" class="container-ms|md|lg|xl|xxl w-100 text-light All font1 py-3 py-sm-2 z-2">
+  {{college.name}}
+  </header>
+  <div class="row w-100 my-2">
+      <!-- <nav style="background-color: #77A0F2;" class="navbar col-2 col-sm-1 h-100 position-fixed text-light All3 flex-column flex-sm-row justify-content-center z-1">
+          <div class="container-fluid col-12">
+              <ul class="navbar-nav col-12">
+                  <li class="nav-item col-12 All my-5">
+                      <a href="#up" class="nav-link">
+                          <img class="mx-auto d-block imgw rounded-circle" src="png-clipart-long-beach-christian-fellowship-computer-icons-graphy-up-arrow-miscellaneous-angle-thumbnail.png" alt="">
+                      </a>
+                  </li>
+                  <li class="nav-item col-12 All my-5">
+                      <a href="http://193.227.46.42/ZAD_fci/Zad.aspx" target="_blank" class="nav-link">
+                          <img class="mx-auto d-block imgw rounded-circle" src="download.png" alt="">
+                      </a>
+                  </li>
+                  <li class="nav-item col-12 All my-5">
+                      <a href="https://fci.sohag-univ.edu.eg/main/" target="_blank" class="nav-link">
+                          <img class="mx-auto d-block imgw rounded-circle" src="image8-2.jpg">
+                      </a>
+                  </li>
+                  <li class="nav-item col-12 All my-5">
+                      <a href="https://www.facebook.com/groups/419995525365826/" target="_blank" class="nav-link">
+                          <img class="mx-auto d-block imgw rounded-circle" src="2023_Facebook_icon.svg.webp">
+                      </a>
+                  </li>
+              </ul>
+          </div>
+      </nav> -->
+      <div class="container w-100">
+        <div class="container my-1 d-flex justify-content-center flex-column align-items-center bg-dark-subtle">
+          @for (depart of departments; track depart) {
+            <div class="col-5 py-3">
+              <button  (click)="setDepartment(depart)" style="background-color: #77A0F2;"
+                 class="btn text-light w-100">{{depart.name}}</button>
+            </div>
+              }
         </div>
-<!-- } -->
+          <div class="container-fluid w-100 d-flex flex-row-reverse justify-content-evenly">
+                <app-year class="row col-3"></app-year>
+                <app-subject class="row col-3"></app-subject>
+                <app-subject-content class="row col-3"></app-subject-content>
+                <app-content class="row col-3"></app-content>
+          </div>
+      </div>
+  </div>
+  <footer style="background-color: #152659;" class="text-light All align-items-center w-100 pt-2">
+      <p class="font3 d-flex justify-content-center col-12 align-items-center" style="opacity:0.4;">Copyright&copy;Your Website 2024</p>
+  </footer>
+  </div>
+}@else {
+  <div class="d-flex justify-content-center my-5">
+    <h1 class="text-bg-danger">Database is empty</h1>
+  </div>
+}
+

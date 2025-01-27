@@ -1,1 +1,60 @@
-<p>login works!</p>
+<div class="container my-5 d-flex justify-content-center">
+  <form class="row w-50 gy-3 gx-0 py-3 shadow-lg color rounded-2"  #login="ngForm">
+    <h3 class="text-center fw-bolder my-1">Login</h3>
+    <div class="col-10 mx-auto">
+      <label for="inputEmail4" class="form-label">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputEmail4"
+        required
+        name="username"
+        [(ngModel)]="user.username"
+        #usernameinput="ngModel"
+        pattern="^\d{13}$"
+        [ngClass]="{'is-invalid': (usernameinput.dirty || usernameinput.touched)&& usernameinput.invalid,
+          'is-valid':usernameinput.valid
+        }"
+      />
+      <div class="invalid-feedback">
+        @if (usernameinput.errors?.['required'] ) {
+          <span>useremail is required</span>
+        }
+        @else if (usernameinput.errors?.['pattern'] ) {
+          <span>useremail most be contain numbers</span>
+        }
+      </div>
+    </div>
+    <div class="col-10 mx-auto">
+      <label for="inputPassword4" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="inputPassword4"
+        required
+        name="password"
+        [(ngModel)]="user.password"
+        #passwordinput="ngModel"
+        minlength="6"
+        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(*[@|.])"
+        [ngClass]="{'is-invalid': (passwordinput.dirty || passwordinput.touched)&& passwordinput.invalid,
+          'is-valid':passwordinput.valid
+        }"
+      />
+      <div class="invalid-feedback">
+        @if (passwordinput.errors?.['required'] ) {
+          <span>password is required</span>
+        } @else if (passwordinput.errors?.['minlength'] ) {
+          <span>password most be at least 6 charcters</span>
+        }
+        @else if (passwordinput.errors?.['pattern'] ) {
+          <span>password most be at least one small and one captail charcters and numbers</span>
+        }
+      </div>
+    </div>
+
+    <div class="col-10 mx-auto">
+      <button type="submit" (click)="Login(usernameinput.value,passwordinput.value)" class="btn btn-dark" [disabled]="login.invalid">login</button>
+    </div>
+  </form>
+</div>

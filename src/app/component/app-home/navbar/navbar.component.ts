@@ -16,10 +16,7 @@ export class NavbarComponent implements AfterViewInit {
     });
 
     // Tooltips
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-    const tooltipList = [...tooltipTriggerList].map(
-      (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
-    );
+    
 
     // Carousel
     const carousel = new bootstrap.Carousel('#myCarousel');

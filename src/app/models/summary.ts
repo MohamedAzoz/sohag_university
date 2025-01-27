@@ -3,6 +3,6 @@ export interface Summary {
   title: string;
   description: string;
   subjectId: string;
-  uploadedBy: string; 
+  uploadedBy: string;
   updatedAt: Date;
 }

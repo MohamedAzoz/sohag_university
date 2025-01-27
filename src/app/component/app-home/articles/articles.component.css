@@ -1,7 +1,0 @@
-.cl {
-  font-size: 2vw;
-  background-color: red;
-  &:hover {
-      background-color: rgb(196, 0, 0);
-  }
-}

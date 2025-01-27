@@ -10,20 +10,25 @@ class=" w-auto scrollspy-example"
 <div class=" d-flex justify-content-center p-2 p-md-4">
   <div id="carouselExampleDark" class="carousel carousel-dark slide col-12" data-bs-ride="carousel">
     <div class="carousel-indicators w-25 mx-auto">
-      <button style="background-color: #D4AF37;" type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <!-- @for (item of carousels; track item) { -->
+        <button style="background-color: #D4AF37;" type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <!-- } -->
       <button style="background-color: #D4AF37;" type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 1"></button>
       <button style="background-color: #D4AF37;" type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 2"></button>
       <button style="background-color: #D4AF37;" type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item active" data-bs-interval="1000">
-        <img src="19_2024-638574278668167801-816.jpeg" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-block">
-          <h5 class="All1 bgcolor py-1 col-6 mx-auto"> د/حسان النعمانى ( رئيس جامعة سوهاج )</h5>
-          <p class="All bgcolor p-1">الجامعة تحرص على تكريم المجتهدين ولإبراز النماذج المثالية التي يمكن أن تكون قدوة لغيرهم من الطلاب</p>
+      @for (item of carousels; track item) {
+
+        <div class="carousel-item active" data-bs-interval="2000">
+          <img [src]="item.imge" class="d-block w-100" alt="...">
+          <div class="carousel-caption d-block">
+            <h5 class="All1 bgcolor py-1 col-6 mx-auto">{{item.title}}</h5>
+            <p class="All bgcolor p-1">{{item.description}}</p>
+          </div>
         </div>
-      </div>
-      <div class="carousel-item" data-bs-interval="2000">
+      }
+      <!-- <div class="carousel-item" data-bs-interval="2000">
         <img src="67812028_1986045838162083_6533333761948385280_n.jpg" class="d-block w-100" alt="...">
         <div class="carousel-caption d-block">
           <h5 class="All bgcolor py-1 col-6 mx-auto">رؤية الجامعة</h5>
@@ -43,7 +48,7 @@ class=" w-auto scrollspy-example"
           <h5 class="All bgcolor py-1 col-6 mx-auto">من أهداف الجامعة</h5>
           <p class="All bgcolor p-1">تطوير البرامج الدراسية القائمة و إتاحة برامج دراسية جديدة تخدم المجتمع المحيط و تواكب التطورات على الساحتين الإقليمية و العالمية لإعداد خريج متميز يلبي إحتياجات سوق العمل</p>
         </div>
-      </div>
+      </div> -->
     </div>
     <button class="carousel-control-prev wid ms-2" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
