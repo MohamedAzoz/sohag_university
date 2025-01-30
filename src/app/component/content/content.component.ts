@@ -18,11 +18,12 @@ import { SubjectInface } from '../../models/subject_inface';
 })
 export class ContentComponent implements OnInit{
   id!:string|null
- summarys!:Summary[]|null
-  exam!:Exam[]|null
-  test!:Test[]|null
-  review!:Review[]|null
+//  summarys!:Summary[]|null
+//   exam!:Exam[]|null
+//   test!:Test[]|null
+//   review!:Review[]|null
   name!:string
+  content:Summary[]|Exam[]|Test[]|Review[]|null=null
   constructor(
     private subject_Service:SubjectServiceService,
     private summary_Service:SummaryServiceService,
@@ -31,50 +32,47 @@ export class ContentComponent implements OnInit{
     private review_Service:ReviewService,
   ){}
   ngOnInit(): void {
+//     const serviceMap = {
+//       summary: (subject: SubjectInface) => this.summary_Service.getSummary(subject),
+//       reviews: (subject: SubjectInface) => this.review_Service.getReview(subject),
+//       tests: (subject: SubjectInface) => this.test_Service.getTest(subject),
+//       exams: (subject: SubjectInface) => this.exam_Service.getExam(subject),
+//     };
     this.subject_Service.currentContent.subscribe((v)=>{
       if(v){
         this.name=v
       }
     })
-//     this.activa.paramMap.subscribe((Id)=>{
-//       this.id=Id.get('content')
 
-// });
-// this.subject_Service.currentContent.subscribe((value)=>{
-//   this.id=value
-// })
-this.subject_Service.currentSubject.subscribe((subject)=>{
-  if(subject){
-    // if(this.id=='summarys'){
-      this.summary_Service.getSummary(subject).subscribe((S)=>{
-        this.summarys=S
-      });
-    // }
-    // else if(this.id=='reviews'){
-    //   this.review_Service.getReview(subject).subscribe((R)=>{
-    //     this.review=R
-    //   });
-    // // }else if(this.id=='tests'){
-    //   this.test_Service.getTest(subject).subscribe((T)=>{
-    //     this.test=T
-    //   });
-    // // }else if(this.id=='exams'){
-    //   this.exam_Service.getExam(subject).subscribe((E)=>{
-    //       this.exam=E
-    //   });
-    // }
-  }
-  });
+// this.subject_Service.currentSubject.subscribe((subject)=>{
+//   if(subject){
+//     if(this.name==='summary'){
+//       serviceMap[this.name](subject).subscribe((S)=>{
+//         this.content=S
+//       });
+//     }
+//     else if(this.name==='reviews'){
+//       serviceMap[this.name](subject).subscribe((R)=>{
+//         this.content=R
+//       });
+//     }else if(this.name==='tests'){
+//       serviceMap[this.name](subject).subscribe((T)=>{
+//         this.content=T
+//       });
+//     }else if(this.name==='exams'){
+//       serviceMap[this.name](subject).subscribe((E)=>{
+//           this.content=E
+//       });
+//     }
+//   }
+//   });
+
+this.subject_Service.allContent.subscribe((cont)=>{
+  this.content=cont
+})
+
 }
-isBoolen():boolean{
-  if((this.exam?.length==0&& this.exam==null)
-    || (this.test?.length==0 && this.test==null)
-    ||( this.summarys?.length==0 && this.summarys==null)
-    || (this.review?.length==0 && this.review==null)){
-    return true;
-  }else{
-    return false;
-  }
-
+isempty():boolean{
+  return (this.content?.length==0)?true:false;
 }
 }

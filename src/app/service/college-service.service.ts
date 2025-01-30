@@ -39,6 +39,9 @@ export class CollegeServiceService {
   DeleteCollege(college:College):Observable<College>{
     return this.http.delete<College>(`${environment.apiUrl}/college/${college.id}`,this.header);
   }
+  updateCollege(college:College):Observable<College>{
+    return this.http.patch<College>(`${environment.apiUrl}/college/${college.id}`,college,this.header);
+  }
 
 
   //================ Departments  Service =====================
@@ -51,6 +54,9 @@ export class CollegeServiceService {
   DeleteDepartment(department:Department):Observable<Department>{
     return this.http.delete<Department>(`${environment.apiUrl}/department/${department.id}`,this.header)
   }
+  updateDepartment(department:Department):Observable<Department>{
+        return this.http.patch<Department>(`${environment.apiUrl}/department/${department.id}`,department,this.header);
+      }
 
   //================= Year  Service===================
   getYears(department:Department):Observable<Year[]>{
@@ -62,8 +68,10 @@ export class CollegeServiceService {
   DeleteYear(year:Year):Observable<Year>{
     return this.http.delete<Year>(`${environment.apiUrl}/year/${year.id}`,this.header)
   }
-
-
+  updateYear(year:Year):Observable<Year>{
+    return this.http.patch<Year>(`${environment.apiUrl}/year/${year.id}`,year,this.header);
+  }
+  
 
 
 

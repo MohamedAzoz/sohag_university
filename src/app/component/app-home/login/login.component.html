@@ -1,6 +1,11 @@
 <div class="container my-5 d-flex justify-content-center">
-  <form class="row w-50 gy-3 gx-0 py-3 shadow-lg color rounded-2"  #login="ngForm">
+  <form class="row w-50 gy-3 gx-0 py-3 shadow-lg color rounded-2" #login="ngForm">
     <h3 class="text-center fw-bolder my-1">Login</h3>
+    <div class="d-flex justify-content-center">
+      @if (errorMessage) {
+        <h3 class="is-invalid">{{errorMessage}}</h3>
+      }
+    </div>
     <div class="col-10 mx-auto">
       <label for="inputEmail4" class="form-label">Username</label>
       <input
@@ -18,10 +23,10 @@
       />
       <div class="invalid-feedback">
         @if (usernameinput.errors?.['required'] ) {
-          <span>useremail is required</span>
+          <span>username is required</span>
         }
         @else if (usernameinput.errors?.['pattern'] ) {
-          <span>useremail most be contain numbers</span>
+          <span>username most be contain numbers</span>
         }
       </div>
     </div>

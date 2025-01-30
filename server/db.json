@@ -22,6 +22,23 @@
     "role":  "doctor"
   }
 ],
+"student_data":[
+    {
+      "id":"CS12",
+      "studentId":"5467",
+      "collegeId":"CS",
+      "yearId":"4it"
+    }
+  ],
+"doctor_data":[
+    {
+        "id":"all44",
+        "doctorId":"5789",
+        "collegesId":["CS"],
+        "yearsId":[],
+        "subjectsId":[]
+    }
+  ],
   "college":[
     {
       "id": "EDU",
@@ -317,21 +334,22 @@
       "updatedAt":"2025 1 4"
     }
   ],
+
   "summary":[
 {
   "id": "1",
   "title": "lecture summary 1",
-  "description": "c:\\Users\\Mega Store\\Desktop\\الخطة التفصيلية لتنفيذ الواجهة الأمامية.pdf",
+  "fileUrl": "https://drive.google.com/file/d/1hDZnoUrJsPtYi02dlyFhxi0c5pCG0BnI/view?usp=drive_link",
   "subjectId": "Data",
-  "uploadedBy": "mohamed",
+  "uploadedBy": "5467",
   "updatedAt": "2025 1 26"
 },
 {
   "id": "2",
   "title": "lecture summary 2",
-  "description": "c:\\Users\\Mega Store\\Desktop\\الخطة التفصيلية لتنفيذ الواجهة الأمامية.pdf",
+  "fileUrl": "https://drive.google.com/file/d/1hDZnoUrJsPtYi02dlyFhxi0c5pCG0BnI/view?usp=drive_link",
   "subjectId": "Data",
-  "uploadedBy": "mohamed",
+  "uploadedBy": "5467",
   "updatedAt": "2025 1 26"
 }
   ],
@@ -339,17 +357,17 @@
     {
       "id": "1",
       "title": "lecture review 1",
-      "description": "c:\\Users\\Mega Store\\Desktop\\الخطة التفصيلية لتنفيذ الواجهة الأمامية.pdf",
+      "fileUrl": "https://drive.google.com/file/d/1hDZnoUrJsPtYi02dlyFhxi0c5pCG0BnI/view?usp=drive_link",
       "subjectId": "Data",
-      "uploadedBy": "mohamed",
+      "uploadedBy": "5467",
       "updatedAt": "2025 1 26"
     },
     {
       "id": "2",
       "title": "lecture review 2",
-      "description": "c:\\Users\\Mega Store\\Desktop\\الخطة التفصيلية لتنفيذ الواجهة الأمامية.pdf",
+      "fileUrl": "https://drive.google.com/file/d/1hDZnoUrJsPtYi02dlyFhxi0c5pCG0BnI/view?usp=drive_link",
       "subjectId": "Data",
-      "uploadedBy": "mohamed",
+      "uploadedBy": "5467",
       "updatedAt": "2025 1 26"
     }
   ],
@@ -359,8 +377,8 @@
       "title": "test1 2025",
       "subjectId": "Data",
       "year": 2025,
-      "fileUrl": "c:\\Users\\Mega Store\\Desktop\\الخطة التفصيلية لتنفيذ الواجهة الأمامية.pdf",
-      "uploadedBy": "mohamed",
+      "fileUrl": "https://drive.google.com/file/d/1hDZnoUrJsPtYi02dlyFhxi0c5pCG0BnI/view?usp=drive_link",
+      "uploadedBy": "5467",
       "updatedAt": "2025 1 26"
     },
     {
@@ -368,8 +386,8 @@
       "title": "test2 2025",
       "subjectId": "Data",
       "year": 2025,
-      "fileUrl": "c:\\Users\\Mega Store\\Desktop\\الخطة التفصيلية لتنفيذ الواجهة الأمامية.pdf",
-      "uploadedBy": "mohamed",
+      "fileUrl": "https://drive.google.com/file/d/1hDZnoUrJsPtYi02dlyFhxi0c5pCG0BnI/view?usp=drive_link",
+      "uploadedBy": "5467",
       "updatedAt": "2025 1 26"
     }
   ],
@@ -379,8 +397,8 @@
       "title": "Exam1 2025",
       "subjectId": "Data",
       "year": 2025,
-      "fileUrl": "c:\\Users\\Mega Store\\Desktop\\الخطة التفصيلية لتنفيذ الواجهة الأمامية.pdf",
-      "uploadedBy": "mohamed",
+      "fileUrl": "https://drive.google.com/file/d/1hDZnoUrJsPtYi02dlyFhxi0c5pCG0BnI/view?usp=drive_link",
+      "uploadedBy": "5467",
       "updatedAt": "2025 1 26"
     },
     {
@@ -388,8 +406,8 @@
       "title": "Exam2 2025",
       "subjectId": "Data",
       "year": 2025,
-      "fileUrl": "c:\\Users\\Mega Store\\Desktop\\الخطة التفصيلية لتنفيذ الواجهة الأمامية.pdf",
-      "uploadedBy": "mohamed",
+      "fileUrl": "https://drive.google.com/file/d/1hDZnoUrJsPtYi02dlyFhxi0c5pCG0BnI/view?usp=drive_link",
+      "uploadedBy": "5467",
       "updatedAt": "2025 1 26"
     }
   ]

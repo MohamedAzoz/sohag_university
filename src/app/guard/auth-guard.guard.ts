@@ -21,11 +21,10 @@ if(!data){
 
 //============fake Database========
 if(userAuth.isAuthenticated()){
-
   return true;
 }else{
-  router.navigate(['/login'])
-  return false
+  router.navigate(['/login']);
+  return false;
 }
 
 };

@@ -17,7 +17,6 @@ header={}
           "Content-type":"application/json"
         })}
    }
-
    getReview(subject:SubjectInface):Observable<Review[]>{
       return this.http.get<Review[]>(`${environment.apiUrl}/review?subjectId=${subject.id}`,this.header);
     }
@@ -27,4 +26,8 @@ header={}
     DeleteReview(review:Review):Observable<Review>{
       return this.http.delete<Review>(`${environment.apiUrl}/review/${review.id}`,this.header)
     }
+    updateReview (review:Review):Observable<Review>{
+      return this.http.patch<Review>(`${environment.apiUrl}/review/${review.id}`,review,this.header);
+    }
+
 }

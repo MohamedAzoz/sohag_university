@@ -1,29 +1,49 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Slider } from '../models/slider';
 import { environment } from '../../environments/environment.development';
 import { Carousel } from '../models/carousel';
-import { College } from '../models/college';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AppHomeService implements OnInit {
-
+export class AppHomeService {
+header={}
   constructor(
-    private API:HttpClient
-  ) { }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    private http:HttpClient
+  ) {
+     this.header={Headers:new HttpHeaders({
+          "Content-type":"application/json"
+        })}
   }
   getCarousels():Observable<Carousel[]>{
-    return this.API.get<Carousel[]>(`${environment.apiUrl}/carousel`)
+    return this.http.get<Carousel[]>(`${environment.apiUrl}/carousel`)
   }
-  getColleges():Observable<College[]>{
-    return this.API.get<College[]>(`${environment.apiUrl}/college`)
+AddCarousel(carousel:Carousel):Observable<Carousel>{
+    return this.http.post<Carousel>(`${environment.apiUrl}/carousel`,carousel,this.header);
   }
+DeleteCarousel(carousel:Carousel):Observable<Carousel>{
+    return this.http.delete<Carousel>(`${environment.apiUrl}/carousel/${carousel.id}`,this.header);
+  }
+updateCarousel(carousel:Carousel):Observable<Carousel>{
+  return this.http.patch<Carousel>(`${environment.apiUrl}/carousel/${carousel.id}`,carousel,this.header);
+}
+
+
  getSliders():Observable<Slider[]>{
-  return this.API.get<Slider[]>(`${environment.apiUrl}/slider`)
+  return this.http.get<Slider[]>(`${environment.apiUrl}/slider`)
  }
+ AddSlider(slider:Slider):Observable<Slider>{
+      return this.http.post<Slider>(`${environment.apiUrl}/slider`,slider,this.header);
+    }
+    DeleteSlider(slider:Slider):Observable<Slider>{
+      return this.http.delete<Slider>(`${environment.apiUrl}/slider/${slider.id}`,this.header);
+    }
+
+updateSlider(slider:Slider):Observable<Slider>{
+    return this.http.patch<Slider>(`${environment.apiUrl}/slider/${slider.id}`,slider,this.header);
+  }
+
+
 }

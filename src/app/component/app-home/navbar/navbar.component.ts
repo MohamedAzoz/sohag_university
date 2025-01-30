@@ -1,9 +1,11 @@
 import { Component, AfterViewInit} from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterLink, RouterModule } from '@angular/router';
 declare const bootstrap: any;
 
 @Component({
   selector: 'app-navbar',
-  imports: [],
+  imports: [RouterLink,RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -15,10 +17,6 @@ export class NavbarComponent implements AfterViewInit {
       target: '#nav',
     });
 
-    // Tooltips
-    
-
-    // Carousel
     const carousel = new bootstrap.Carousel('#myCarousel');
   }
 }

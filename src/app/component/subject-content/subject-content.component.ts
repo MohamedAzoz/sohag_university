@@ -9,6 +9,7 @@ import { Review } from '../../models/review';
 import { TestService } from '../../service/test.service';
 import { ExamServiceService } from '../../service/exam-service.service';
 import { ReviewService } from '../../service/review.service';
+import { SubjectInface } from '../../models/subject_inface';
 
 @Component({
   selector: 'app-subject-content',
@@ -17,7 +18,7 @@ import { ReviewService } from '../../service/review.service';
   styleUrl: './subject-content.component.css'
 })
 export class SubjectContentComponent implements OnInit {
-  summarys:string="summarys"
+  summarys:string="summary"
   reviews:string="reviews"
   exams:string="exams"
   tests:string="tests"
@@ -28,6 +29,7 @@ export class SubjectContentComponent implements OnInit {
   data_review!:Review[]|null
   // Sum!:any[]|null;
   name!:string;
+  subjectone!:SubjectInface
   constructor(
     private subject_Service:SubjectServiceService,
     private summary_Service:SummaryServiceService,
@@ -45,7 +47,9 @@ this.activa.paramMap.subscribe((Id)=>{
 });
     this.subject_Service.currentSubject.subscribe((subject)=>{
       if(subject){
+
         this.name=subject.name
+        this.subjectone=subject
   //   this.summary_Service.getSummary(subject).subscribe((S)=>{
   //     this.data_summarys=S
   //   });
@@ -80,6 +84,8 @@ this.activa.paramMap.subscribe((Id)=>{
   }
   setContent(value:string){
     console.log(value);
-    this.subject_Service.setContent(value)
+    if(this.subjectone){
+      this.subject_Service.setContent(value,this.subjectone)
+    }
   }
 }

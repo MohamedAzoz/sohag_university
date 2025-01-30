@@ -27,4 +27,8 @@ header={}
     DeleteTest(test:Test):Observable<Test>{
       return this.http.delete<Test>(`${environment.apiUrl}/test/${test.id}`,this.header)
     }
+    updateTest(test:Test):Observable<Test>{
+      return this.http.patch<Test>(`${environment.apiUrl}/test/${test.id}`,test,this.header);
+    }
+
 }

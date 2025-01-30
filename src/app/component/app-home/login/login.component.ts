@@ -36,12 +36,13 @@ export class LoginComponent {
 // ============fake databaes========
 
   Login(username: string, password: string): void {
-   const isLogin=this.authService.login(username,password)
-   if(isLogin){
-    this.router.navigate(['Dashboard']);
-   }else{
-    this.errorMessage='invalid username or password'
-   }
+    this.authService.login(username,password);
+    this.authService.currentUser.subscribe((user)=>{
+      if(user==null){
+        this.errorMessage='invalid username or password';
+       this.user.username='';
+       this.user.password='';
+      }
+    })
   }
-
 }

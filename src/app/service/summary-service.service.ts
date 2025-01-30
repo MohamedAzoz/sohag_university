@@ -27,4 +27,7 @@ export class SummaryServiceService {
     DeleteSummary(summary:Summary):Observable<Summary>{
       return this.http.delete<Summary>(`${environment.apiUrl}/summary/${summary.id}`,this.header)
     }
+    updateSummary(summary:Summary):Observable<Summary>{
+        return this.http.patch<Summary>(`${environment.apiUrl}/summary/${summary.id}`,summary,this.header);
+      }
 }

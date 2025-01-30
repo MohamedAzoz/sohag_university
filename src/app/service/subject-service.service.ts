@@ -7,6 +7,14 @@ import { Year } from '../models/year';
 import { BehaviorSubject } from 'rxjs';
 import { CollegeServiceService } from './college-service.service';
 import { ActivatedRoute } from '@angular/router';
+import { SummaryServiceService } from './summary-service.service';
+import { TestService } from './test.service';
+import { ExamServiceService } from './exam-service.service';
+import { ReviewService } from './review.service';
+import { Exam } from '../models/exam';
+import { Review } from '../models/review';
+import { Summary } from '../models/summary';
+import { Test } from '../models/test';
 
 @Injectable({
   providedIn: 'root'
@@ -25,9 +33,17 @@ private contentBehaviorSubject=new BehaviorSubject<string>('');
 private boolenBehaviorSubject=new BehaviorSubject<boolean>(false);
  currentbool:Observable<boolean>=this.boolenBehaviorSubject.asObservable();
 
+ private allContentBehavior=new BehaviorSubject<Summary[]|Exam[]|Test[]|Review[]|null>(null);
+ allContent:Observable<Summary[]|Exam[]|Test[]|Review[]|null>=this.allContentBehavior.asObservable();
+
   constructor(
     private http:HttpClient,
-    private college_Service:CollegeServiceService
+    private college_Service:CollegeServiceService,
+    private summary_Service:SummaryServiceService,
+    private test_Service:TestService,
+    private exam_Service:ExamServiceService,
+    private review_Service:ReviewService,
+
     ) {
     this.header={Headers:new HttpHeaders({
           "Content-type":"application/json"
@@ -41,7 +57,10 @@ private boolenBehaviorSubject=new BehaviorSubject<boolean>(false);
       return this.http.post<SubjectInface>(`${environment.apiUrl}/subject`,subject,this.header);
     }
     DeleteSubject(subject:SubjectInface):Observable<SubjectInface>{
-      return this.http.delete<SubjectInface>(`${environment.apiUrl}/subject/${subject.id}`,this.header)
+      return this.http.delete<SubjectInface>(`${environment.apiUrl}/subject/${subject.id}`,this.header);
+    }
+    updateSubject(subject:SubjectInface):Observable<SubjectInface>{
+      return this.http.patch<SubjectInface>(`${environment.apiUrl}/subject/${subject.id}`,subject,this.header);
     }
 
 
@@ -64,8 +83,7 @@ private boolenBehaviorSubject=new BehaviorSubject<boolean>(false);
 
     setSubject(subject:SubjectInface,value:boolean){
       this.currentYear.subscribe((v)=>{
-         let x= v?.id
-         if(subject.yearId==x){
+         if(subject.yearId==v?.id){
           this.boolenBehaviorSubject.next(value)
            this.SubjectBehaviorSubject.next(subject);
          }else{
@@ -81,8 +99,34 @@ private boolenBehaviorSubject=new BehaviorSubject<boolean>(false);
        return this.boolenBehaviorSubject.value;
      }
 
-     setContent(value:string){
-        this.contentBehaviorSubject.next(value);
+     setContent(value:string,subject:SubjectInface){
+      this.currentSubject.subscribe((x)=>{
+        if(x==subject){
+           this.contentBehaviorSubject.next(value);
+           if(value=='summary'){
+             this.summary_Service.getSummary(subject).subscribe((content)=>{
+               this.allContentBehavior.next(content)
+             });
+           }else if(value=='reviews'){
+             this.review_Service.getReview(subject).subscribe((content)=>{
+               this.allContentBehavior.next(content)
+             });
+           }else if(value=='exams'){
+             this.exam_Service.getExam(subject).subscribe((content)=>{
+               this.allContentBehavior.next(content)
+             });
+           }else if(value=='tests'){
+             this.test_Service.getTest(subject).subscribe((content)=>{
+               this.allContentBehavior.next(content)
+             });
+           }else{
+             this.allContentBehavior.next(null);
+           }
+         }else{
+           this.contentBehaviorSubject.next('')
+           this.allContentBehavior.next(null);
+         }
+      })
      }
    get getContent(){
        return this.contentBehaviorSubject.value;

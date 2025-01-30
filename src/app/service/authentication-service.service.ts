@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment.development';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from '../models/user';
 import { UserServiceService } from './user-service.service';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,10 +15,10 @@ export class AuthenticationServiceService {
 
   private currentUserSubject=new BehaviorSubject<User | null>(null);
   public currentUser=this.currentUserSubject.asObservable();
-  user!:User|undefined
 
   constructor(
     // private Http:HttpClient,
+    private router:Router,
     private CookieService:CookieService,
     private users:UserServiceService
   ) {
@@ -49,17 +50,17 @@ export class AuthenticationServiceService {
 
 
 //============fake databaes========
-  login(username:string,password:string):boolean{
+  login(username:string,password:string):void{
     this.users.getUsers().subscribe((data)=>{
-        this.user=data.find((value)=>(value.username==username  && value.password==password))
-    })
-    if(this.user){
-      this.currentUserSubject.next(this.user);
-      this.CookieService.set("token",this.user.name);
-      return true
+        let user=data.find((value)=>(value.username==username  && value.password==password))
+    if(user){
+      this.router.navigate(['/Dashboard']);
+      this.currentUserSubject.next(user);
+      this.CookieService.set("token",user.username);
     }else{
-      return false
+      this.currentUserSubject.next(null);
     }
+    })
   }
 
   getCurrentUser():User |null{
@@ -70,8 +71,9 @@ export class AuthenticationServiceService {
     this.currentUserSubject.next(null);
     this.CookieService.delete("token");
   }
+  
 isAuthenticated():boolean{
-  return this.currentUserSubject.value?true:false;
+  return (this.currentUserSubject.value)?true:false;
 }
 
 

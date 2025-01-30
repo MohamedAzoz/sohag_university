@@ -13,6 +13,25 @@ declare const bootstrap: any;
 export class ContainerComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
+    function icown(element:any) {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top >=0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+    }
+
+    window.addEventListener('scroll', function() {
+      var iconsl = document.querySelectorAll('.ic');
+
+      iconsl.forEach(function(icon) {
+        if (icown(icon)) {
+          icon.classList.add("icsh");
+        }
+      });
+    });
     // ScrollSpy
     const scrollSpy = new bootstrap.ScrollSpy(document.body, {
       target: '#nav',

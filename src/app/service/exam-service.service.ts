@@ -28,4 +28,9 @@ export class ExamServiceService {
       return this.http.delete<Exam>(`${environment.apiUrl}/exam/${exam.id}`,this.header)
     }
 
+    updateExam (exam:Exam):Observable<Exam>{
+      return this.http.patch<Exam>(`${environment.apiUrl}/exam/${exam.id}`,exam,this.header);
+    }
+
+
 }
