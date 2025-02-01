@@ -8,5 +8,5 @@ import { MainComponent } from "./component/main/main.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Sohag_Uneviristy';
+  title = 'Sohag Uneviristy';
 }

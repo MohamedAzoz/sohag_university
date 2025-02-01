@@ -1,0 +1,8 @@
+@for (review of reviews; track $index) {
+  <p>{{review.title}}</p>
+  <a [routerLink]="'../updatereview'" title="{{review.title}}">update</a>
+  <!-- <a routerLink="">delete</a> -->
+}
+
+
+

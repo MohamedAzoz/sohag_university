@@ -1,0 +1,8 @@
+@for (exam of exams; track $index) {
+  <p>{{exam.title}}</p>
+  <a [routerLink]="'../updateexam'" title="{{exam.title}}">update</a>
+  <!-- <a routerLink="">delete</a> -->
+}
+
+
+

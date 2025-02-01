@@ -22,7 +22,7 @@ export class SubjectComponent implements OnInit {
     this.subject_Service.currentYear.subscribe((year)=>{
       if(year){
         this.name=year.name
-    this.subject_Service.getSubjects(year).subscribe((Y)=>{
+    this.subject_Service.getSubjects(year.id).subscribe((Y)=>{
       this.subjects=Y
     })
   }else{

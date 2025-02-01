@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { SubjectInface } from '../models/subject_inface';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,9 @@ header={}
    getReview(subject:SubjectInface):Observable<Review[]>{
       return this.http.get<Review[]>(`${environment.apiUrl}/review?subjectId=${subject.id}`,this.header);
     }
+     getReviewByStudentId(student:User):Observable<Review[]>{
+          return this.http.get<Review[]>(`${environment.apiUrl}/review?uploadedBy=${student.id}`,this.header);
+        }
     AddReview(review:Review):Observable<Review>{
       return this.http.post<Review>(`${environment.apiUrl}/review`,review,this.header);
     }

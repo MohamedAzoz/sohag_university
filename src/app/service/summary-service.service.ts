@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { SubjectInface } from '../models/subject_inface';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,9 @@ export class SummaryServiceService {
    getSummary(subject:SubjectInface):Observable<Summary[]>{
       return this.http.get<Summary[]>(`${environment.apiUrl}/summary?subjectId=${subject.id}`,this.header);
     }
+     getSummaryByStudentId(student:User):Observable<Summary[]>{
+        return this.http.get<Summary[]>(`${environment.apiUrl}/summary?uploadedBy=${student.id}`,this.header);
+      }
     AddSummary(summary:Summary):Observable<Summary>{
       return this.http.post<Summary>(`${environment.apiUrl}/summary`,summary,this.header);
     }

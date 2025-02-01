@@ -1,0 +1,8 @@
+@for (summary of summaries; track $index) {
+  <p>{{summary.title}}</p>
+  <a [routerLink]="'../updatesummary'" title="{{summary.title}}">update</a>
+  <!-- <a routerLink="">delete</a> -->
+}
+
+
+

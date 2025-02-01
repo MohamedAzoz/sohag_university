@@ -50,8 +50,8 @@ private boolenBehaviorSubject=new BehaviorSubject<boolean>(false);
         })}
    }
 
-   getSubjects(year:Year):Observable<SubjectInface[]>{
-      return this.http.get<SubjectInface[]>(`${environment.apiUrl}/subject?yearId=${year.id}`,this.header);
+   getSubjects(id:string):Observable<SubjectInface[]>{
+      return this.http.get<SubjectInface[]>(`${environment.apiUrl}/subject?yearId=${id}`,this.header);
     }
     AddSubject(subject:SubjectInface):Observable<SubjectInface>{
       return this.http.post<SubjectInface>(`${environment.apiUrl}/subject`,subject,this.header);
@@ -100,28 +100,30 @@ private boolenBehaviorSubject=new BehaviorSubject<boolean>(false);
      }
 
      setContent(value:string,subject:SubjectInface){
+     let currentOb:Observable<any>;
       this.currentSubject.subscribe((x)=>{
         if(x==subject){
            this.contentBehaviorSubject.next(value);
-           if(value=='summary'){
-             this.summary_Service.getSummary(subject).subscribe((content)=>{
-               this.allContentBehavior.next(content)
-             });
-           }else if(value=='reviews'){
-             this.review_Service.getReview(subject).subscribe((content)=>{
-               this.allContentBehavior.next(content)
-             });
-           }else if(value=='exams'){
-             this.exam_Service.getExam(subject).subscribe((content)=>{
-               this.allContentBehavior.next(content)
-             });
-           }else if(value=='tests'){
-             this.test_Service.getTest(subject).subscribe((content)=>{
-               this.allContentBehavior.next(content)
-             });
-           }else{
+           switch(value){
+             case 'summary':
+             currentOb=this.summary_Service.getSummary(subject);
+             break;
+           case 'reviews':
+            currentOb= this.review_Service.getReview(subject)
+            break;
+           case 'exams':
+            currentOb= this.exam_Service.getExam(subject)
+            break;
+           case 'tests':
+            currentOb=this.test_Service.getTest(subject);
+            break;
+           default:
              this.allContentBehavior.next(null);
+             break;
            }
+           currentOb.subscribe((content)=>{
+            this.allContentBehavior.next(content);
+           })
          }else{
            this.contentBehaviorSubject.next('')
            this.allContentBehavior.next(null);

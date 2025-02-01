@@ -107,9 +107,11 @@
     (ngSubmit)="onSubmit()"
     enctype="multipart/form-data"
   >
-  @if (message) {
-   <h3 class="text-center fw-bolder my-1">{{message}}</h3>
-  }
+   <!-- <h3  class="text-center fw-bolder my-1" [ngClass]="{
+    'is-invalid':
+      (Titleinput.dirty || Titleinput.touched) && Titleinput.invalid,
+    'is-valid': Titleinput.valid
+  }">{{message}}</h3> -->
     <h3 class="text-center fw-bolder my-1">Add New Exam</h3>
     <div class="col-10 mx-auto">
       <label for="Title" class="form-label">Title</label>
@@ -119,9 +121,9 @@
         id="Title"
         required
         placeholder="lecture 1"
-        name="name"
+        name="Title"
         minlength="3"
-        [(ngModel)]="exam.title"
+          [(ngModel)]="exam.title"
         #Titleinput="ngModel"
         [ngClass]="{
           'is-invalid':
@@ -137,22 +139,22 @@
         }
       </div>
     </div>
+      <div class="col-10 mx-auto">
+          <label for="subject" class="form-label">subject </label>
+          <select name="subject" id="subject" required [(ngModel)]="exam.subjectId">
+            @for (item of subjects; track $index) {
+            <option [value]="item.id">{{ item.name }}</option>
+            }
+          </select>
+      </div>
     <div class="col-10 mx-auto">
-      <label for="subject" class="form-label">subject </label>
-      <select name="subject" id="subject" required [(ngModel)]="exam.subjectId">
-        @for (item of subjects; track $index) {
-        <option [value]="item.id">{{ item.name }}</option>
-        }
-      </select>
-    </div>
-    <div class="col-10 mx-auto">
-      <label for="file" class="form-label">url</label>
+      <label for="url" class="form-label">url</label>
       <input
         type="text"
         class="form-control"
-        id="file"
+        id="url"
         required
-        name="file"
+        name="url"
         [(ngModel)]="exam.fileUrl"
         #fileinput="ngModel"
         [ngClass]="{
@@ -168,35 +170,35 @@
       </div>
     </div>
     <div class="col-10 mx-auto">
-      <label for="inputAddress" class="form-label">year</label>
+      <label for="year" class="form-label">year</label>
       <input
         type="number"
         class="form-control"
-        id="inputAddress"
+        id="year"
         placeholder="2025"
         required
-        name="address"
+        name="year"
         [(ngModel)]="exam.year"
         minlength="4"
-        #addressinput="ngModel"
+        #yearinput="ngModel"
         [ngClass]="{
           'is-invalid':
-            (addressinput.dirty || addressinput.touched) &&
-            addressinput.invalid,
-          'is-valid': addressinput.valid
+            (yearinput.dirty || yearinput.touched) &&
+            yearinput.invalid,
+          'is-valid': yearinput.valid
         }"
       />
       <div class="invalid-feedback">
-        @if (addressinput.errors?.['required'] ) {
-        <span>address is required</span>
-        } @else if (addressinput.errors?.['minlength'] ) {
-        <span>address most be at least 4 charcters</span>
+        @if (yearinput.errors?.['required'] ) {
+        <span>year is required</span>
+        } @else if (yearinput.errors?.['minlength'] ) {
+        <span>year most be at least 4 charcters</span>
         }
       </div>
     </div>
     <div class="col-10 mx-auto">
       <button type="submit" class="btn btn-dark" [disabled]="examForm.invalid">
-        Sign in
+        Add Exam
       </button>
     </div>
   </form>

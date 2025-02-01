@@ -41,7 +41,7 @@
         [(ngModel)]="user.password"
         #passwordinput="ngModel"
         minlength="6"
-        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(*[@|.])"
+       pattern="^([a-zA-Z]+|\d+|(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@.]).{6,})$"
         [ngClass]="{'is-invalid': (passwordinput.dirty || passwordinput.touched)&& passwordinput.invalid,
           'is-valid':passwordinput.valid
         }"
