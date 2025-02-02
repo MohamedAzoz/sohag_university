@@ -9,7 +9,7 @@ declare const bootstrap: any;
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.css'
 })
-export class CarouselComponent implements AfterViewInit ,OnInit {
+export class CarouselComponent implements OnInit {
   carousels!:Carousel[]
   constructor(
     private carousel_Service:AppHomeService
@@ -22,8 +22,5 @@ export class CarouselComponent implements AfterViewInit ,OnInit {
    })
   }
 
-  ngAfterViewInit(): void {
-    // Carousel
-    const carousel = new bootstrap.Carousel('#myCarousel');
-  }
+  
 }

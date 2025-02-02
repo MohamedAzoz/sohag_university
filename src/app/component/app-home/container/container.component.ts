@@ -32,18 +32,7 @@ export class ContainerComponent implements AfterViewInit {
         }
       });
     });
-    // ScrollSpy
-    const scrollSpy = new bootstrap.ScrollSpy(document.body, {
-      target: '#nav',
-    });
 
-    // Tooltips
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-    const tooltipList = [...tooltipTriggerList].map(
-      (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
-    );
 
-    // Carousel
-    const carousel = new bootstrap.Carousel('#myCarousel');
   }
 }

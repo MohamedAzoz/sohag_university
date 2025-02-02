@@ -17,6 +17,5 @@ export class NavbarComponent implements AfterViewInit {
       target: '#nav',
     });
 
-    const carousel = new bootstrap.Carousel('#myCarousel');
   }
 }
