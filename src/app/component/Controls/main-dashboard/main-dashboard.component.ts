@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../../../service/student.service';
 import { DoctorService } from '../../../service/doctor.service';
 import { AdminService } from '../../../service/admin.service';
-import { NavBarComponent } from "../nav-bar/nav-bar.component";
+import { NavBarComponent } from "../student/nav-bar/nav-bar.component";
 import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.component';
 import { DoctorDashboardComponent } from '../doctor-dashboard/doctor-dashboard.component';
 import { StudentDashboardComponent } from '../student-dashboard/student-dashboard.component';
@@ -10,7 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-main-dashboard',
-  imports: [NavBarComponent,AdminDashboardComponent,DoctorDashboardComponent,StudentDashboardComponent],
+  imports: [AdminDashboardComponent,DoctorDashboardComponent,StudentDashboardComponent],
   templateUrl: './main-dashboard.component.html',
   styleUrl: './main-dashboard.component.css'
 })
@@ -30,7 +30,7 @@ export class MainDashboardComponent implements OnInit{
     // this.student_service.student();
     let username=this.CookieService.get('token');
     this.Admin_service.checkAdmin(username);
-    this.doctor_service.checkStudent(username);
+    this.doctor_service.checkDoctor(username);
     this.student_service.checkStudent(username);
     this.Admin_service.isbool().subscribe((A)=>{
       if(A){

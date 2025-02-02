@@ -1,0 +1,47 @@
+<nav id="nav" class="navbar navbar-expand w-100 py-2 py-sm-1">
+  <div class="container-fluid w-100 row">
+    <ul
+      class="navbar-nav nav-pills row w-100 d-flex align-items-center justify-content-center"
+    >
+      <div class="col-2 d-flex">
+        <li
+          class="nav-item col-12 d-flex justify-content-start justify-content-sm-center"
+        >
+          <a routerLink="doctor" class="All text-light d-flex justify-content-end nav-link hov">{{user}}</a>
+        </li>
+      </div>
+      <div class="col-10 d-flex justify-content-center">
+        <li class="nav-item col-2 d-flex justify-content-end">
+          <a routerLink="doctor" class="All text-light nav-link hov"
+            ><i class="icwn fa-solid fa-house-chimney"></i
+          ></a>
+        </li>
+        <li class="nav-item col-2 d-flex justify-content-end">
+          <a class="All text-light nav-link hov"
+          routerLink="updatedoctor">Update Manager</a>
+        </li>
+        <li class="nav-item col-2 d-flex justify-content-end">
+          <a class="All text-light nav-link hov"
+          routerLink="deletedoctor">Delete Manager</a>
+        </li>
+        <li class="nav-item col-2 d-flex justify-content-center">
+          <a
+            class="All text-light nav-link hov"
+            routerLink="notices">Notices</a>
+        </li>
+        <li class="nav-item col-2 d-flex justify-content-center">
+          <a class="All text-light nav-link hov"
+          routerLink="updateYourData">Update Password</a>
+        </li>
+        <li class="nav-item col-2 d-flex justify-content-end">
+          <a
+          routerLink="/login"
+            class="All text-light nav-link hov"
+             (click)="Logout()">Logout</a>
+        </li>
+      </div>
+    </ul>
+  </div>
+</nav>
+
+

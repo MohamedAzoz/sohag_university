@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { StudentService } from '../../../service/student.service';
+import { StudentService } from '../../../../service/student.service';
 import { Router, RouterModule } from '@angular/router';
-import { AuthenticationServiceService } from '../../../service/authentication-service.service';
+import { AuthenticationServiceService } from '../../../../service/authentication-service.service';
 
 @Component({
   selector: 'app-nav-bar',

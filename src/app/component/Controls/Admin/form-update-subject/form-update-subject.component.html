@@ -1,1 +1,150 @@
-<p>form-update-subject works!</p>
+<!-- <div class="container my-5 d-flex justify-content-center">
+  <form
+    class="row w-50 gy-3 gx-0 py-3 shadow-lg color rounded-2"
+    #examForm="ngForm"
+    (ngSubmit)="onSubmit(examForm)"
+    enctype="multipart/form-data"
+  >
+    <h3 class="text-center fw-bolder my-1">Add New Exam</h3>
+    <div class="col-10 mx-auto">
+      <label for="Title" class="form-label">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="Title"
+        required
+        placeholder="lecture 1"
+        name="name"
+        minlength="3"
+        [(ngModel)]="summary.title"
+        #Titleinput="ngModel"
+        [ngClass]="{
+          'is-invalid':
+            (Titleinput.dirty || Titleinput.touched) && Titleinput.invalid,
+          'is-valid': Titleinput.valid
+        }"
+      />
+      <div class="invalid-feedback">
+        @if (Titleinput.errors?.['required'] ) {
+        <span>name is required</span>
+        } @else if (Titleinput.errors?.['minlength'] ) {
+        <span>name most be at least 3 charcters</span>
+        }
+      </div>
+    </div>
+    <div class="col-10 mx-auto">
+      <label for="subject" class="form-label">subject </label>
+      <select name="subject" id="subject" required [(ngModel)]="summary.subjectId">
+        @for (item of subjects; track $index) {
+        <option [value]="item.id">{{ item.name }}</option>
+        }
+      </select>
+    </div>
+    <div class="col-10 mx-auto">
+      <label for="file" class="form-label">file</label>
+      <input
+        type="file"
+        class="form-control"
+        id="file"
+        required
+        name="file"
+        (change)="onFileSelect($event)"
+        [(ngModel)]="selectFile"
+        #fileinput="ngModel"
+        accept=".pdf , .docx"
+        [ngClass]="{
+          'is-invalid':
+            (fileinput.dirty || fileinput.touched) && fileinput.invalid,
+          'is-valid': fileinput.valid
+        }"
+      />
+      <div class="invalid-feedback">
+        @if (fileinput.errors?.['required'] ) {
+        <span>file is required</span>
+        } @else if (fileinput.errors?.['accept'] ) {
+        <span>file .pdf or .docx</span>
+        }
+      </div>
+    </div>
+    <div class="col-10 mx-auto">
+      <button type="submit" class="btn btn-dark" [disabled]="examForm.invalid">
+        Sign in
+      </button>
+    </div>
+  </form>
+</div> -->
+<div class="container my-5 d-flex justify-content-center">
+  <form
+    class="row w-50 gy-3 gx-0 py-3 shadow-lg color rounded-2"
+    #examForm="ngForm"
+    (ngSubmit)="onSubmit()"
+    enctype="multipart/form-data"
+  >
+  @if (message) {
+   <h3 class="text-center fw-bolder my-1">{{message}}</h3>
+  }
+    <h3 class="text-center fw-bolder my-1">Add New Exam</h3>
+    <div class="col-10 mx-auto">
+      <label for="Title" class="form-label">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="Title"
+        required
+        placeholder="lecture 1"
+        name="name"
+        minlength="3"
+        [(ngModel)]="summary.title"
+        #Titleinput="ngModel"
+        [ngClass]="{
+          'is-invalid':
+            (Titleinput.dirty || Titleinput.touched) && Titleinput.invalid,
+          'is-valid': Titleinput.valid
+        }"
+      />
+      <div class="invalid-feedback">
+        @if (Titleinput.errors?.['required'] ) {
+        <span>name is required</span>
+        } @else if (Titleinput.errors?.['minlength'] ) {
+        <span>name most be at least 3 charcters</span>
+        }
+      </div>
+    </div>
+    <div class="col-10 mx-auto">
+      <label for="subject" class="form-label">subject </label>
+      <select name="subject" id="subject" required [(ngModel)]="summary.subjectId">
+        @for (item of subjects; track $index) {
+        <option [value]="item.id">{{ item.name }}</option>
+        }
+      </select>
+    </div>
+    <div class="col-10 mx-auto">
+      <label for="file" class="form-label">url</label>
+      <input
+        type="text"
+        class="form-control"
+        id="file"
+        required
+        name="file"
+        [(ngModel)]="summary.fileUrl"
+        #fileinput="ngModel"
+        [ngClass]="{
+          'is-invalid':
+            (fileinput.dirty || fileinput.touched) && fileinput.invalid,
+          'is-valid': fileinput.valid
+        }"
+      />
+      <div class="invalid-feedback">
+        @if (fileinput.errors?.['required'] ) {
+        <span>file is required</span>
+        }
+      </div>
+    </div>
+
+    <div class="col-10 mx-auto">
+      <button type="submit" class="btn btn-dark" [disabled]="examForm.invalid">
+        Sign in
+      </button>
+    </div>
+  </form>
+</div>

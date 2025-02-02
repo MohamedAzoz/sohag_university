@@ -1,0 +1,102 @@
+@if (!bool) {
+  <div class="container my-5 d-flex justify-content-center">
+    <form class="row w-50 gy-3 gx-0 py-3 shadow-lg color rounded-2" #update="ngForm">
+      <h3 class="text-center fw-bolder my-1">Login</h3>
+      <div class="d-flex justify-content-center">
+        @if (errorMessage) {
+          <h3 class="is-invalid">{{errorMessage}}</h3>
+        }
+      </div>
+      <div class="col-10 mx-auto">
+        <label for="inputPassword4" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="inputPassword4"
+          required
+          name="password"
+          [(ngModel)]="user.password"
+          #passwordinput="ngModel"
+          minlength="6"
+         pattern="^([a-zA-Z]+|\d+|(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@.]).{6,})$"
+          [ngClass]="{'is-invalid': (passwordinput.dirty || passwordinput.touched)&& passwordinput.invalid,
+            'is-valid':passwordinput.valid
+          }"
+        />
+        <div class="invalid-feedback">
+          @if(passwordinput.errors?.['required'] ) {
+            <span>password is required</span>
+          } @else if (passwordinput.errors?.['minlength'] ) {
+            <span>password most be at least 6 charcters</span>
+          }
+          @else if (passwordinput.errors?.['pattern'] ) {
+            <span>password most be at least one small and one captail charcters and numbers</span>
+          }
+
+        </div>
+      </div>
+      <div class="col-10 mx-auto">
+        <label for="inputPassword1" class="form-label">Update Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="inputPassword1"
+          required
+          name="Updatepassword"
+          [(ngModel)]="password1"
+          #Updatepasswordinput="ngModel"
+          minlength="6"
+         pattern="^([a-zA-Z]+|\d+|(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@.]).{6,})$"
+          [ngClass]="{'is-invalid': (Updatepasswordinput.dirty || Updatepasswordinput.touched)&& Updatepasswordinput.invalid,
+            'is-valid':Updatepasswordinput.valid
+          }"
+        />
+        <div class="invalid-feedback">
+          @if (Updatepasswordinput.errors?.['required'] ) {
+            <span>password is required</span>
+          } @else if (Updatepasswordinput.errors?.['minlength'] ) {
+            <span>password most be at least 6 charcters</span>
+          }
+          @else if (Updatepasswordinput.errors?.['pattern'] ) {
+            <span>password most be at least one small and one captail charcters and numbers</span>
+          }
+        </div>
+      </div>
+      <div class="col-10 mx-auto">
+        <label for="inputPassword2" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="inputPassword2"
+          required
+          name="newpassword"
+          [(ngModel)]="password2"
+          #newpasswordinput="ngModel"
+          minlength="6"
+         pattern="^([a-zA-Z]+|\d+|(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@.]).{6,})$"
+          [ngClass]="{'is-invalid': (newpasswordinput.dirty || newpasswordinput.touched)&& newpasswordinput.invalid,
+            'is-valid':newpasswordinput.valid
+          }"
+        />
+        <div class="invalid-feedback">
+          @if (newpasswordinput.errors?.['required'] ) {
+            <span>password is required</span>
+          } @else if (newpasswordinput.errors?.['minlength'] ) {
+            <span>password most be at least 6 charcters</span>
+          }
+          @else if (newpasswordinput.errors?.['pattern'] ) {
+            <span>password most be at least one small and one captail charcters and numbers</span>
+          }
+        </div>
+      </div>
+      <div class="col-10 mx-auto">
+        <button type="submit" (click)="updatePassword(passwordinput.value,Updatepasswordinput.value,newpasswordinput.value)" class="btn btn-dark" [disabled]="update.invalid">Update</button>
+      </div>
+    </form>
+  </div>
+}
+@if(bool) {
+  <div class="container my-5 d-flex justify-content-center">
+    <h3>update passwored is correct</h3>
+  </div>
+}

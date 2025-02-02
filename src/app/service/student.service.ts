@@ -34,7 +34,9 @@ export class StudentService implements OnInit {
   ngOnInit(): void {
 
   }
-
+  setDataUser(user:StudentData):Observable<StudentData>{
+    return this.http.post<StudentData>(`${environment.apiUrl}/student_data/${user.id}`,user,this.header)
+  }
 getDataUsers():Observable<StudentData[]>{
     return this.http.get<StudentData[]>(`${environment.apiUrl}/student_data`)
   }

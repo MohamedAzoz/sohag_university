@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { StudentService } from '../../../service/student.service';
+import { NavBarComponent } from '../student/nav-bar/nav-bar.component';
 
 @Component({
   selector: 'app-student-dashboard',
-  imports: [RouterModule],
+imports: [RouterModule,NavBarComponent],
   templateUrl: './student-dashboard.component.html',
   styleUrl: './student-dashboard.component.css'
 })

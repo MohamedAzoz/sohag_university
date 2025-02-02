@@ -30,6 +30,22 @@ import { ReviewHomeComponent } from './component/Controls/student/home_Manager/r
 import { UpdateSummaryComponent } from './component/Controls/student/Forms/update-summary/update-summary.component';
 import { SummaryFormComponent } from './component/Controls/student/Forms/summary-form/summary-form.component';
 import { SummaryHomeComponent } from './component/Controls/student/home_Manager/summary-home/summary-home.component';
+import { AdminHomeComponent } from './component/Controls/Admin/App_Admin_pages/admin-home/admin-home.component';
+import { AddManagerComponent } from './component/Controls/Admin/App_Admin_pages/add-manager/add-manager.component';
+import { UpdateManagerComponent } from './component/Controls/Admin/App_Admin_pages/update-manager/update-manager.component';
+import { DeleteManagerComponent } from './component/Controls/Admin/App_Admin_pages/delete-manager/delete-manager.component';
+import { adminGuardGuard } from './guard/admin-guard.guard';
+import { DoctorHomeComponent } from './component/Controls/doctor/doctor-home/doctor-home.component';
+import { doctorGuardGuard } from './guard/doctor-guard.guard';
+import { FormSubjectComponent } from './component/Controls/Admin/form-subject/form-subject.component';
+import { FormAddUserComponent } from './component/Controls/Admin/form-add-user/form-add-user.component';
+import { FormUpdateUserComponent } from './component/Controls/Admin/form-update-user/form-update-user.component';
+import { FormDeleteUserComponent } from './component/Controls/Admin/form-delete-user/form-delete-user.component';
+import { FormAddYourDataComponent } from './component/Controls/form-add-your-data/form-add-your-data.component';
+import { FormUpdateYourDataComponent } from './component/Controls/form-update-your-data/form-update-your-data.component';
+import { NoticesComponent } from './component/Controls/notices/notices.component';
+import { UpdateManagerByDoctorComponent } from './component/Controls/doctor/update-manager-by-doctor/update-manager-by-doctor.component';
+import { DeleteManagerByDoctorComponent } from './component/Controls/doctor/delete-manager-by-doctor/delete-manager-by-doctor.component';
 
 export const routes: Routes = [
   {path:"", redirectTo:"",pathMatch:'full'},
@@ -39,38 +55,62 @@ export const routes: Routes = [
     {path:"college/:id", component:CollegeComponent , title:"College"},
   ]},
   {path:"Dashboard", component:MainDashboardComponent , title:"Dashboard",canActivate:[authGuardGuard],children:[
-    {path:"Admin",component:AdminDashboardComponent , title:"Admin",canActivate:[authGuardGuard]},
-    {path:"student",component:StudentDashboardComponent , title:"student",canActivate:[authGuardGuard]},
-    {path:"Doctor",component:DoctorDashboardComponent , title:"Doctor",canActivate:[authGuardGuard]},
+    // {path:"Admin",component:AdminDashboardComponent , title:"Admin",canActivate:[authGuardGuard],children:[]},
+  // {path:"", redirectTo:"admin",pathMatch:'full'},
+    {path:"admin",component:AdminHomeComponent , title:"Admin",canActivate:[adminGuardGuard]},
+    {path:"addManager",component:AddManagerComponent , title:"Add Manager",canActivate:[adminGuardGuard]},
+    {path:"updateManager",component:UpdateManagerComponent , title:"Update Manager",canActivate:[adminGuardGuard]},
+    {path:"deleteManager",component:DeleteManagerComponent , title:"Delete Manager",canActivate:[adminGuardGuard]},
+
+    {path:"doctor",component:DoctorHomeComponent , title:"Doctor",canActivate:[doctorGuardGuard]},
+    {path:"updatedoctor",component:UpdateManagerByDoctorComponent , title:"Update Manager",canActivate:[doctorGuardGuard]},
+    {path:"deletedoctor",component:DeleteManagerByDoctorComponent , title:"Delete Manager",canActivate:[doctorGuardGuard]},
+
+    // {path:"Doctor",component:DoctorDashboardComponent , title:"Doctor",canActivate:[authGuardGuard]},
+    // {path:"student",component:StudentDashboardComponent , title:"student",canActivate:[authGuardGuard]},
     {path:"summarymanager",component:SummaryManagerComponent , title:"Summary Manager",canActivate:[authGuardGuard],children:[
       {path:"", redirectTo:"summaryhome",pathMatch:'full'},
       {path:"summaryhome",component:SummaryHomeComponent , title:"Summary Home",canActivate:[authGuardGuard]},
       {path:"summaryform",component:SummaryFormComponent , title:"Summary Form",canActivate:[authGuardGuard]},
-      {path:"updatesummary",component:UpdateSummaryComponent , title:"Update Summary",canActivate:[authGuardGuard]},
     ]},
+    {path:"updatesummary",component:UpdateSummaryComponent , title:"Update Summary",canActivate:[authGuardGuard]},
+
     {path:"reviewmanager",component:ReviewManagerComponent , title:"Review Manager",canActivate:[authGuardGuard],children:[
       {path:"", redirectTo:"reviewhome",pathMatch:'full'},
       {path:"reviewhome",component:ReviewHomeComponent , title:"Review Home",canActivate:[authGuardGuard]},
       {path:"reviewform",component:ReviewFormComponent , title:"Review Form",canActivate:[authGuardGuard]},
-      {path:"updatereview",component:UpdateReviewComponent , title:"Update Review",canActivate:[authGuardGuard]},
     ]},
+    {path:"updatereview",component:UpdateReviewComponent , title:"Update Review",canActivate:[authGuardGuard]},
+
     {path:"testmanager",component:TestManagerComponent , title:"Test Manager",canActivate:[authGuardGuard],children:[
       {path:"", redirectTo:"testhome",pathMatch:'full'},
       {path:"testhome",component:TestHomeComponent , title:"Test Home",canActivate:[authGuardGuard]},
       {path:"testform",component:TestFormComponent , title:"Test Form",canActivate:[authGuardGuard]},
-      {path:"updatetest",component:UpdateTestComponent , title:"Update Test",canActivate:[authGuardGuard]},
     ]},
+    {path:"updatetest",component:UpdateTestComponent , title:"Update Test",canActivate:[authGuardGuard]},
+
     {path:"exammanager",component:ExamManagerComponent , title:"Exam Manager",canActivate:[authGuardGuard],children:[
       {path:"", redirectTo:"examhome",pathMatch:'full'},
       {path:"examhome",component:ExamHomeComponent , title:"Exam Home",canActivate:[authGuardGuard]},
       {path:"examform",component:ExamFormComponent , title:"Exam Form",canActivate:[authGuardGuard]},
-      {path:"updateexam",component:UpdateExamComponent , title:"Update Exam",canActivate:[authGuardGuard]},
     ]},
-    {path:"addCollege",component:FormAddCollegeComponent , title:"addCollege",canActivate:[authGuardGuard]},
-    {path:"updateCollege",component:FormUpdateCollegeComponent , title:"updateCollege",canActivate:[authGuardGuard]},
-    {path:"deleteCollege",component:FormDeleteCollegeComponent , title:"deleteCollege",canActivate:[authGuardGuard]},
-    {path:"updateSubject",component:FormUpdateSubjectComponent , title:"updateSubject",canActivate:[authGuardGuard]},
-    {path:"deleteSubject",component:FormDeleteSubjectComponent , title:"deleteSubject",canActivate:[authGuardGuard]},
+    {path:"updateexam",component:UpdateExamComponent , title:"Update Exam",canActivate:[authGuardGuard]},
+
+    {path:"addCollege",component:FormAddCollegeComponent , title:"Add College",canActivate:[authGuardGuard]},
+    {path:"updateCollege",component:FormUpdateCollegeComponent , title:"Update College",canActivate:[authGuardGuard]},
+    {path:"deleteCollege",component:FormDeleteCollegeComponent , title:"Delete College",canActivate:[authGuardGuard]},
+
+    {path:"addSubject",component:FormSubjectComponent , title:"Add Subject",canActivate:[authGuardGuard]},
+    {path:"updateSubject",component:FormUpdateSubjectComponent , title:"Update Subject",canActivate:[authGuardGuard]},
+    {path:"deleteSubject",component:FormDeleteSubjectComponent , title:"Delete Subject",canActivate:[authGuardGuard]},
+
+    {path:"addUser",component:FormAddUserComponent , title:"Add User",canActivate:[authGuardGuard]},
+    {path:"updateUser",component:FormUpdateUserComponent , title:"Update User",canActivate:[authGuardGuard]},
+    {path:"deleteUser",component:FormDeleteUserComponent , title:"Delete User",canActivate:[authGuardGuard]},
+
+    {path:"addYourData",component:FormAddYourDataComponent , title:"Add Your Data",canActivate:[authGuardGuard]},
+    {path:"updateYourData",component:FormUpdateYourDataComponent , title:"Update Your Data",canActivate:[authGuardGuard]},
+    {path:"notices",component:NoticesComponent , title:"Notices",canActivate:[authGuardGuard]},
   ]},
   {path:"**",component:ErrorComponent , title:"not found"}
 ];
