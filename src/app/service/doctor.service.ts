@@ -6,18 +6,25 @@ import { User } from '../models/user';
 import { DoctorData } from '../models/doctor-data';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
+import { CollegeServiceService } from './college-service.service';
+import { Year } from '../models/year';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DoctorService implements OnInit{
+  year_doctor:Year[]=[]
   header={}
    private isDoctor=new BehaviorSubject<boolean>(false);
       private user=new BehaviorSubject<User|undefined>(undefined);
+private doctorData=new BehaviorSubject<DoctorData|undefined>(undefined);
+   userData=this.doctorData.asObservable();
 
+   private yearsBehavior=new BehaviorSubject<Year[]|undefined>(undefined);
+   years_dotor=this.yearsBehavior.asObservable();
   constructor(
      private userService:UserServiceService,
-        private CookieService:CookieService,
+        private college_service:CollegeServiceService,
             private http:HttpClient,
 
   ) {
@@ -63,5 +70,30 @@ updateDataUser (users:DoctorData):Observable<DoctorData>{
   }
   usercurrent():Observable<User|undefined>{
     return this.user.asObservable();
+  }
+
+  setDoctor(user:User){
+     this.getDataUsers().subscribe((data)=>{
+      let us=data.find((v)=>(v.doctorId==user.id))
+      if(us){
+        this.doctorData.next(us)
+      }else{
+        this.doctorData.next(undefined);
+      }
+    })
+  }
+  getyears(years:string[]){
+    for(let i =0; i < years.length; i++) {
+      this.college_service.getYears_Doctor().subscribe((data)=>{
+        let year=data.find((v)=>v.id==years[i])
+        if(year){
+         let bool=this.year_doctor.find((b)=>b.id==year.id)
+          if(!bool){
+            this.year_doctor.push(year)
+             this.yearsBehavior.next(this.year_doctor);
+          }
+        }
+      })
+    }
   }
 }

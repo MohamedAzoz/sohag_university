@@ -10,18 +10,15 @@ class=" w-auto scrollspy-example"
 <div class=" d-flex justify-content-center p-2 p-md-4">
   <div id="carouselExampleDark" class="carousel carousel-dark slide col-12" data-bs-ride="carousel">
     <div class="carousel-indicators w-25 mx-auto">
-      <!-- @for (item of carousels; track item) { -->
         <button style="background-color: #D4AF37;" type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <!-- } -->
       <button style="background-color: #D4AF37;" type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 1"></button>
       <button style="background-color: #D4AF37;" type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 2"></button>
       <button style="background-color: #D4AF37;" type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner">
       @for (item of carousels; track item) {
-
         <div class="carousel-item active" data-bs-interval="2000">
-          <img [src]="item.imge" class="d-block w-100" alt="...">
+          <img [src]="item.imge" class="d-block" width="100%" alt="...">
           <div class="carousel-caption d-block">
             <h5 class="All1 bgcolor py-1 col-6 mx-auto">{{item.title}}</h5>
             <p class="All bgcolor p-1">{{item.description}}</p>

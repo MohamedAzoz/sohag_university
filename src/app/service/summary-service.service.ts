@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Summary } from '../models/summary';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { SubjectInface } from '../models/subject_inface';
 import { User } from '../models/user';
@@ -10,6 +10,8 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class SummaryServiceService {
+  private summary=new BehaviorSubject<Summary|undefined>(undefined);
+  public currentSummary=this.summary.asObservable()
  header={}
 
   constructor(
@@ -19,6 +21,9 @@ export class SummaryServiceService {
         })}
    }
 
+   getSummaries():Observable<Summary[]>{
+      return this.http.get<Summary[]>(`${environment.apiUrl}/summary`,this.header);
+    }
    getSummary(subject:SubjectInface):Observable<Summary[]>{
       return this.http.get<Summary[]>(`${environment.apiUrl}/summary?subjectId=${subject.id}`,this.header);
     }
@@ -33,5 +38,16 @@ export class SummaryServiceService {
     }
     updateSummary(summary:Summary):Observable<Summary>{
         return this.http.patch<Summary>(`${environment.apiUrl}/summary/${summary.id}`,summary,this.header);
+      }
+
+      clickSummary(id:string){
+        this.getSummaries().subscribe((data)=>{
+          let chick=data.find((data)=>(data.id==id))
+          if(chick){
+            this.summary.next(chick);
+          }else{
+            this.summary.next(undefined);
+          }
+        })
       }
 }

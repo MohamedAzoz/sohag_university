@@ -6,6 +6,11 @@ import { SubjectInface } from '../../../../models/subject_inface';
 import { Summary } from '../../../../models/summary';
 import { StudentService } from '../../../../service/student.service';
 import { SummaryServiceService } from '../../../../service/summary-service.service';
+import { SubjectServiceService } from '../../../../service/subject-service.service';
+import { CollegeServiceService } from '../../../../service/college-service.service';
+import { Department } from '../../../../models/department';
+import { College } from '../../../../models/college';
+import { Year } from '../../../../models/year';
 
 @Component({
   selector: 'app-form-subject',
@@ -14,26 +19,58 @@ import { SummaryServiceService } from '../../../../service/summary-service.servi
   styleUrl: './form-subject.component.css'
 })
 export class FormSubjectComponent implements OnInit{
- summary!:Summary
+  subject:SubjectInface={}as SubjectInface
+  years:Year[]=[] as Year[]
   selectFile:File|null=null;
-  subjects!:SubjectInface[]|null
+  colleges:College[]=[] as College[]
+  departments:Department[]=[] as Department[]
   message!:string;
-
+  collegeid:string='';
+  Departmentid:string='';
+  bool:boolean=false;
+select1:boolean=false;
+select2:boolean=false;
    constructor(
     private http:HttpClient,
-    private summary_service:SummaryServiceService,
-    private student_service:StudentService
-   ){}
+    private college_service:CollegeServiceService,
+    private subject_service:SubjectServiceService
+   ){
+
+   }
     ngOnInit(): void {
-      //  this.student_service.setStudentData();
-      //  this.student_service.setSubject();
-      //  this.student_service.getSubjects().subscribe((sub)=>{
-      //   if(sub){
-      //     this.subjects=sub;
-      //   }else{
-      //     this.subjects=null;
-      //   }
-      //  })
+
+          this.college_service.getColleges().subscribe((data)=>{
+                      if(data){
+                        this.colleges=data
+                      }else{
+                        this.colleges=[]
+                      }
+                  });
+
+
+      }
+      selectCollege(id:string){
+          this.college_service.getDepartments(id).subscribe((data)=>{
+            if(data){
+              this.departments=data;
+              this.select1=true;
+            }else{
+              this.departments=[];
+              this.select1=false;
+            }
+          })
+
+      }
+      selectDepartment(id:string){
+          this.college_service.getYears(id).subscribe((data)=>{
+            if(data){
+              this.years=data;
+              this.select2=true;
+            }else{
+              this.years=[];
+              this.select2=false;
+            }
+          })
 
       }
   //  onFileSelect(event: any) {
@@ -52,13 +89,14 @@ export class FormSubjectComponent implements OnInit{
 
   //       }
   //   }
-
   onSubmit(){
-  this.summary_service.AddSummary(this.summary).subscribe((R)=>{
+  this.subject_service.AddSubject(this.subject).subscribe((R)=>{
     if(R){
-      this.message="been exam add successfully";
+      this.message="been Your add successfully";
+      this.bool=true;
     }else{
-      this.message="error"
+      this.message="error in Add";
+      this.bool=false;
     }
   })
   }

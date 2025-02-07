@@ -14,37 +14,60 @@ import { Router } from '@angular/router';
 })
 export class FormUpdateYourDataComponent implements OnInit{
 user: User = {} as User;
+usercurrent: User | undefined;
 userdata: User = {} as User;
 password1:string='';
 password2:string='';
   errorMessage = '';
+  username:string='';
   bool:boolean=false;
+  select:boolean=false;
+  select2:boolean=false;
   constructor(
     private userService: UserServiceService,
     private CookieService:CookieService,
     private router: Router
   ) {}
   ngOnInit(): void {
-
+    this.username= this.CookieService.get('token');
+    this.userService.getUsers().subscribe((data)=>{
+      if(data){
+        this.usercurrent=data.find((V)=>(V.username===this.username))
+      }
+    })
   }
-  updatePassword(pass:string,password1:string,password2:string){
-    let username= this.CookieService.get('token');
-    if(username){
-      this.userService.getuserone(username).subscribe((data)=>{
-         if(pass==data.password && password1==password2 && (password1.trim()||password2.trim()!='')){
-          this.user.password=password1;
-          this.userService.updatePassword(this.user).subscribe((us)=>{
-            if(us){
-              this.bool=true;
-            }else{
-              this.bool=false;
-            }
-          })
-        }
-      })
-    }else{
-      console.log("error in update password");
+checkpassword(pass:string){
+  if(this.username!=''){
+    if(this.usercurrent?.password==pass)
+      {
+       this.select=true;
+      }else{
+       this.select2=true;
+      }
+  }else{
+    console.log(this.username);
+    this.errorMessage="error in update password";
+  }
 
+}
+  updatePassword(password1:string,password2:string){
+    if(this.usercurrent){
+      this.user=this.usercurrent;
+    // this.userService.getuserone(this.username).subscribe((data)=>{
+       if(password1==password2 && (password1.trim()||password2.trim()!='')){
+        this.user.password=password1;
+        this.userService.updatePassword(this.user).subscribe((us)=>{
+          if(us){
+            this.bool=true;
+          }else{
+            this.bool=false;
+          }
+        })
+      }
+    // })
+    }else{
+      console.log(this.usercurrent);
+      this.errorMessage="error in update password";
     }
   }
 }

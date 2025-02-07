@@ -1,10 +1,45 @@
-<div class="container-fluid d-flex justify-content-center align-items-center">
-<div class="row d-flex justify-content-center">
+<!-- <div class="container-fluid  d-grid align-content-center">
+
+<div class="row w-100 d-flex justify-content-center">
+  <button class="btn btn-primary col-2" (click)="selecteontent('summary')">update summary</button>
+  <button class="btn btn-primary col-2" (click)="selecteontent('exam')">update exam</button>
+</div>
+<div class="row w-25 d-flex justify-content-between ">
+  <button class="btn btn-primary col-2" (click)="selecteontent('test')">update test</button>
+  <button class="btn btn-primary col-2" (click)="selecteontent('review')">update review</button>
+</div>
+</div> -->
+
+@for (year of years; track $index) {
+    <p class="text-bg-danger mx-3">{{year.name}}</p>
+}
+@if (content=='summary') {
+  <!-- @if (!bool) {
+    <div class="container w-50 my-5 d-flex flex-column justify-content-center align-items-center shadow-lg color">
+  @for (exam of exams; track $index) {
+    <div class="col-10 my-2 py-1 text-bg-primary d-flex justify-content-evenly align-items-center">
+    <p>{{exam.title}}</p>
+    <a class="btn btn-danger All2" [routerLink]="'../updateexam'" (click)="clickExam(exam.id)" title="{{exam.title}}">update</a>
+    </div>
+  }
+  </div>
+  }
+
+  @if (bool==true) {
+    <div class="container my-5 d-flex justify-content-center text-bg-success">
+      <h3 class="text-center fw-bolder my-1">{{message}}</h3>
+      </div>
+   } -->
+
   <a [routerLink]="'../updatesummary'">update summary</a>
+}
+@if (content=='exam') {
   <a [routerLink]="'../updateexam'">update exam</a>
-</div>
-<div class="row d-flex justify-content-center">
+
+}
+@if (content=='test') {
   <a [routerLink]="'../updatetest'">update test</a>
+}
+@if (content=='review') {
   <a [routerLink]="'../updatereview'">update review</a>
-</div>
-</div>
+}

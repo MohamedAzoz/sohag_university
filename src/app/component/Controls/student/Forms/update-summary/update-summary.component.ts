@@ -14,52 +14,36 @@ import { SummaryServiceService } from '../../../../../service/summary-service.se
   styleUrl: './update-summary.component.css'
 })
 export class UpdateSummaryComponent implements OnInit{
- summary!:Summary
+  summary:Summary={} as Summary;
+  summarys:Summary[]=[] as Summary[]
   selectFile:File|null=null;
   subjects!:SubjectInface[]|null
   message!:string;
-
-   constructor(
-    private http:HttpClient,
-    private summary_service:SummaryServiceService,
-    private student_service:StudentService
-   ){}
-    ngOnInit(): void {
-      //  this.student_service.setStudentData();
-      //  this.student_service.setSubject();
-      //  this.student_service.getSubjects().subscribe((sub)=>{
-      //   if(sub){
-      //     this.subjects=sub;
-      //   }else{
-      //     this.subjects=null;
-      //   }
-      //  })
-
-      }
-  //  onFileSelect(event: any) {
-  //   this.selectFile = event.target.files[0];
-  // }
-  //  onSubmit(form:any){
-  //   if(form.valid && this.selectFile){
-  //     const dataForm=new FormData();
-  //      dataForm.append('title',form.title);
-  //      dataForm.append('title',form.title);
-  //      dataForm.append('title',form.title);
-  //      dataForm.append('title',form.title);
-  //      this.http.post(`${environment.apiUrl}/review/`,dataForm).subscribe((response)=>{
-  //       console.log("تم رفع الا متحان",response);
-  //      })
-
-  //       }
-  //   }
-
-  onSubmit(){
-  this.summary_service.AddSummary(this.summary).subscribe((R)=>{
-    if(R){
-      this.message="been exam add successfully";
-    }else{
-      this.message="error"
-    }
-  })
+  bool:boolean=false;
+  bool2:boolean=false;
+ constructor(
+  private http:HttpClient,
+  private summary_service:SummaryServiceService,
+  // private subject_service:SubjectServiceService,
+  private student_service:StudentService
+ ){}
+  ngOnInit(): void {
+this.summary_service.currentSummary.subscribe((data)=>{
+  if(data){
+    this.summary=data;
   }
+})
+    }
+
+onSubmit(summary:Summary){
+    this.summary_service.updateSummary(summary).subscribe((Value)=>{
+      if(Value){
+        this.message="been Your Update successfully";
+        this.bool=true;
+      }else{
+        this.message="error in Update";
+        this.bool2=true;
+      }
+    })
+}
 }

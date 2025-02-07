@@ -20,7 +20,7 @@ export class YearComponentimplements implements OnInit{
  this.college_Service.currentDepartment.subscribe((Depart)=>{
     if(Depart){
       this.name=Depart.name;
-  this.college_Service.getYears(Depart).subscribe((Y)=>{
+  this.college_Service.getYears(Depart.id).subscribe((Y)=>{
     this.years=Y;
   });
 }

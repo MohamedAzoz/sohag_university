@@ -14,8 +14,10 @@ import { StudentService } from '../../../../../service/student.service';
 export class SummaryHomeComponent implements OnInit{
   summaries!:Summary[]
   student:User={} as User
+  bool:boolean=false;
+  message:string='';
 constructor(
-  private exam_service:SummaryServiceService,
+  private summary_service:SummaryServiceService,
     private student_service:StudentService
 
 ){}
@@ -25,10 +27,26 @@ constructor(
         this.student=ST
       }
     })
-    this.exam_service.getSummaryByStudentId(this.student).subscribe((R)=>{
+    this.summary_service.getSummaryByStudentId(this.student).subscribe((R)=>{
       if(R){
         this.summaries=R
       }
     })
   }
+    DeleteSummary(review:Summary){
+        if(confirm("sure this delete")){
+          this.summary_service.DeleteSummary(review).subscribe((value)=>{
+            if(value){
+              this.message="been Your Delete successfully";
+              this.bool=true;
+            }else{
+              this.message="error in Delete";
+              this.bool=false;
+            }
+          })
+        }
+      }
+      clickSummary(id:string){
+        this.summary_service.clickSummary(id)
+      }
 }

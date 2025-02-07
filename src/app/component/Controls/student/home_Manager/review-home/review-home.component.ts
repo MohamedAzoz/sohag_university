@@ -13,7 +13,9 @@ import { Review } from '../../../../../models/review';
 })
 export class ReviewHomeComponent implements OnInit{
   reviews!:Review[]
-  student:User={} as User
+  student:User={} as User;
+  bool:boolean=false;
+  message:string='';
 constructor(
   private exam_service:ReviewService,
     private student_service:StudentService
@@ -31,4 +33,20 @@ constructor(
       }
     })
   }
+  DeleteReview(review:Review){
+      if(confirm("sure this delete")){
+        this.exam_service.DeleteReview(review).subscribe((value)=>{
+          if(value){
+            this.message="been Your Delete successfully";
+            this.bool=true;
+          }else{
+            this.message="error in Delete";
+            this.bool=false;
+          }
+        })
+      }
+    }
+    clickReview(id:string){
+      this.exam_service.clickReview(id)
+    }
 }

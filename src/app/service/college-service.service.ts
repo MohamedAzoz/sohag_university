@@ -59,8 +59,11 @@ export class CollegeServiceService {
       }
 
   //================= Year  Service===================
-  getYears(department:Department):Observable<Year[]>{
-    return this.http.get<Year[]>(`${environment.apiUrl}/year?departmentId=${department.id}`,this.header);
+  getYears_Doctor():Observable<Year[]>{
+    return this.http.get<Year[]>(`${environment.apiUrl}/year`,this.header);
+  }
+  getYears(id:string):Observable<Year[]>{
+    return this.http.get<Year[]>(`${environment.apiUrl}/year?departmentId=${id}`,this.header);
   }
   AddYear(year:Year):Observable<Year>{
     return this.http.post<Year>(`${environment.apiUrl}/year`,year,this.header);
@@ -71,7 +74,7 @@ export class CollegeServiceService {
   updateYear(year:Year):Observable<Year>{
     return this.http.patch<Year>(`${environment.apiUrl}/year/${year.id}`,year,this.header);
   }
-  
+
 
 
 

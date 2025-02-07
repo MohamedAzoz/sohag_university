@@ -16,7 +16,7 @@
         placeholder="lecture 1"
         name="name"
         minlength="3"
-        [(ngModel)]="summary.title"
+        [(ngModel)]="subject.title"
         #Titleinput="ngModel"
         [ngClass]="{
           'is-invalid':
@@ -34,7 +34,7 @@
     </div>
     <div class="col-10 mx-auto">
       <label for="subject" class="form-label">subject </label>
-      <select name="subject" id="subject" required [(ngModel)]="summary.subjectId">
+      <select name="subject" id="subject" required [(ngModel)]="subject.subjectId">
         @for (item of subjects; track $index) {
         <option [value]="item.id">{{ item.name }}</option>
         }
@@ -73,78 +73,108 @@
     </div>
   </form>
 </div> -->
-<div class="container my-5 d-flex justify-content-center">
-  <form
-    class="row w-50 gy-3 gx-0 py-3 shadow-lg color rounded-2"
-    #examForm="ngForm"
-    (ngSubmit)="onSubmit()"
-    enctype="multipart/form-data"
-  >
-  @if (message) {
-   <h3 class="text-center fw-bolder my-1">{{message}}</h3>
-  }
-    <h3 class="text-center fw-bolder my-1">Add New Exam</h3>
-    <div class="col-10 mx-auto">
-      <label for="Title" class="form-label">Title</label>
-      <input
-        type="text"
-        class="form-control"
-        id="Title"
-        required
-        placeholder="lecture 1"
-        name="name"
-        minlength="3"
-        [(ngModel)]="summary.title"
-        #Titleinput="ngModel"
-        [ngClass]="{
-          'is-invalid':
-            (Titleinput.dirty || Titleinput.touched) && Titleinput.invalid,
-          'is-valid': Titleinput.valid
-        }"
-      />
-      <div class="invalid-feedback">
-        @if (Titleinput.errors?.['required'] ) {
-        <span>name is required</span>
-        } @else if (Titleinput.errors?.['minlength'] ) {
-        <span>name most be at least 3 charcters</span>
-        }
-      </div>
-    </div>
-    <div class="col-10 mx-auto">
-      <label for="subject" class="form-label">subject </label>
-      <select name="subject" id="subject" required [(ngModel)]="summary.subjectId">
-        @for (item of subjects; track $index) {
-        <option [value]="item.id">{{ item.name }}</option>
-        }
-      </select>
-    </div>
-    <div class="col-10 mx-auto">
-      <label for="file" class="form-label">url</label>
-      <input
-        type="text"
-        class="form-control"
-        id="file"
-        required
-        name="file"
-        [(ngModel)]="summary.fileUrl"
-        #fileinput="ngModel"
-        [ngClass]="{
-          'is-invalid':
-            (fileinput.dirty || fileinput.touched) && fileinput.invalid,
-          'is-valid': fileinput.valid
-        }"
-      />
-      <div class="invalid-feedback">
-        @if (fileinput.errors?.['required'] ) {
-        <span>file is required</span>
-        }
-      </div>
-    </div>
+@if (!bool) {
+  <div class="container w-50 my-5 d-flex flex-column justify-content-center shadow-lg color">
+    <div class="row w-100 d-flex justify-content-center">
+    <form  class="row w-50 gy-3 gx-0 py-3 rounded-2"
+    #collegeForm="ngForm"
+    (ngSubmit)="selectCollege(id.value)"
+    enctype="multipart/form-data">
+    <h3 class="text-center fw-bolder my-1">select College</h3>
 
-    <div class="col-10 mx-auto">
-      <button type="submit" class="btn btn-dark" [disabled]="examForm.invalid">
-        Sign in
-      </button>
+      <div class="col-10 d-flex justify-content-evenly">
+        <label for="College" class="form-label" >College </label>
+        <select name="College" id="College" required [(ngModel)]="collegeid" #id>
+          @for (item of colleges; track $index) {
+          <option [value]="item.id">{{ item.name }}</option>
+          }
+        </select>
+        <button type="submit" class="btn btn-dark" [disabled]="collegeForm.invalid">
+          Ok
+        </button>
+      </div>
+    </form>
+  </div>
+  @if (select1==true) {
+    <div class="row w-100 d-flex justify-content-center">
+
+    <form  class="row w-50 gy-3 gx-0 py-3 rounded-2"
+    #departForm="ngForm"
+    (ngSubmit)="selectDepartment(id2.value)"
+    enctype="multipart/form-data">
+    <h3 class="text-center fw-bolder my-1">select Department</h3>
+
+      <div class="col-10 d-flex justify-content-evenly">
+        <label for="Department" class="form-label" >Department </label>
+        <select name="Department" id="Department" required [(ngModel)]="Departmentid" #id2>
+          @for (item of departments; track $index) {
+          <option [value]="item.id">{{ item.name }}</option>
+          }
+        </select>
+         <button type="submit" class="btn btn-dark" [disabled]="departForm.invalid">
+          Ok
+        </button>
+      </div>
+    </form>
+  </div>
+  }
+  @if (select2==true) {
+    <div class="row w-100 d-flex justify-content-center">
+      <form
+        class="row w-50 gy-3 gx-0 py-3 rounded-2"
+        #examForm="ngForm"
+        (ngSubmit)="onSubmit()"
+        enctype="multipart/form-data"
+      >
+      @if (message=='error in Add') {
+       <h3 class="text-center fw-bolder my-1">{{message}}</h3>
+      }
+        <h3 class="text-center fw-bolder my-1">Add New subject</h3>
+        <div class="col-10 mx-auto">
+          <label for="Year" class="form-label">Year </label>
+          <select name="Year" id="Year" required [(ngModel)]="subject.yearId">
+            @for (item of years; track $index) {
+            <option [value]="item.id">{{ item.name }}</option>
+            }
+          </select>
+        </div>
+        <div class="col-10 mx-auto">
+          <label for="name" class="form-label">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            required
+            name="name"
+            minlength="2"
+            [(ngModel)]="subject.name"
+            #Titleinput="ngModel"
+            [ngClass]="{
+              'is-invalid':
+                (Titleinput.dirty || Titleinput.touched) && Titleinput.invalid,
+              'is-valid': Titleinput.valid
+            }"
+          />
+          <div class="invalid-feedback">
+            @if (Titleinput.errors?.['required'] ) {
+            <span>name is required</span>
+            } @else if (Titleinput.errors?.['minlength'] ) {
+            <span>name most be at least 2 charcters</span>
+            }
+          </div>
+        </div>
+        <div class="col-10 mx-auto">
+          <button type="submit" class="btn btn-dark" [disabled]="examForm.invalid">
+            Add
+          </button>
+        </div>
+      </form>
     </div>
-  </form>
-</div>
+  }
+  </div>
+}
+@if (bool==true) {
+  <div class="container my-5 d-flex justify-content-center text-bg-success">
+  <h3 class="text-center fw-bolder my-1">{{message}}</h3>
+  </div>
+ }

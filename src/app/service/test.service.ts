@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Test } from '../models/test';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { SubjectInface } from '../models/subject_inface';
 import { User } from '../models/user';
@@ -10,6 +10,8 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class TestService {
+   private test=new BehaviorSubject<Test|undefined>(undefined);
+    public currentTest=this.test.asObservable()
 header={}
 
   constructor(
@@ -19,6 +21,9 @@ header={}
         })}
    }
 
+   getTests():Observable<Test[]>{
+      return this.http.get<Test[]>(`${environment.apiUrl}/test`,this.header);
+    }
    getTest(subject:SubjectInface):Observable<Test[]>{
       return this.http.get<Test[]>(`${environment.apiUrl}/test?subjectId=${subject.id}`,this.header);
     }
@@ -35,4 +40,15 @@ header={}
       return this.http.patch<Test>(`${environment.apiUrl}/test/${test.id}`,test,this.header);
     }
 
+
+    clickTest(id:string){
+      this.getTests().subscribe((data)=>{
+        let chick=data.find((data)=>(data.id==id))
+        if(chick){
+          this.test.next(chick);
+        }else{
+          this.test.next(undefined);
+        }
+      })
+    }
 }

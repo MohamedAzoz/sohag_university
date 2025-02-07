@@ -26,6 +26,8 @@ private yearBehaviorSubject=new BehaviorSubject<Year|null>(null);
 
 private SubjectBehaviorSubject=new BehaviorSubject<SubjectInface|null>(null);
  currentSubject:Observable<SubjectInface|null>=this.SubjectBehaviorSubject.asObservable();
+private SubjectBehaviors=new BehaviorSubject<SubjectInface[]|null>(null);
+ currentSubs:Observable<SubjectInface[]|null>=this.SubjectBehaviors.asObservable();
 
 private contentBehaviorSubject=new BehaviorSubject<string>('');
  currentContent:Observable<string>=this.contentBehaviorSubject.asObservable();
@@ -132,5 +134,13 @@ private boolenBehaviorSubject=new BehaviorSubject<boolean>(false);
      }
    get getContent(){
        return this.contentBehaviorSubject.value;
+     }
+
+
+     //=======================
+     setSubs(yearid:string){
+  this.getSubjects(yearid).subscribe((data)=>{
+    this.SubjectBehaviors.next(data);
+  })
      }
 }

@@ -46,6 +46,12 @@ import { FormUpdateYourDataComponent } from './component/Controls/form-update-yo
 import { NoticesComponent } from './component/Controls/notices/notices.component';
 import { UpdateManagerByDoctorComponent } from './component/Controls/doctor/update-manager-by-doctor/update-manager-by-doctor.component';
 import { DeleteManagerByDoctorComponent } from './component/Controls/doctor/delete-manager-by-doctor/delete-manager-by-doctor.component';
+import { FormAddDepartmentComponent } from './component/Controls/Admin/form-add-department/form-add-department.component';
+import { FormUpdateDepartmentComponent } from './component/Controls/Admin/form-update-department/form-update-department.component';
+import { FormDeleteDepartmentComponent } from './component/Controls/Admin/form-delete-department/form-delete-department.component';
+import { FormAddYearComponent } from './component/Controls/Admin/form-add-year/form-add-year.component';
+import { FormDeleteYearComponent } from './component/Controls/Admin/form-delete-year/form-delete-year.component';
+import { FormUpdateYearComponent } from './component/Controls/Admin/form-update-year/form-update-year.component';
 
 export const routes: Routes = [
   {path:"", redirectTo:"",pathMatch:'full'},
@@ -99,6 +105,14 @@ export const routes: Routes = [
     {path:"addCollege",component:FormAddCollegeComponent , title:"Add College",canActivate:[authGuardGuard]},
     {path:"updateCollege",component:FormUpdateCollegeComponent , title:"Update College",canActivate:[authGuardGuard]},
     {path:"deleteCollege",component:FormDeleteCollegeComponent , title:"Delete College",canActivate:[authGuardGuard]},
+
+    {path:"addDepartment",component:FormAddDepartmentComponent , title:"Add Department",canActivate:[authGuardGuard]},
+    {path:"updateDepartment",component:FormUpdateDepartmentComponent , title:"Update Department",canActivate:[authGuardGuard]},
+    {path:"deleteDepartment",component:FormDeleteDepartmentComponent , title:"Delete Department",canActivate:[authGuardGuard]},
+
+    {path:"addYear",component:FormAddYearComponent , title:"Add Year",canActivate:[authGuardGuard]},
+    {path:"updateYear",component:FormUpdateYearComponent , title:"Update Year",canActivate:[authGuardGuard]},
+    {path:"deleteYear",component:FormDeleteYearComponent , title:"Delete Year",canActivate:[authGuardGuard]},
 
     {path:"addSubject",component:FormSubjectComponent , title:"Add Subject",canActivate:[authGuardGuard]},
     {path:"updateSubject",component:FormUpdateSubjectComponent , title:"Update Subject",canActivate:[authGuardGuard]},

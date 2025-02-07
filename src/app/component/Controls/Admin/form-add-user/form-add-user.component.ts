@@ -6,6 +6,8 @@ import { SubjectInface } from '../../../../models/subject_inface';
 import { Summary } from '../../../../models/summary';
 import { StudentService } from '../../../../service/student.service';
 import { SummaryServiceService } from '../../../../service/summary-service.service';
+import { User } from '../../../../models/user';
+import { UserServiceService } from '../../../../service/user-service.service';
 
 @Component({
   selector: 'app-form-add-user',
@@ -14,14 +16,14 @@ import { SummaryServiceService } from '../../../../service/summary-service.servi
   styleUrl: './form-add-user.component.css'
 })
 export class FormAddUserComponent implements OnInit{
- summary!:Summary
+ user:User={} as User
   selectFile:File|null=null;
   subjects!:SubjectInface[]|null
   message!:string;
-
+bool:boolean=false
    constructor(
     private http:HttpClient,
-    private summary_service:SummaryServiceService,
+    private summary_service:UserServiceService,
     private student_service:StudentService
    ){}
     ngOnInit(): void {
@@ -54,11 +56,13 @@ export class FormAddUserComponent implements OnInit{
   //   }
 
   onSubmit(){
-  this.summary_service.AddSummary(this.summary).subscribe((R)=>{
+  this.summary_service.adduser(this.user).subscribe((R)=>{
     if(R){
-      this.message="been exam add successfully";
+      this.message="been Your add successfully";
+      this.bool=true;
     }else{
-      this.message="error"
+      this.message="error";
+      this.bool=false;
     }
   })
   }

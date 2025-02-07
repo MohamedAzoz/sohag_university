@@ -6,6 +6,9 @@ import { SubjectInface } from '../../../../../models/subject_inface';
 import { StudentService } from '../../../../../service/student.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SubjectServiceService } from '../../../../../service/subject-service.service';
+import { StudentData } from '../../../../../models/student-data';
+import { User } from '../../../../../models/user';
 
 @Component({
   selector: 'app-test-form',
@@ -14,53 +17,60 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './test-form.component.css'
 })
 export class TestFormComponent implements OnInit{
-  test!:Test
-   selectFile:File|null=null;
-   subjects!:SubjectInface[]|null
-   message!:string;
+ date:Date=new Date
+user:User={} as User
+userd:StudentData|undefined;
+  test:Test={} as Test
+  selectFile:File|null=null;
+  subjects:SubjectInface[]=[] as SubjectInface[]
+  message!:string;
+  bool!:boolean;
+ constructor(
+  private http:HttpClient,
+  private test_service:TestService,
+  private subject_service:SubjectServiceService,
+  private student_service:StudentService
+ ){
 
-    constructor(
-     private http:HttpClient,
-     private test_service:TestService,
-     private student_service:StudentService
-    ){}
-     ngOnInit(): void {
-        // this.student_service.setStudentData();
-        // this.student_service.setSubject();
-        // this.student_service.getSubjects().subscribe((sub)=>{
-        //  if(sub){
-        //    this.subjects=sub;
-        //  }else{
-        //    this.subjects=null;
-        //  }
-        // })
 
-       }
-   //  onFileSelect(event: any) {
-   //   this.selectFile = event.target.files[0];
-   // }
-   //  onSubmit(form:any){
-   //   if(form.valid && this.selectFile){
-   //     const dataForm=new FormData();
-   //      dataForm.append('title',form.title);
-   //      dataForm.append('title',form.title);
-   //      dataForm.append('title',form.title);
-   //      dataForm.append('title',form.title);
-   //      this.http.post(`${environment.apiUrl}/review/`,dataForm).subscribe((response)=>{
-   //       console.log("تم رفع الا متحان",response);
-   //      })
+  this.student_service.usercurrent().subscribe((ST)=>{
+    if(ST){
+    this.test.uploadedBy=ST.id;
+      student_service.setuser(ST);
+    }
+  });
+  student_service.userData.subscribe((data)=>{
+      if(data){
+        this.subject_service.setSubs(data.yearId);
+        console.log(data);
+      }
 
-   //       }
-   //   }
+    });
 
-   onSubmit(){
-   this.test_service.AddTest(this.test).subscribe((R)=>{
-     if(R){
-       this.message="been exam add successfully";
-     }else{
-       this.message="error"
-     }
-   })
-   }
+    subject_service.currentSubs.subscribe((s)=>{
+      if(s){
+        this.subjects=s
+      }else{
+        this.subjects=[]
+      }
+    })
  }
+  ngOnInit(): void {
 
+    }
+
+onSubmit(){
+  if(this.test){
+    this.test.updatedAt=this.date
+    this.test_service.AddTest(this.test).subscribe((EX)=>{
+      if(EX){
+        this.message="been Your add successfully";
+        this.bool=true;
+      }else{
+        this.message="error in Add";
+        this.bool=false;
+      }
+    })
+  }
+}
+}

@@ -100,6 +100,7 @@
     </div>
   </form>
 </div> -->
+@if (!bool ) {
 <div class="container my-5 d-flex justify-content-center">
   <form
     class="row w-50 gy-3 gx-0 py-3 shadow-lg color rounded-2"
@@ -107,11 +108,6 @@
     (ngSubmit)="onSubmit()"
     enctype="multipart/form-data"
   >
-   <!-- <h3  class="text-center fw-bolder my-1" [ngClass]="{
-    'is-invalid':
-      (Titleinput.dirty || Titleinput.touched) && Titleinput.invalid,
-    'is-valid': Titleinput.valid
-  }">{{message}}</h3> -->
     <h3 class="text-center fw-bolder my-1">Add New Exam</h3>
     <div class="col-10 mx-auto">
       <label for="Title" class="form-label">Title</label>
@@ -203,3 +199,10 @@
     </div>
   </form>
 </div>
+}
+@if (bool==true) {
+  <div class="container my-5 d-flex justify-content-center text-bg-success">
+    <h3 class="text-center fw-bolder my-1">{{message}}</h3>
+    </div>
+ }
+

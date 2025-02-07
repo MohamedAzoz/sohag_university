@@ -4,76 +4,16 @@
     class="slider w-100 mt-5 py-1"
   >
   <div class="slider-items z-3 w-100 d-flex justify-content-evenly align-items-center">
+    @for (slider of sliders; track $index) {
     <div>
-      <a href="https://mcit.gov.eg/ar" target="_blank">
+      <a [href]="slider.url" target="_blank">
         <img
-          src="newlogoAr.png"
-          alt="photo"
+          [src]="slider.imge"
+          [alt]="slider.name"
         />
       </a>
     </div>
-    <div>
-      <a
-        href="https://tiec.gov.eg/Arabic/Pages/default.aspx"
-        target="_blank"
-      >
-        <img
-          src="images.png"
-          alt="photo"
-        />
-      </a>
-    </div>
-    <div>
-      <a href="https://www.cultnat.org/" target="_blank">
-        <img
-          src="6.png"
-          alt="photo"
-        />
-      </a>
-    </div>
-    <div>
-      <a href="https://www.nti.sci.eg/" target="_blank">
-        <img
-          src="logo.png"
-          alt="photo"
-        />
-      </a>
-    </div>
-    <div>
-      <a href="https://iti.gov.eg/home" target="_blank">
-        <img
-          src="ColoredLogo.svg"
-          alt="photo"
-        />
-      </a>
-    </div>
-    <div>
-      <a href="https://egyptpost.gov.eg/ar-eg/home/" target="_blank">
-        <img
-          src="nav-logo.svg"
-          alt="photo"
-        />
-      </a>
-    </div>
-    <div>
-      <a
-        href="https://www.itida.gov.eg/Arabic/Pages/default.aspx"
-        target="_blank"
-      >
-        <img
-          src="LogoAR.jpg"
-          alt="photo"
-        />
-      </a>
-    </div>
-    <div id="img8" class="my-4 my-sm-0">
-      <a href="https://www.tra.gov.eg/ar/" target="_blank">
-        <img
-          src="1.png"
-          alt="photo"
-        />
-      </a>
-    </div>
+  }
 </div>
   </div>
   </section>

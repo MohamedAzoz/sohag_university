@@ -14,53 +14,36 @@ import { TestService } from '../../../../../service/test.service';
   styleUrl: './update-test.component.css'
 })
 export class UpdateTestComponent implements OnInit{
-  test!:Test
-   selectFile:File|null=null;
-   subjects!:SubjectInface[]|null
-   message!:string;
+  test:Test={} as Test;
+  tests:Test[]=[] as Test[]
+  selectFile:File|null=null;
+  subjects!:SubjectInface[]|null
+  message!:string;
+  bool:boolean=false;
+  bool2:boolean=false;
+ constructor(
+  private http:HttpClient,
+  private test_service:TestService,
+  // private subject_service:SubjectServiceService,
+  private student_service:StudentService
+ ){}
+  ngOnInit(): void {
+this.test_service.currentTest.subscribe((data)=>{
+  if(data){
+    this.test=data;
+  }
+})
+    }
 
-    constructor(
-     private http:HttpClient,
-     private test_service:TestService,
-     private student_service:StudentService
-    ){}
-     ngOnInit(): void {
-        // this.student_service.setStudentData();
-        // this.student_service.setSubject();
-        // this.student_service.getSubjects().subscribe((sub)=>{
-        //  if(sub){
-        //    this.subjects=sub;
-        //  }else{
-        //    this.subjects=null;
-        //  }
-        // })
-
-       }
-   //  onFileSelect(event: any) {
-   //   this.selectFile = event.target.files[0];
-   // }
-   //  onSubmit(form:any){
-   //   if(form.valid && this.selectFile){
-   //     const dataForm=new FormData();
-   //      dataForm.append('title',form.title);
-   //      dataForm.append('title',form.title);
-   //      dataForm.append('title',form.title);
-   //      dataForm.append('title',form.title);
-   //      this.http.post(`${environment.apiUrl}/review/`,dataForm).subscribe((response)=>{
-   //       console.log("تم رفع الا متحان",response);
-   //      })
-
-   //       }
-   //   }
-
-   onSubmit(){
-   this.test_service.AddTest(this.test).subscribe((R)=>{
-     if(R){
-       this.message="been exam add successfully";
-     }else{
-       this.message="error"
-     }
-   })
-   }
- }
-
+onSubmit(test:Test){
+    this.test_service.updateTest(test).subscribe((Value)=>{
+      if(Value){
+        this.message="been Your Update successfully";
+        this.bool=true;
+      }else{
+        this.message="error in Update";
+        this.bool2=true;
+      }
+    })
+}
+}

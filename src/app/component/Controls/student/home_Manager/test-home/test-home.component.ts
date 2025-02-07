@@ -14,6 +14,8 @@ import { StudentService } from '../../../../../service/student.service';
 export class TestHomeComponent implements OnInit{
   tests!:Test[]
   student:User={} as User
+  bool:boolean=false;
+  message:string='';
 constructor(
   private test_service:TestService,
     private student_service:StudentService
@@ -31,4 +33,20 @@ constructor(
       }
     })
   }
+   DeleteTest(review:Test){
+          if(confirm("sure this delete")){
+            this.test_service.DeleteTest(review).subscribe((value)=>{
+              if(value){
+                this.message="been Your Delete successfully";
+                this.bool=true;
+              }else{
+                this.message="error in Delete";
+                this.bool=false;
+              }
+            })
+          }
+        }
+        clickTest(id:string){
+          this.test_service.clickTest(id)
+        }
 }

@@ -7,6 +7,9 @@ import { ReviewService } from '../../../../../service/review.service';
 import { HttpClient } from '@angular/common/http';
 import { StudentService } from '../../../../../service/student.service';
 import { environment } from '../../../../../../environments/environment.development';
+import { SubjectServiceService } from '../../../../../service/subject-service.service';
+import { StudentData } from '../../../../../models/student-data';
+import { User } from '../../../../../models/user';
 
 @Component({
   selector: 'app-review-form',
@@ -15,54 +18,86 @@ import { environment } from '../../../../../../environments/environment.developm
   styleUrl: './review-form.component.css'
 })
 export class ReviewFormComponent implements OnInit{
- review!:Review
+ date:Date=new Date
+user:User={} as User
+userd:StudentData|undefined;
+  review:Review={} as Review
   selectFile:File|null=null;
-  subjects!:SubjectInface[]|null
+  subjects:SubjectInface[]=[] as SubjectInface[]
   message!:string;
-  StId!:string;
-  yearId!:string;
-  reviews!:Review[]
-   constructor(
-    private http:HttpClient,
-    private review_service:ReviewService,
-    private student_service:StudentService
-   ){}
-    ngOnInit(): void {
-      //  this.student_service.setStudentData();
-      //  this.student_service.setSubject();
-      //  this.student_service.getSubjects().subscribe((sub)=>{
-      //   if(sub){
-      //     this.subjects=sub;
-      //   }else{
-      //     this.subjects=null;
-      //   }
-      //  })
+  bool!:boolean;
+ constructor(
+  private http:HttpClient,
+  private review_service:ReviewService,
+  private subject_service:SubjectServiceService,
+  private student_service:StudentService
+ ){
 
-      }
-  //  onFileSelect(event: any) {
-  //   this.selectFile = event.target.files[0];
-  // }
-  //  onSubmit(form:any){
-  //   if(form.valid && this.selectFile){
-  //     const dataForm=new FormData();
-  //      dataForm.append('title',form.title);
-  //      dataForm.append('title',form.title);
-  //      dataForm.append('title',form.title);
-  //      dataForm.append('title',form.title);
-  //      this.http.post(`${environment.apiUrl}/review/`,dataForm).subscribe((response)=>{
-  //       console.log("تم رفع الا متحان",response);
-  //      })
-
-  //       }
+  // this.student_service.usercurrent().subscribe((ST)=>{
+  //   if(ST){
+  //     this.user=ST
+  //     this.student_service.setuser(ST);
+  //     // console.log(this.user);
+  //     // console.log(this.user.username);
   //   }
+  // });
+  //   this.student_service.userData.subscribe((data)=>{
+  //     if(data){
 
-  onSubmit(){
-  this.review_service.AddReview(this.review).subscribe((R)=>{
-    if(R){
-      this.message="been exam add successfully";
-    }else{
-      this.message="error"
+  //       ObservableSubjects=this.subject_service.getSubjects(data.yearId);
+  //       console.log(data);
+  //     }
+
+  //   });
+
+  //   ObservableSubjects.subscribe((s)=>{
+  //     if(s){
+  //       this.subjects=s
+  //       console.log(this.subjects[0]);
+  //     }else{
+  //       this.subjects=[]
+  //       console.log(this.subjects);
+  //     }
+  //   })
+
+  this.student_service.usercurrent().subscribe((ST)=>{
+    if(ST){
+    this.review.uploadedBy=ST.id;
+      student_service.setuser(ST);
     }
-  })
+  });
+  student_service.userData.subscribe((data)=>{
+      if(data){
+        this.subject_service.setSubs(data.yearId);
+        console.log(data);
+      }
+
+    });
+
+    subject_service.currentSubs.subscribe((s)=>{
+      if(s){
+        this.subjects=s
+      }else{
+        this.subjects=[]
+      }
+    })
+ }
+  ngOnInit(): void {
+
+    }
+
+onSubmit(){
+  if(this.review){
+    this.review.updatedAt=this.date
+    this.review_service.AddReview(this.review).subscribe((EX)=>{
+      if(EX){
+        this.message="been Your add successfully";
+        this.bool=true;
+      }else{
+        this.message="error in Add";
+        this.bool=false;
+      }
+    })
   }
+}
 }

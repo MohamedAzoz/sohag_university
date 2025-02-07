@@ -20,13 +20,13 @@ import { User } from '../../../../../models/user';
 })
 export class ExamFormComponent implements OnInit{
 
-     private userCurrent=new BehaviorSubject<User|undefined>(undefined);
-  private studentData=new BehaviorSubject<StudentData|null>(null);
-     private subjectsAll=new Observable<SubjectInface[]|null>(undefined);
 
+ date:Date=new Date
+user:User={} as User
+userd:StudentData|undefined;
   exam:Exam={} as Exam
   selectFile:File|null=null;
-  subjects!:SubjectInface[]|null
+  subjects:SubjectInface[]=[] as SubjectInface[]
   message!:string;
   bool!:boolean;
  constructor(
@@ -34,47 +34,58 @@ export class ExamFormComponent implements OnInit{
   private exam_service:ExamServiceService,
   private subject_service:SubjectServiceService,
   private student_service:StudentService
- ){}
-  ngOnInit(): void {
-    //  this.student_service.setStudentData();
-    //  this.student_service.setSubject();
-    //  this.student_service.getSubjects.subscribe((sub)=>{
-    //     this.subjects=sub ?? null;
-    //  })
-    let bool=this.student_service.user_student()
-    if(bool){
-      this.student_service.usercurrent().subscribe((ST)=>{
-        if(ST){
-          this.subjectsAll=this.student_service.setStudentData(ST)
+ ){
+  //  let ObservableSubjects:Observable<SubjectInface[]>=new Observable;
 
+  // this.student_service.usercurrent().subscribe((ST)=>{
+  //   if(ST){
+  //     this.user=ST
+  //     this.student_service.setuser(ST);
+  //     // console.log(this.user);
+  //     // console.log(this.user.username);
+  //   }
+  // });
+  //   this.student_service.userData.subscribe((data)=>{
+  //     if(data){
+
+  //       ObservableSubjects=this.subject_service.getSubjects(data.yearId);
+  //       console.log(data);
+  //     }
+
+  //   });
+
+  //   ObservableSubjects.subscribe((s)=>{
+  //     if(s){
+  //       this.subjects=s
+  //       console.log(this.subjects[0]);
+  //     }else{
+  //       this.subjects=[]
+  //       console.log(this.subjects);
+  //     }
+  //   })
+
+
+ }
+  ngOnInit(): void {
+    this.student_service.usercurrent().subscribe((ST)=>{
+      if(ST){
+      this.exam.uploadedBy=ST.id;
+        this.student_service.setuser(ST);
+      }
+    });
+    this.student_service.userData.subscribe((data)=>{
+        if(data){
+          this.subject_service.setSubs(data.yearId);
+        }
+      });
+
+      this.subject_service.currentSubs.subscribe((s)=>{
+        if(s){
+          this.subjects=s
+        }else{
+          this.subjects=[]
         }
       })
-
-      this.subjectsAll.subscribe((sub)=>{
-        this.subjects=sub
-      })
-    }
-
-
-    // this.student_service.usercurrent().subscribe((user)=>{
-    //     this.userCurrent.next(user);
-    // });
-
-    // if(this.userCurrent.value){
-    //   this.student_service.getDataUser(this.userCurrent.value.id).subscribe((ST)=>{
-    //     this.studentData.next(ST);
-    //   })
-    // }else{
-    //   this.studentData.next(null);
-    // }
-    // let userData=this.studentData.value;
-    // if(userData){
-    //   this.subject_service.getSubjects(userData.yearId).subscribe((sub)=>{
-    //     this.subjects=sub;
-    //   })
-    // }else{
-    //   this.subjects=null;
-    // }
     }
 
 //  onFileSelect(event: any) {
@@ -90,14 +101,20 @@ export class ExamFormComponent implements OnInit{
 //      this.http.post(`${environment.apiUrl}/exam/`,dataForm).subscribe((response)=>{
 //       console.log("تم رفع الا متحان",response);
 //      })
-
 //       }
 //   }
 
 onSubmit(){
   if(this.exam){
-    this.exam_service.AddExam(this.exam).subscribe((ex)=>{
-        this.bool=!!ex;
+    this.exam.updatedAt=this.date
+    this.exam_service.AddExam(this.exam).subscribe((EX)=>{
+      if(EX){
+        this.message="been Your add successfully";
+        this.bool=true;
+      }else{
+        this.message="error in Add";
+        this.bool=false;
+      }
     })
   }
 }

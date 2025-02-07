@@ -1,6 +1,8 @@
-import { Component, AfterViewInit} from '@angular/core';
+import { Component, AfterViewInit, OnInit} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterModule } from '@angular/router';
+import { CollegeServiceService } from '../../../service/college-service.service';
+import { College } from '../../../models/college';
 declare const bootstrap: any;
 
 @Component({
@@ -9,7 +11,16 @@ declare const bootstrap: any;
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent implements AfterViewInit {
+export class NavbarComponent implements AfterViewInit ,OnInit{
+  colleges:College[]=[]
+  constructor(
+    private college_service:CollegeServiceService
+  ){}
+  ngOnInit(): void {
+    this.college_service.getColleges().subscribe((data)=>{
+      this.colleges=data;
+    })
+  }
 
   ngAfterViewInit(): void {
     // ScrollSpy

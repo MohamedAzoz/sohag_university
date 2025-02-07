@@ -13,7 +13,8 @@ import { RouterLink } from '@angular/router';
 })
 export class ExamHomeComponent implements OnInit{
   exams!:Exam[]
-  getexam:Exam|undefined
+  bool:boolean=false;
+  message:string='';
   student:User={} as User
 constructor(
   private exam_service:ExamServiceService,
@@ -32,16 +33,33 @@ constructor(
       }
     })
   }
-
-  selectSubject(id:string){
-      this.student_service.usercurrent().subscribe((ST)=>{
-        if(ST){
-            this.exam_service.getExamByStudentId(ST).subscribe((data)=>{
-               if(data){
-                this.getexam=data.find((x)=>{x.id==id})
-               }
-           })
+  DeleteExam(exam:Exam){
+    if(confirm("sure this delete")){
+      this.exam_service.DeleteExam(exam).subscribe((value)=>{
+        if(value){
+          this.message="been Your Delete successfully";
+          this.bool=true;
+        }else{
+          this.message="error in Delete";
+          this.bool=false;
         }
       })
+    }
+  }
+
+  // selectSubject(id:string){
+  //     this.student_service.usercurrent().subscribe((ST)=>{
+  //       if(ST){
+  //           this.exam_service.getExamByStudentId(ST).subscribe((data)=>{
+  //              if(data){
+  //               this.getexam=data.find((x)=>{x.id==id})
+  //              }
+  //          })
+  //       }
+  //     })
+  //   }
+
+    clickExam(id:string){
+      this.exam_service.clickExam(id)
     }
 }

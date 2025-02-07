@@ -1,8 +1,21 @@
+
+
+
+@if (!bool) {
+  <div class="container w-50 my-5 d-flex flex-column justify-content-center align-items-center shadow-lg color">
 @for (test of tests; track $index) {
-  <p>{{test.title}}</p>
-  <a [routerLink]="'/Dashboard/updatetest'" title="{{test.title}}">update</a>
-  <!-- <a routerLink="">delete</a> -->
+  <div class="col-10 my-2 py-1 text-bg-primary d-flex justify-content-evenly align-items-center">
+    <p>{{test.title}}</p>
+    <a class="btn btn-danger All2" [routerLink]="'/Dashboard/updatetest'" (click)="clickTest(test.id)" title="{{test.title}}">update</a>
+    <button class="btn btn-danger All2" (click)="DeleteTest(test)">delete</button>
+  </div>
+}
+</div>
 }
 
-
+@if (bool==true) {
+  <div class="container my-5 d-flex justify-content-center text-bg-success">
+    <h3 class="text-center fw-bolder my-1">{{message}}</h3>
+    </div>
+ }
 

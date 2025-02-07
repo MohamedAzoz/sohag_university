@@ -6,6 +6,9 @@ import { SubjectInface } from '../../../../models/subject_inface';
 import { Summary } from '../../../../models/summary';
 import { StudentService } from '../../../../service/student.service';
 import { SummaryServiceService } from '../../../../service/summary-service.service';
+import { College } from '../../../../models/college';
+import { CollegeServiceService } from '../../../../service/college-service.service';
+import { Department } from '../../../../models/department';
 
 @Component({
   selector: 'app-form-update-college',
@@ -14,51 +17,50 @@ import { SummaryServiceService } from '../../../../service/summary-service.servi
   styleUrl: './form-update-college.component.css'
 })
 export class FormUpdateCollegeComponent implements OnInit{
- summary!:Summary
   selectFile:File|null=null;
-  subjects!:SubjectInface[]|null
-  message!:string;
+    college:College={} as College
+    colleges:College[]=[] as College[]
+  departments:Department[]=[] as Department[]
+   message!:string;
+   collegeid:string='';
+   bool:boolean=false;
+ select:boolean=false;
 
    constructor(
     private http:HttpClient,
-    private summary_service:SummaryServiceService,
-    private student_service:StudentService
+        private college_service:CollegeServiceService,
+
    ){}
     ngOnInit(): void {
-      //  this.student_service.setStudentData();
-      //  this.student_service.setSubject();
-      //  this.student_service.getSubjects().subscribe((sub)=>{
-      //   if(sub){
-      //     this.subjects=sub;
-      //   }else{
-      //     this.subjects=null;
-      //   }
-      //  })
+      this.college_service.getColleges().subscribe((data)=>{
+        if(data){
+          this.colleges=data;
+        }else{
+          this.colleges=[]
+        }
+    });
 
       }
-  //  onFileSelect(event: any) {
-  //   this.selectFile = event.target.files[0];
-  // }
-  //  onSubmit(form:any){
-  //   if(form.valid && this.selectFile){
-  //     const dataForm=new FormData();
-  //      dataForm.append('title',form.title);
-  //      dataForm.append('title',form.title);
-  //      dataForm.append('title',form.title);
-  //      dataForm.append('title',form.title);
-  //      this.http.post(`${environment.apiUrl}/review/`,dataForm).subscribe((response)=>{
-  //       console.log("تم رفع الا متحان",response);
-  //      })
+      selectCollege(id:string){
+        this.college_service.getCollege(id).subscribe((data)=>{
+          if(data){
+            this.college=data;
+            this.select=true;
+          }else{
+            this.select=false;
+          }
+        })
 
-  //       }
-  //   }
+    }
 
-  onSubmit(){
-  this.summary_service.AddSummary(this.summary).subscribe((R)=>{
+  onSubmit(college:College){
+  this.college_service.updateCollege(college).subscribe((R)=>{
     if(R){
-      this.message="been exam add successfully";
+      this.message="been College update successfully";
+      this.bool=true;
     }else{
-      this.message="error"
+      this.message="error";
+      this.bool=false;
     }
   })
   }

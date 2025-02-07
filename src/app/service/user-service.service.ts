@@ -26,11 +26,14 @@ header={}
   getUsers():Observable<User[]>{
     return this.http.get<User[]>(`${environment.apiUrl}/users`)
   }
-  getuser(role:string):Observable<User[]>{
-    return this.http.get<User[]>(`${environment.apiUrl}/users?username=${role}`)
+  getuser(username:string):Observable<User[]>{
+    return this.http.get<User[]>(`${environment.apiUrl}/users?username=${username}`)
   }
   getuserone(username:string):Observable<User>{
     return this.http.get<User>(`${environment.apiUrl}/users?username=${username}`)
+  }
+  adduser(user:User):Observable<User>{
+    return this.http.post<User>(`${environment.apiUrl}/users`,user,this.header)
   }
 DeleteUser(users:User):Observable<User>{
       return this.http.delete<User>(`${environment.apiUrl}/users/${users.id}`,this.header)
