@@ -1,12 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { College } from '../../../../models/college';
 import { Department } from '../../../../models/department';
 import { Year } from '../../../../models/year';
 import { CollegeServiceService } from '../../../../service/college-service.service';
-import { StudentService } from '../../../../service/student.service';
 import { SubjectInface } from '../../../../models/subject_inface';
 import { SubjectServiceService } from '../../../../service/subject-service.service';
 
@@ -19,7 +17,6 @@ import { SubjectServiceService } from '../../../../service/subject-service.servi
 export class FormDeleteSubjectComponent implements OnInit{
   subject:SubjectInface={} as SubjectInface
   depart:Department={} as Department
-  selectFile:File|null=null;
   colleges:College[]=[] as College[]
   departments:Department[]=[] as Department[]
   yeats:Year[]=[] as Year[]
@@ -33,7 +30,6 @@ export class FormDeleteSubjectComponent implements OnInit{
   select2:boolean=false;
   select3:boolean=false;
    constructor(
-    private http:HttpClient,
     private college_service:CollegeServiceService,
     private subject_service:SubjectServiceService
 
@@ -88,7 +84,8 @@ export class FormDeleteSubjectComponent implements OnInit{
     }
 
       DeleteSubject(subject:SubjectInface){
-        this.subject_service.DeleteSubject(subject).subscribe((value)=>{
+    if(confirm("sure this delete")){
+      this.subject_service.DeleteSubject(subject).subscribe((value)=>{
           if(value){
             this.message="been Subject Delete successfully";
             this.bool=true;
@@ -97,6 +94,7 @@ export class FormDeleteSubjectComponent implements OnInit{
             this.bool=false;
           }
         })
+      }
       }
 }
 

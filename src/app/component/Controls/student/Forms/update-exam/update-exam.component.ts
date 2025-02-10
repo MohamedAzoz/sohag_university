@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -30,6 +30,7 @@ export class UpdateExamComponent implements OnInit{
   private exam_service:ExamServiceService,
   private subject_service:SubjectServiceService,
   private student_service:StudentService
+  ,private location:Location
  ){}
   ngOnInit(): void {
 this.exam_service.currentExam.subscribe((data)=>{
@@ -38,7 +39,9 @@ this.exam_service.currentExam.subscribe((data)=>{
   }
 })
     }
-
+    back(){
+      this.location.back();
+    }
 
 //  onFileSelect(event: any) {
 //   this.selectFile = event.target.files[0];

@@ -22,11 +22,11 @@
       "role": "doctor"
     },
     {
-      "id": "77ef",
-      "name": "Mohamed",
-      "role": "doctor",
-      "username": "1234567899874",
-      "password": "123456"
+      "id": "ab5e",
+      "role": "student",
+      "name": "Omer",
+      "username": "4657986231054",
+      "password": "200445"
     }
   ],
   "student_data": [
@@ -37,10 +37,10 @@
       "yearId": "4it"
     },
     {
-      "id": "465752135",
-      "studentId": "1548",
-      "collegeId": "CS",
-      "yearId": "4it"
+      "id": "ba4a",
+      "collegeId": "SCI",
+      "yearId": "7c72",
+      "studentId": "ab5e"
     }
   ],
   "doctor_data": [
@@ -48,11 +48,18 @@
       "id": "all44",
       "doctorId": "5789",
       "collegesId": [
-        "CS"
+        "CS",
+        "EDU"
+      ],
+      "departmentId": [
+        "it",
+        "Cs",
+        "Network"
       ],
       "yearsId": [
         "4it",
-        "4cs","4N"
+        "4cs",
+        "4N"
       ],
       "subjectsId": [
         "Data",
@@ -62,10 +69,10 @@
   ],
   "college": [
     {
-      "id": "EDU",
+      "id": "E4654",
       "name": "التربية",
-      "description": "كلية التربية بجامعة سوهاج تعد من الكليات الأساسية التي تهدف إلى إعداد معلمين مؤهلين للتدريس في مختلف المراحل التعليمية. تأسست الكلية في عام 2007، وهي تسعى لتحقيق التميز في التعليم والتدريب التربوي من خلال برامج أكاديمية متميزة وشراكات مع المدارس والمؤسسات التعليمية.",
-      "imge": "372937.svg"
+      "description": "كلية الآداب بجامعة سوهاج هي إحدى الكليات التي تهدف إلى تقديم تعليم متميز في مجال العلوم الإنسانية والاجتماعية.  تأسست الكلية في عام 2007، وتعد من الكليات الرائدة في تقديم برامج أكاديمية تشمل مجموعة متنوعة من التخصصات الأدبية والإنسانية.",
+      "imge": "372935.svg"
     },
     {
       "id": "ARTS",
@@ -256,7 +263,7 @@
     {
       "id": "generalEDU",
       "name": "general",
-      "collegeId": "EDU"
+      "collegeId": null
     },
     {
       "id": "generalARTS",
@@ -265,7 +272,7 @@
     },
     {
       "id": "generalSCI",
-      "name": "general",
+      "name": "All",
       "collegeId": "SCI"
     },
     {
@@ -296,7 +303,7 @@
     {
       "id": "5725",
       "name": "عام",
-      "collegeId": "EDU"
+      "collegeId": null
     },
     {
       "id": "9fa7",
@@ -343,6 +350,11 @@
     {
       "id": "7c72",
       "departmentId": "generalSCI",
+      "name": "Math"
+    },
+    {
+      "id": "e7ef",
+      "departmentId": "generalSCI",
       "name": "two"
     }
   ],
@@ -363,7 +375,7 @@
     },
     {
       "id": "AI",
-      "name": "AI",
+      "name": "AL",
       "yearId": "4it",
       "description": "string",
       "updatedAt": "2025 1 4"
@@ -398,14 +410,6 @@
       "subjectId": "Data",
       "uploadedBy": "5467",
       "updatedAt": "2025 1 26"
-    },
-    {
-      "id": "b29e",
-      "uploadedBy": "5467",
-      "title": "summary 6",
-      "subjectId": "Data",
-      "fileUrl": "jhkhgfhgdf",
-      "updatedAt": "2025-02-07T02:59:46.045Z"
     }
   ],
   "review": [
@@ -428,21 +432,21 @@
   ],
   "test": [
     {
-      "id": "Ts2",
-      "title": "test2 1",
-      "subjectId": "Data",
-      "year": 2025,
-      "fileUrl": "https://drive.google.com/file/d/1hDZnoUrJsPtYi02dlyFhxi0c5pCG0BnI/view?usp=drive_link",
-      "uploadedBy": "5467",
-      "updatedAt": "2025 1 26"
-    },
-    {
       "id": "b390",
       "uploadedBy": "5467",
       "title": "test2025",
       "subjectId": "file",
       "fileUrl": "jhkhgfhgdf",
       "updatedAt": "2025-02-07T03:08:25.102Z"
+    },
+    {
+      "id": "e525",
+      "uploadedBy": "5467",
+      "title": "lhytresz",
+      "subjectId": "Data",
+      "fileUrl": "jhkhgfhgdf",
+      "year": 2025,
+      "updatedAt": "2025-02-10T04:29:40.150Z"
     }
   ],
   "exam": [
@@ -456,13 +460,13 @@
       "updatedAt": "2025-02-06T18:21:19.753Z"
     },
     {
-      "id": "3508",
+      "id": "b87a",
       "uploadedBy": "5467",
-      "title": "Exam3",
+      "title": "exam6",
       "subjectId": "Data",
       "fileUrl": "jhkhgfhgdf",
       "year": 2025,
-      "updatedAt": "2025-02-06T18:27:38.307Z"
+      "updatedAt": "2025-02-10T05:06:01.462Z"
     }
   ]
 }

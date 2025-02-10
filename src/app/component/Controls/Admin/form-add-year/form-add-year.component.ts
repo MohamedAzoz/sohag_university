@@ -1,11 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { College } from '../../../../models/college';
 import { Department } from '../../../../models/department';
 import { CollegeServiceService } from '../../../../service/college-service.service';
-import { StudentService } from '../../../../service/student.service';
 import { Year } from '../../../../models/year';
 
 @Component({
@@ -16,7 +14,6 @@ import { Year } from '../../../../models/year';
 })
 export class FormAddYearComponent implements OnInit{
   year:Year={} as Year
-  selectFile:File|null=null;
   colleges:College[]=[] as College[]
   departments:Department[]=[] as Department[]
   message!:string;
@@ -24,9 +21,7 @@ export class FormAddYearComponent implements OnInit{
   bool:boolean=false;
 select:boolean=false;
    constructor(
-    private http:HttpClient,
     private college_service:CollegeServiceService,
-    private student_service:StudentService
    ){
 
    }
@@ -54,26 +49,11 @@ select:boolean=false;
           })
 
       }
-  //  onFileSelect(event: any) {
-  //   this.selectFile = event.target.files[0];
-  // }
-  //  onSubmit(form:any){
-  //   if(form.valid && this.selectFile){
-  //     const dataForm=new FormData();
-  //      dataForm.append('title',form.title);
-  //      dataForm.append('title',form.title);
-  //      dataForm.append('title',form.title);
-  //      dataForm.append('title',form.title);
-  //      this.http.post(`${environment.apiUrl}/review/`,dataForm).subscribe((response)=>{
-  //       console.log("تم رفع الا متحان",response);
-  //      })
 
-  //       }
-  //   }
-  onSubmit(){
-  this.college_service.AddYear(this.year).subscribe((R)=>{
+  onSubmit(year:Year){
+  this.college_service.AddYear(year).subscribe((R)=>{
     if(R){
-      this.message="been Your add successfully";
+      this.message="been Year add successfully";
       this.bool=true;
     }else{
       this.message="error in Add";

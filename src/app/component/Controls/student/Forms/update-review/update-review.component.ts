@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -25,7 +25,8 @@ export class UpdateReviewComponent implements OnInit{
   private http:HttpClient,
   private review_service:ReviewService,
   // private subject_service:SubjectServiceService,
-  private student_service:StudentService
+  private student_service:StudentService,
+  private location:Location
  ){}
   ngOnInit(): void {
 this.review_service.currentReview.subscribe((data)=>{
@@ -33,6 +34,9 @@ this.review_service.currentReview.subscribe((data)=>{
     this.review=data;
   }
 })
+    }
+    back(){
+      this.location.back();
     }
 
 onSubmit(review:Review){

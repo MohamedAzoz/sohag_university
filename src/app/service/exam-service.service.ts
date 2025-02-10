@@ -26,9 +26,9 @@ public currentExam=this.exam.asObservable();
    getExam(subject:SubjectInface):Observable<Exam[]>{
       return this.http.get<Exam[]>(`${environment.apiUrl}/exam?subjectId=${subject.id}`,this.header);
     }
-   getExamone(id:string):Observable<Exam>{
-      return this.http.get<Exam>(`${environment.apiUrl}/exam?id=${id}`,this.header);
-    }
+  //  getExamone(id:string):Observable<Exam>{
+  //     return this.http.get<Exam>(`${environment.apiUrl}/exam?id=${id}`,this.header);
+  //   }
    getExamByStudentId(student:User):Observable<Exam[]>{
       return this.http.get<Exam[]>(`${environment.apiUrl}/exam?uploadedBy=${student.id}`,this.header);
     }
@@ -51,7 +51,7 @@ public currentExam=this.exam.asObservable();
         }else{
           this.exam.next(undefined);
         }
-      })
+      });
     }
-   
+
 }

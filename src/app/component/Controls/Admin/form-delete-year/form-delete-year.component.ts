@@ -1,12 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { College } from '../../../../models/college';
 import { Department } from '../../../../models/department';
 import { Year } from '../../../../models/year';
 import { CollegeServiceService } from '../../../../service/college-service.service';
-import { StudentService } from '../../../../service/student.service';
 
 @Component({
   selector: 'app-form-delete-year',
@@ -17,7 +15,6 @@ import { StudentService } from '../../../../service/student.service';
 export class FormDeleteYearComponent implements OnInit{
   year:Year={} as Year
   depart:Department={} as Department
-  selectFile:File|null=null;
   colleges:College[]=[] as College[]
   departments:Department[]=[] as Department[]
   yeats:Year[]=[] as Year[]
@@ -28,9 +25,7 @@ export class FormDeleteYearComponent implements OnInit{
 select1:boolean=false;
 select2:boolean=false;
    constructor(
-    private http:HttpClient,
     private college_service:CollegeServiceService,
-    private student_service:StudentService
    ){
 
    }
@@ -71,7 +66,8 @@ select2:boolean=false;
     }
 
       DeleteYear(year:Year){
-        this.college_service.DeleteYear(year).subscribe((value)=>{
+    if(confirm("sure this delete")){
+      this.college_service.DeleteYear(year).subscribe((value)=>{
           if(value){
             this.message="been Your Delete successfully";
             this.bool=true;
@@ -80,6 +76,7 @@ select2:boolean=false;
             this.bool=false;
           }
         })
+      }
       }
 }
 

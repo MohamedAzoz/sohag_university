@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -25,7 +25,8 @@ export class UpdateTestComponent implements OnInit{
   private http:HttpClient,
   private test_service:TestService,
   // private subject_service:SubjectServiceService,
-  private student_service:StudentService
+  private student_service:StudentService,
+  private location:Location
  ){}
   ngOnInit(): void {
 this.test_service.currentTest.subscribe((data)=>{
@@ -34,7 +35,9 @@ this.test_service.currentTest.subscribe((data)=>{
   }
 })
     }
-
+    back(){
+      this.location.back();
+    }
 onSubmit(test:Test){
     this.test_service.updateTest(test).subscribe((Value)=>{
       if(Value){

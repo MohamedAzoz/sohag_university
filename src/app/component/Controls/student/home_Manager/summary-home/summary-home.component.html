@@ -3,7 +3,7 @@
 @for (summary of summaries; track $index) {
   <div class="col-10 my-2 py-1 text-bg-primary d-flex justify-content-evenly align-items-center">
     <p>{{summary.title}}</p>
-    <a class="btn btn-danger All2" [routerLink]="'/Dashboard/updatesummary'" (click)="clickSummary(summary.id)" title="{{summary.title}}">update</a>
+    <a class="btn btn-danger All2" [routerLink]="'/updatesummary'" (click)="clickSummary(summary.id)" title="{{summary.title}}">update</a>
     <button class="btn btn-danger All2" (click)="DeleteSummary(summary)">delete</button>
   </div>
 }

@@ -38,6 +38,10 @@ private boolenBehaviorSubject=new BehaviorSubject<boolean>(false);
  private allContentBehavior=new BehaviorSubject<Summary[]|Exam[]|Test[]|Review[]|null>(null);
  allContent:Observable<Summary[]|Exam[]|Test[]|Review[]|null>=this.allContentBehavior.asObservable();
 
+ private SubjectInfaceBehavior=new BehaviorSubject<SubjectInface[]|undefined>(undefined);
+    subject_dotor=this.SubjectInfaceBehavior.asObservable();
+
+
   constructor(
     private http:HttpClient,
     private college_Service:CollegeServiceService,
@@ -45,7 +49,6 @@ private boolenBehaviorSubject=new BehaviorSubject<boolean>(false);
     private test_Service:TestService,
     private exam_Service:ExamServiceService,
     private review_Service:ReviewService,
-
     ) {
     this.header={Headers:new HttpHeaders({
           "Content-type":"application/json"
@@ -54,6 +57,12 @@ private boolenBehaviorSubject=new BehaviorSubject<boolean>(false);
 
    getSubjects(id:string):Observable<SubjectInface[]>{
       return this.http.get<SubjectInface[]>(`${environment.apiUrl}/subject?yearId=${id}`,this.header);
+    }
+    getSubject_Doctor():Observable<SubjectInface[]>{
+      return this.http.get<SubjectInface[]>(`${environment.apiUrl}/subject`,this.header);
+    }
+   getSubjectone(id:string):Observable<SubjectInface>{
+      return this.http.get<SubjectInface>(`${environment.apiUrl}/subject/${id}`,this.header);
     }
     AddSubject(subject:SubjectInface):Observable<SubjectInface>{
       return this.http.post<SubjectInface>(`${environment.apiUrl}/subject`,subject,this.header);
@@ -125,12 +134,48 @@ private boolenBehaviorSubject=new BehaviorSubject<boolean>(false);
            }
            currentOb.subscribe((content)=>{
             this.allContentBehavior.next(content);
+            console.log(content);
+
            })
          }else{
-           this.contentBehaviorSubject.next('')
+           console.log("error in set content");
+           this.contentBehaviorSubject.next('');
+
            this.allContentBehavior.next(null);
          }
       })
+     }
+     setContent_Doctor(value:string,subject:SubjectInface){
+     let currentOb:Observable<any>=new Observable;
+        if(subject){
+           this.contentBehaviorSubject.next(value);
+           switch(value){
+             case 'summary':
+             currentOb=this.summary_Service.getSummary(subject);
+             break;
+           case 'reviews':
+            currentOb= this.review_Service.getReview(subject)
+            break;
+           case 'exams':
+            currentOb= this.exam_Service.getExam(subject)
+            break;
+           case 'tests':
+            currentOb=this.test_Service.getTest(subject);
+            break;
+           default:
+             this.allContentBehavior.next(null);
+             break;
+           }
+           currentOb.subscribe((content)=>{
+            this.allContentBehavior.next(content);
+
+           })
+         }else{
+           console.log("error in set content");
+           this.contentBehaviorSubject.next('');
+
+           this.allContentBehavior.next(null);
+         }
      }
    get getContent(){
        return this.contentBehaviorSubject.value;
@@ -143,4 +188,6 @@ private boolenBehaviorSubject=new BehaviorSubject<boolean>(false);
     this.SubjectBehaviors.next(data);
   })
      }
+
+
 }

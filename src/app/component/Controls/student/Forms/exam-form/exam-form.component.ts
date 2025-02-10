@@ -11,6 +11,8 @@ import { SubjectInface } from '../../../../../models/subject_inface';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { StudentData } from '../../../../../models/student-data';
 import { User } from '../../../../../models/user';
+import { DoctorService } from '../../../../../service/doctor.service';
+import { NoticesService } from '../../../../../service/notices.service';
 
 @Component({
   selector: 'app-exam-form',
@@ -32,6 +34,7 @@ userd:StudentData|undefined;
  constructor(
   private http:HttpClient,
   private exam_service:ExamServiceService,
+  private notices_service:NoticesService,
   private subject_service:SubjectServiceService,
   private student_service:StudentService
  ){
@@ -104,10 +107,9 @@ userd:StudentData|undefined;
 //       }
 //   }
 
-onSubmit(){
-  if(this.exam){
-    this.exam.updatedAt=this.date
-    this.exam_service.AddExam(this.exam).subscribe((EX)=>{
+onSubmit(exam:Exam){
+    exam.updatedAt=this.date
+    this.exam_service.AddExam(exam).subscribe((EX)=>{
       if(EX){
         this.message="been Your add successfully";
         this.bool=true;
@@ -116,6 +118,6 @@ onSubmit(){
         this.bool=false;
       }
     })
-  }
+
 }
 }

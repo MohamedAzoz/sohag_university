@@ -23,14 +23,16 @@ constructor(
      })
   }
   DeleteCollege(college:College){
-    this.college_service.DeleteCollege(college).subscribe((value)=>{
-      if(value){
-        this.message="been Your Delete successfully";
-        this.bool=true;
-      }else{
-        this.message="error in Delete";
-        this.bool=false;
-      }
-    })
+    if(confirm("sure this delete")){
+      this.college_service.DeleteCollege(college).subscribe((value)=>{
+        if(value){
+          this.message="been Your Delete successfully";
+          this.bool=true;
+        }else{
+          this.message="error in Delete";
+          this.bool=false;
+        }
+      })
+    }
   }
 }

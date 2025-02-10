@@ -3,7 +3,7 @@
 @for (exam of exams; track $index) {
   <div class="col-10 my-2 py-1 text-bg-primary d-flex justify-content-evenly align-items-center">
   <p>{{exam.title}}</p>
-  <a class="btn btn-danger All2" [routerLink]="'/Dashboard/updateexam'" (click)="clickExam(exam.id)" title="{{exam.title}}">update</a>
+  <a class="btn btn-danger All2" [routerLink]="'/updateexams'" (click)="clickExam(exam.id)" title="{{exam.title}}">update</a>
     <button class="btn btn-danger All2" (click)="DeleteExam(exam)">delete</button>
   </div>
 }

@@ -1,11 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SubjectInface } from '../../../../models/subject_inface';
-import { Summary } from '../../../../models/summary';
-import { StudentService } from '../../../../service/student.service';
-import { SummaryServiceService } from '../../../../service/summary-service.service';
 import { SubjectServiceService } from '../../../../service/subject-service.service';
 import { CollegeServiceService } from '../../../../service/college-service.service';
 import { Department } from '../../../../models/department';
@@ -21,7 +17,6 @@ import { Year } from '../../../../models/year';
 export class FormSubjectComponent implements OnInit{
   subject:SubjectInface={}as SubjectInface
   years:Year[]=[] as Year[]
-  selectFile:File|null=null;
   colleges:College[]=[] as College[]
   departments:Department[]=[] as Department[]
   message!:string;
@@ -31,7 +26,6 @@ export class FormSubjectComponent implements OnInit{
 select1:boolean=false;
 select2:boolean=false;
    constructor(
-    private http:HttpClient,
     private college_service:CollegeServiceService,
     private subject_service:SubjectServiceService
    ){
@@ -73,22 +67,6 @@ select2:boolean=false;
           })
 
       }
-  //  onFileSelect(event: any) {
-  //   this.selectFile = event.target.files[0];
-  // }
-  //  onSubmit(form:any){
-  //   if(form.valid && this.selectFile){
-  //     const dataForm=new FormData();
-  //      dataForm.append('title',form.title);
-  //      dataForm.append('title',form.title);
-  //      dataForm.append('title',form.title);
-  //      dataForm.append('title',form.title);
-  //      this.http.post(`${environment.apiUrl}/review/`,dataForm).subscribe((response)=>{
-  //       console.log("تم رفع الا متحان",response);
-  //      })
-
-  //       }
-  //   }
   onSubmit(){
   this.subject_service.AddSubject(this.subject).subscribe((R)=>{
     if(R){

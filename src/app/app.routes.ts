@@ -52,6 +52,8 @@ import { FormDeleteDepartmentComponent } from './component/Controls/Admin/form-d
 import { FormAddYearComponent } from './component/Controls/Admin/form-add-year/form-add-year.component';
 import { FormDeleteYearComponent } from './component/Controls/Admin/form-delete-year/form-delete-year.component';
 import { FormUpdateYearComponent } from './component/Controls/Admin/form-update-year/form-update-year.component';
+import { StudentMainHomeComponent } from './component/Controls/student/student-main-home/student-main-home.component';
+import { studentGuardGuard } from './guard/student-guard.guard';
 
 export const routes: Routes = [
   {path:"", redirectTo:"",pathMatch:'full'},
@@ -60,71 +62,73 @@ export const routes: Routes = [
     {path:"login",component:LoginComponent , title:"Login"},
     {path:"college/:id", component:CollegeComponent , title:"College"},
   ]},
-  {path:"Dashboard", component:MainDashboardComponent , title:"Dashboard",canActivate:[authGuardGuard],children:[
-    // {path:"Admin",component:AdminDashboardComponent , title:"Admin",canActivate:[authGuardGuard],children:[]},
-  // {path:"", redirectTo:"admin",pathMatch:'full'},
-    {path:"admin",component:AdminHomeComponent , title:"Admin",canActivate:[adminGuardGuard]},
-    {path:"addManager",component:AddManagerComponent , title:"Add Manager",canActivate:[adminGuardGuard]},
-    {path:"updateManager",component:UpdateManagerComponent , title:"Update Manager",canActivate:[adminGuardGuard]},
-    {path:"deleteManager",component:DeleteManagerComponent , title:"Delete Manager",canActivate:[adminGuardGuard]},
+  {path:"student", component:StudentDashboardComponent , title:"Student Dashboard",canActivate:[authGuardGuard],children:[
+      {path:"", redirectTo:"studenthome",pathMatch:'full'},
+      {path:"studenthome",component:StudentMainHomeComponent , title:"Student Home",canActivate:[studentGuardGuard]},
 
+      {path:"summarymanager",component:SummaryManagerComponent , title:"Summary Manager",canActivate:[studentGuardGuard],children:[
+        {path:"", redirectTo:"summaryhome",pathMatch:'full'},
+        {path:"summaryhome",component:SummaryHomeComponent , title:"Summary Home",canActivate:[authGuardGuard]},
+        {path:"summaryform",component:SummaryFormComponent , title:"Summary Form",canActivate:[authGuardGuard]},
+      ]},
+
+      {path:"reviewmanager",component:ReviewManagerComponent , title:"Review Manager",canActivate:[studentGuardGuard],children:[
+        {path:"", redirectTo:"reviewhome",pathMatch:'full'},
+        {path:"reviewhome",component:ReviewHomeComponent , title:"Review Home",canActivate:[authGuardGuard]},
+        {path:"reviewform",component:ReviewFormComponent , title:"Review Form",canActivate:[authGuardGuard]},
+      ]},
+
+      {path:"testmanager",component:TestManagerComponent , title:"Test Manager",canActivate:[studentGuardGuard],children:[
+        {path:"", redirectTo:"testhome",pathMatch:'full'},
+        {path:"testhome",component:TestHomeComponent , title:"Test Home",canActivate:[authGuardGuard]},
+        {path:"testform",component:TestFormComponent , title:"Test Form",canActivate:[authGuardGuard]},
+      ]},
+
+      {path:"exammanager",component:ExamManagerComponent , title:"Exam Manager",canActivate:[studentGuardGuard],children:[
+        {path:"", redirectTo:"examhome",pathMatch:'full'},
+        {path:"examhome",component:ExamHomeComponent , title:"Exam Home",canActivate:[authGuardGuard]},
+        {path:"examform",component:ExamFormComponent , title:"Exam Form",canActivate:[authGuardGuard]},
+      ]},
+  ]},
+  {path:"Admin",component:AdminDashboardComponent , title:"Admin Dashboard",canActivate:[authGuardGuard],children:[
+    {path:"", redirectTo:"admin",pathMatch:'full'},
+      {path:"admin",component:AdminHomeComponent , title:"Admin",canActivate:[adminGuardGuard]},
+      {path:"addManager",component:AddManagerComponent , title:"Add Manager",canActivate:[adminGuardGuard]},
+      {path:"updateManager",component:UpdateManagerComponent , title:"Update Manager",canActivate:[adminGuardGuard]},
+      {path:"deleteManager",component:DeleteManagerComponent , title:"Delete Manager",canActivate:[adminGuardGuard]},
+      {path:"addCollege",component:FormAddCollegeComponent , title:"Add College",canActivate:[adminGuardGuard]},
+      {path:"updateCollege",component:FormUpdateCollegeComponent , title:"Update College",canActivate:[adminGuardGuard]},
+      {path:"deleteCollege",component:FormDeleteCollegeComponent , title:"Delete College",canActivate:[adminGuardGuard]},
+
+      {path:"addDepartment",component:FormAddDepartmentComponent , title:"Add Department",canActivate:[adminGuardGuard]},
+      {path:"updateDepartment",component:FormUpdateDepartmentComponent , title:"Update Department",canActivate:[adminGuardGuard]},
+      {path:"deleteDepartment",component:FormDeleteDepartmentComponent , title:"Delete Department",canActivate:[adminGuardGuard]},
+
+      {path:"addYear",component:FormAddYearComponent , title:"Add Year",canActivate:[adminGuardGuard]},
+      {path:"updateYear",component:FormUpdateYearComponent , title:"Update Year",canActivate:[adminGuardGuard]},
+      {path:"deleteYear",component:FormDeleteYearComponent , title:"Delete Year",canActivate:[adminGuardGuard]},
+
+      {path:"addSubject",component:FormSubjectComponent , title:"Add Subject",canActivate:[adminGuardGuard]},
+      {path:"updateSubject",component:FormUpdateSubjectComponent , title:"Update Subject",canActivate:[adminGuardGuard]},
+      {path:"deleteSubject",component:FormDeleteSubjectComponent , title:"Delete Subject",canActivate:[adminGuardGuard]},
+
+      {path:"addUser",component:FormAddUserComponent , title:"Add User",canActivate:[adminGuardGuard]},
+      {path:"updateUser",component:FormUpdateUserComponent , title:"Update User",canActivate:[adminGuardGuard]},
+      {path:"deleteUser",component:FormDeleteUserComponent , title:"Delete User",canActivate:[adminGuardGuard]},
+    ]},
+  {path:"Doctor",component:DoctorDashboardComponent , title:"Doctor Dashboard",canActivate:[authGuardGuard],children:[
+    {path:"", redirectTo:"doctor",pathMatch:'full'},
     {path:"doctor",component:DoctorHomeComponent , title:"Doctor",canActivate:[doctorGuardGuard]},
     {path:"updatedoctor",component:UpdateManagerByDoctorComponent , title:"Update Manager",canActivate:[doctorGuardGuard]},
     {path:"deletedoctor",component:DeleteManagerByDoctorComponent , title:"Delete Manager",canActivate:[doctorGuardGuard]},
-
-    // {path:"Doctor",component:DoctorDashboardComponent , title:"Doctor",canActivate:[authGuardGuard]},
-    // {path:"student",component:StudentDashboardComponent , title:"student",canActivate:[authGuardGuard]},
-    {path:"summarymanager",component:SummaryManagerComponent , title:"Summary Manager",canActivate:[authGuardGuard],children:[
-      {path:"", redirectTo:"summaryhome",pathMatch:'full'},
-      {path:"summaryhome",component:SummaryHomeComponent , title:"Summary Home",canActivate:[authGuardGuard]},
-      {path:"summaryform",component:SummaryFormComponent , title:"Summary Form",canActivate:[authGuardGuard]},
-    ]},
-    {path:"updatesummary",component:UpdateSummaryComponent , title:"Update Summary",canActivate:[authGuardGuard]},
-
-    {path:"reviewmanager",component:ReviewManagerComponent , title:"Review Manager",canActivate:[authGuardGuard],children:[
-      {path:"", redirectTo:"reviewhome",pathMatch:'full'},
-      {path:"reviewhome",component:ReviewHomeComponent , title:"Review Home",canActivate:[authGuardGuard]},
-      {path:"reviewform",component:ReviewFormComponent , title:"Review Form",canActivate:[authGuardGuard]},
-    ]},
-    {path:"updatereview",component:UpdateReviewComponent , title:"Update Review",canActivate:[authGuardGuard]},
-
-    {path:"testmanager",component:TestManagerComponent , title:"Test Manager",canActivate:[authGuardGuard],children:[
-      {path:"", redirectTo:"testhome",pathMatch:'full'},
-      {path:"testhome",component:TestHomeComponent , title:"Test Home",canActivate:[authGuardGuard]},
-      {path:"testform",component:TestFormComponent , title:"Test Form",canActivate:[authGuardGuard]},
-    ]},
-    {path:"updatetest",component:UpdateTestComponent , title:"Update Test",canActivate:[authGuardGuard]},
-
-    {path:"exammanager",component:ExamManagerComponent , title:"Exam Manager",canActivate:[authGuardGuard],children:[
-      {path:"", redirectTo:"examhome",pathMatch:'full'},
-      {path:"examhome",component:ExamHomeComponent , title:"Exam Home",canActivate:[authGuardGuard]},
-      {path:"examform",component:ExamFormComponent , title:"Exam Form",canActivate:[authGuardGuard]},
-    ]},
-    {path:"updateexam",component:UpdateExamComponent , title:"Update Exam",canActivate:[authGuardGuard]},
-
-    {path:"addCollege",component:FormAddCollegeComponent , title:"Add College",canActivate:[authGuardGuard]},
-    {path:"updateCollege",component:FormUpdateCollegeComponent , title:"Update College",canActivate:[authGuardGuard]},
-    {path:"deleteCollege",component:FormDeleteCollegeComponent , title:"Delete College",canActivate:[authGuardGuard]},
-
-    {path:"addDepartment",component:FormAddDepartmentComponent , title:"Add Department",canActivate:[authGuardGuard]},
-    {path:"updateDepartment",component:FormUpdateDepartmentComponent , title:"Update Department",canActivate:[authGuardGuard]},
-    {path:"deleteDepartment",component:FormDeleteDepartmentComponent , title:"Delete Department",canActivate:[authGuardGuard]},
-
-    {path:"addYear",component:FormAddYearComponent , title:"Add Year",canActivate:[authGuardGuard]},
-    {path:"updateYear",component:FormUpdateYearComponent , title:"Update Year",canActivate:[authGuardGuard]},
-    {path:"deleteYear",component:FormDeleteYearComponent , title:"Delete Year",canActivate:[authGuardGuard]},
-
-    {path:"addSubject",component:FormSubjectComponent , title:"Add Subject",canActivate:[authGuardGuard]},
-    {path:"updateSubject",component:FormUpdateSubjectComponent , title:"Update Subject",canActivate:[authGuardGuard]},
-    {path:"deleteSubject",component:FormDeleteSubjectComponent , title:"Delete Subject",canActivate:[authGuardGuard]},
-
-    {path:"addUser",component:FormAddUserComponent , title:"Add User",canActivate:[authGuardGuard]},
-    {path:"updateUser",component:FormUpdateUserComponent , title:"Update User",canActivate:[authGuardGuard]},
-    {path:"deleteUser",component:FormDeleteUserComponent , title:"Delete User",canActivate:[authGuardGuard]},
+  ]},
+  {path:"updatesummary",component:UpdateSummaryComponent , title:"Update Summary",canActivate:[authGuardGuard]},
+  {path:"updatereviews",component:UpdateReviewComponent , title:"Update Review",canActivate:[authGuardGuard]},
+  {path:"updatetests",component:UpdateTestComponent , title:"Update Test",canActivate:[authGuardGuard]},
+  {path:"updateexams",component:UpdateExamComponent , title:"Update Exam",canActivate:[authGuardGuard]},
 
     {path:"addYourData",component:FormAddYourDataComponent , title:"Add Your Data",canActivate:[authGuardGuard]},
     {path:"updateYourData",component:FormUpdateYourDataComponent , title:"Update Your Data",canActivate:[authGuardGuard]},
     {path:"notices",component:NoticesComponent , title:"Notices",canActivate:[authGuardGuard]},
-  ]},
   {path:"**",component:ErrorComponent , title:"not found"}
 ];

@@ -5,7 +5,7 @@ import { User } from '../models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
 import { StudentData } from '../models/student-data';
-import { SubjectInface } from '../models/subject_inface';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,7 @@ export class StudentService implements OnInit {
    constructor(
     private userService:UserServiceService,
     private http:HttpClient,
+    private router:Router
 
   ) {
     this.header={Headers:new HttpHeaders({
@@ -30,14 +31,15 @@ export class StudentService implements OnInit {
 
   }
   setDataUser(user:StudentData):Observable<StudentData>{
-    return this.http.post<StudentData>(`${environment.apiUrl}/student_data/${user.id}`,user,this.header)
+    return this.http.post<StudentData>(`${environment.apiUrl}/student_data`,user,this.header)
   }
 getDataUsers():Observable<StudentData[]>{
     return this.http.get<StudentData[]>(`${environment.apiUrl}/student_data`)
   }
-// getDataUser(id:string):Observable<StudentData>{
-//     return this.http.get<StudentData>(`${environment.apiUrl}/student_data?studentId=${id}`)
-//   }
+getDataUser(id:string):Observable<StudentData>{
+    return this.http.get<StudentData>(`${environment.apiUrl}/student_data/${id}`);
+  }
+
 DeleteDataUser(users:StudentData):Observable<StudentData>{
       return this.http.delete<StudentData>(`${environment.apiUrl}/student_data/${users.id}`,this.header)
     }
@@ -46,10 +48,14 @@ DeleteDataUser(users:StudentData):Observable<StudentData>{
   }
 
   checkStudent(username:string){
-    this.userService.getuser(username).subscribe((role)=>{
-      let userRole=role.find((user)=>user.username==username && user.role=='student');
-      this.isStudent.next(!!userRole);
-      this.user.next(userRole);
+    this.userService.getuser(username).subscribe((users)=>{
+      let userRole=users.find((user)=>user.username==username && user.role=='student');
+      if(userRole){
+        this.isStudent.next(true);
+        this.user.next(userRole);
+      }else{
+        this.isStudent.next(false);
+      }
     })
   }
 
@@ -74,5 +80,6 @@ setuser(user:User){
     }
   })
 }
+
 
 }

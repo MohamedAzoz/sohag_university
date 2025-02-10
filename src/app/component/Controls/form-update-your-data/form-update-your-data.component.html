@@ -4,14 +4,16 @@
     <form class="row w-50 gy-3 gx-0 py-3 rounded-2"
 (ngSubmit)="checkpassword(pass.value)"
 #check="ngForm">
-  <h3 class="text-center fw-bolder my-1">Update password</h3>
-  <div class="d-flex justify-content-center">
-    @if (errorMessage) {
-      <h3 class="is-invalid">{{errorMessage}}</h3>
+  <h3 class="text-center fw-bolder my-1 All1">Write Your password</h3>
+  <div class="d-flex justify-content-center All2">
+    @if (errorpass!='') {
+      <div class="container my-1 d-flex justify-content-center text-bg-danger">
+        <h3 class="All1 text-center fw-bolder my-1">{{errorpass}}</h3>
+        </div>
     }
   </div>
   <div class="col-10 mx-auto">
-    <label for="inputPassword4" class="form-label">Password</label>
+    <label for="inputPassword4" class="form-label All1">Password</label>
     <input
       type="password"
       class="form-control"
@@ -27,7 +29,7 @@
         'is-valid':passwordinput.valid
       }"
     />
-    <div class="invalid-feedback">
+    <div class="invalid-feedback All">
       @if(passwordinput.errors?.['required'] ) {
         <span>password is required</span>
       } @else if (passwordinput.errors?.['minlength'] ) {
@@ -39,10 +41,9 @@
 
     </div>
   </div>
-  <div class="col-10 mx-auto">
+  <div class="col-10 mx-auto All1">
     <button type="submit" class="btn btn-dark" [disabled]="check.invalid">Update</button>
   </div>
-
 </form>
 </div>
 @if (select==true) {
@@ -50,14 +51,16 @@
     <form class="row w-50 gy-3 gx-0 py-3 rounded-2"
     (ngSubmit)="updatePassword(pass1.value,pass2.value)"
     #update="ngForm">
-      <h3 class="text-center fw-bolder my-1">Update password</h3>
+      <h3 class="text-center fw-bolder my-1 All1">Update password</h3>
       <div class="d-flex justify-content-center">
-        @if (errorMessage) {
-          <h3 class="is-invalid">{{errorMessage}}</h3>
+        @if (errorMessage!='') {
+          <div class="container my-5 d-flex justify-content-center text-bg-danger">
+            <h3 class="text-center fw-bolder my-1">{{errorMessage}}</h3>
+            </div>
         }
       </div>
       <div class="col-10 mx-auto">
-        <label for="inputPassword1" class="form-label">Update Password</label>
+        <label for="inputPassword1" class="form-label All1">Update Password</label>
         <input
           type="password"
           class="form-control"
@@ -73,7 +76,7 @@
             'is-valid':Updatepasswordinput.valid
           }"
         />
-        <div class="invalid-feedback">
+        <div class="invalid-feedback All">
           @if (Updatepasswordinput.errors?.['required'] ) {
             <span>password is required</span>
           } @else if (Updatepasswordinput.errors?.['minlength'] ) {
@@ -85,7 +88,7 @@
         </div>
       </div>
       <div class="col-10 mx-auto">
-        <label for="inputPassword2" class="form-label">Password</label>
+        <label for="inputPassword2" class="form-label All1">Retype the password</label>
         <input
           type="password"
           class="form-control"
@@ -101,7 +104,7 @@
             'is-valid':newpasswordinput.valid
           }"
         />
-        <div class="invalid-feedback">
+        <div class="invalid-feedback All">
           @if (newpasswordinput.errors?.['required'] ) {
             <span>password is required</span>
           } @else if (newpasswordinput.errors?.['minlength'] ) {
@@ -113,20 +116,18 @@
         </div>
       </div>
       <div class="col-10 mx-auto">
-        <button type="submit" class="btn btn-dark" [disabled]="update.invalid">Update</button>
+        <button type="submit" class="btn btn-dark All1" [disabled]="update.invalid">Update</button>
       </div>
     </form>
-  </div>
-}
-@if(select2==true) {
-  <div class="row w-100 my-5 d-flex justify-content-center">
-    <h3>passwored isn't correct</h3>
   </div>
 }
 </div>
 }
 @if(bool==true) {
+  <div class="container my-5 d-flex justify-content-center text-bg-success All1">
+    <h3 class="text-center fw-bolder my-1">update passwored is correct</h3>
+    </div>
   <div class="container my-5 d-flex justify-content-center">
-    <h3>update passwored is correct</h3>
+    <button class="btn btn-primary All1" (click)="back()">back</button>
   </div>
 }

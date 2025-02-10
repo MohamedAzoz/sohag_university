@@ -1,9 +1,6 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { SubjectInface } from '../../../../models/subject_inface';
-import { StudentService } from '../../../../service/student.service';
 import { CollegeServiceService } from '../../../../service/college-service.service';
 import { College } from '../../../../models/college';
 import { Department } from '../../../../models/department';
@@ -22,10 +19,9 @@ export class FormAddDepartmentComponent implements OnInit{
   bool:boolean=false;
 
    constructor(
-    private http:HttpClient,
     private college_service:CollegeServiceService,
-    private student_service:StudentService
-   ){
+private location:Location
+  ){
 
    }
     ngOnInit(): void {
@@ -38,22 +34,6 @@ export class FormAddDepartmentComponent implements OnInit{
                       }
                   });
       }
-  //  onFileSelect(event: any) {
-  //   this.selectFile = event.target.files[0];
-  // }
-  //  onSubmit(form:any){
-  //   if(form.valid && this.selectFile){
-  //     const dataForm=new FormData();
-  //      dataForm.append('title',form.title);
-  //      dataForm.append('title',form.title);
-  //      dataForm.append('title',form.title);
-  //      dataForm.append('title',form.title);
-  //      this.http.post(`${environment.apiUrl}/review/`,dataForm).subscribe((response)=>{
-  //       console.log("تم رفع الا متحان",response);
-  //      })
-
-  //       }
-  //   }
 
   onSubmit(){
   this.college_service.AddDepartment(this.department).subscribe((R)=>{
@@ -65,6 +45,9 @@ export class FormAddDepartmentComponent implements OnInit{
       this.bool=false;
     }
   })
+  }
+  back(){
+    this.location.back();
   }
 }
 

@@ -29,7 +29,8 @@ constructor(
      })
   }
   DeleteCollege(user:User){
-    this.user_service.DeleteUser(user).subscribe((value)=>{
+    if(confirm("sure this delete")){
+      this.user_service.DeleteUser(user).subscribe((value)=>{
       if(value){
         this.bool1=false;
         this.message="been Year Delete successfully";
@@ -39,6 +40,7 @@ constructor(
         this.bool2=false;
       }
     })
+  }
   }
 }
 

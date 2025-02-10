@@ -47,18 +47,6 @@ constructor(
     }
   }
 
-  // selectSubject(id:string){
-  //     this.student_service.usercurrent().subscribe((ST)=>{
-  //       if(ST){
-  //           this.exam_service.getExamByStudentId(ST).subscribe((data)=>{
-  //              if(data){
-  //               this.getexam=data.find((x)=>{x.id==id})
-  //              }
-  //          })
-  //       }
-  //     })
-  //   }
-
     clickExam(id:string){
       this.exam_service.clickExam(id)
     }

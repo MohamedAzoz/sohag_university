@@ -48,6 +48,12 @@ export class CollegeServiceService {
   getDepartments(id:string):Observable<Department[]>{
     return this.http.get<Department[]>(`${environment.apiUrl}/department?collegeId=${id}`);
   }
+  getDepartment_Doctor():Observable<Department[]>{
+    return this.http.get<Department[]>(`${environment.apiUrl}/department`);
+  }
+  getDepartmentone(id:string):Observable<Department>{
+    return this.http.get<Department>(`${environment.apiUrl}/department/${id}`);
+  }
   AddDepartment(department:Department):Observable<Department>{
     return this.http.post<Department>(`${environment.apiUrl}/department`,department,this.header);
   }
@@ -64,6 +70,9 @@ export class CollegeServiceService {
   }
   getYears(id:string):Observable<Year[]>{
     return this.http.get<Year[]>(`${environment.apiUrl}/year?departmentId=${id}`,this.header);
+  }
+  getYear(id:string):Observable<Year>{
+    return this.http.get<Year>(`${environment.apiUrl}/year/${id}`,this.header);
   }
   AddYear(year:Year):Observable<Year>{
     return this.http.post<Year>(`${environment.apiUrl}/year`,year,this.header);

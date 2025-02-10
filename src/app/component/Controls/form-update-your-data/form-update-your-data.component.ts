@@ -1,10 +1,9 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserServiceService } from '../../../service/user-service.service';
 import { User } from '../../../models/user';
 import { CookieService } from 'ngx-cookie-service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-update-your-data',
@@ -18,15 +17,15 @@ usercurrent: User | undefined;
 userdata: User = {} as User;
 password1:string='';
 password2:string='';
-  errorMessage = '';
-  username:string='';
-  bool:boolean=false;
-  select:boolean=false;
-  select2:boolean=false;
+errorMessage:string = '';
+errorpass:string = '';
+username:string='';
+bool:boolean=false;
+select:boolean=false;
   constructor(
     private userService: UserServiceService,
     private CookieService:CookieService,
-    private router: Router
+    private location: Location
   ) {}
   ngOnInit(): void {
     this.username= this.CookieService.get('token');
@@ -42,18 +41,14 @@ checkpassword(pass:string){
       {
        this.select=true;
       }else{
-       this.select2=true;
+       this.errorpass="passwored isn't correct";
       }
-  }else{
-    console.log(this.username);
-    this.errorMessage="error in update password";
   }
 
 }
   updatePassword(password1:string,password2:string){
     if(this.usercurrent){
       this.user=this.usercurrent;
-    // this.userService.getuserone(this.username).subscribe((data)=>{
        if(password1==password2 && (password1.trim()||password2.trim()!='')){
         this.user.password=password1;
         this.userService.updatePassword(this.user).subscribe((us)=>{
@@ -63,11 +58,12 @@ checkpassword(pass:string){
             this.bool=false;
           }
         })
+      }else{
+         this.errorMessage='The two passwords are not equal';
       }
-    // })
-    }else{
-      console.log(this.usercurrent);
-      this.errorMessage="error in update password";
     }
+  }
+  back(){
+    this.location.back();
   }
 }

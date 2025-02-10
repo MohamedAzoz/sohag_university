@@ -10,7 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-main-dashboard',
-  imports: [AdminDashboardComponent,DoctorDashboardComponent,StudentDashboardComponent],
+  imports: [],
   templateUrl: './main-dashboard.component.html',
   styleUrl: './main-dashboard.component.css'
 })
@@ -28,32 +28,32 @@ export class MainDashboardComponent implements OnInit{
  ){}
   ngOnInit(): void {
     // this.student_service.student();
-    let username=this.CookieService.get('token');
-    this.Admin_service.checkAdmin(username);
-    this.doctor_service.checkDoctor(username);
-    this.student_service.checkStudent(username);
-    this.Admin_service.isbool().subscribe((A)=>{
-      if(A){
-        this.isAdmin=true;
-      }else{
-        this.isAdmin=false;
-      }
-    })
-   this.doctor_service.isbool().subscribe((D)=>{
-    if(D){
-      this.isDoctor=true;
-    }else{
-      this.isDoctor=false
-    }
-   })
+//     let username=this.CookieService.get('token');
+//     this.Admin_service.checkAdmin(username);
+//     this.doctor_service.checkDoctor(username);
+//     this.student_service.checkStudent(username);
+//     this.Admin_service.isbool().subscribe((A)=>{
+//       if(A){
+//         this.isAdmin=true;
+//       }else{
+//         this.isAdmin=false;
+//       }
+//     })
+//    this.doctor_service.isbool().subscribe((D)=>{
+//     if(D){
+//       this.isDoctor=true;
+//     }else{
+//       this.isDoctor=false
+//     }
+//    })
 
-   this.student_service.isbool().subscribe((ST)=>{
-    if(ST){
-      this.isStudent=true;
-    }else{
-      this.isStudent=false
-    }
-})
+//    this.student_service.isbool().subscribe((ST)=>{
+//     if(ST){
+//       this.isStudent=true;
+//     }else{
+//       this.isStudent=false
+//     }
+// })
   }
 
 }
