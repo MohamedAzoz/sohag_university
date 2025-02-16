@@ -1,13 +1,13 @@
 <div class="container my-5 d-flex justify-content-center">
   <form class="row w-50 gy-3 gx-0 py-3 shadow-lg color rounded-2" #login="ngForm">
-    <h3 class="text-center fw-bolder my-1">Login</h3>
+    <h3 class="text-center fw-bolder my-1  All1">Login</h3>
     <div class="d-flex justify-content-center">
       @if (errorMessage) {
-        <h3 class="is-invalid">{{errorMessage}}</h3>
+        <h3 class="is-invalid All2">{{errorMessage}}</h3>
       }
     </div>
     <div class="col-10 mx-auto">
-      <label for="inputEmail4" class="form-label">Username</label>
+      <label for="inputEmail4" class="form-label All2">Username</label>
       <input
         type="text"
         class="form-control"
@@ -21,7 +21,7 @@
           'is-valid':usernameinput.valid
         }"
       />
-      <div class="invalid-feedback">
+      <div class="invalid-feedback All3">
         @if (usernameinput.errors?.['required'] ) {
           <span>username is required</span>
         }
@@ -31,35 +31,43 @@
       </div>
     </div>
     <div class="col-10 mx-auto">
-      <label for="inputPassword4" class="form-label">Password</label>
-      <input
-        type="password"
-        class="form-control"
-        id="inputPassword4"
-        required
-        name="password"
-        [(ngModel)]="user.password"
-        #passwordinput="ngModel"
-        minlength="6"
-       pattern="^([a-zA-Z]+|\d+|(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@.]).{6,})$"
-        [ngClass]="{'is-invalid': (passwordinput.dirty || passwordinput.touched)&& passwordinput.invalid,
-          'is-valid':passwordinput.valid
-        }"
-      />
-      <div class="invalid-feedback">
-        @if (passwordinput.errors?.['required'] ) {
-          <span>password is required</span>
-        } @else if (passwordinput.errors?.['minlength'] ) {
-          <span>password most be at least 6 charcters</span>
-        }
-        @else if (passwordinput.errors?.['pattern'] ) {
-          <span>password most be at least one small and one captail charcters and numbers</span>
-        }
+      <label for="inputPassword4" class="form-label All2">Password</label>
+      <div class="input-group flex-nowrap">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          class="form-control"
+          id="inputPassword4"
+          required
+          aria-label="Password"
+          aria-describedby="addon-wrapping"
+          name="password"
+          [(ngModel)]="user.password"
+          #passwordinput="ngModel"
+          minlength="6"
+          pattern="^([a-zA-Z]+|\d+|(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@.]).{6,})$"
+          [ngClass]="{
+            'is-invalid': (passwordinput.dirty || passwordinput.touched) && passwordinput.invalid,
+            'is-valid': passwordinput.valid
+          }"
+        />
+        <span class="input-group-text" id="addon-wrapping" (click)="togglePassword()" style="cursor: pointer;">
+          <i [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword" class="fa-solid"></i>
+        </span>
       </div>
+    <div class="invalid-feedback All3">
+      @if (passwordinput.errors?.['required'] ) {
+        <span>password is required</span>
+      } @else if (passwordinput.errors?.['minlength'] ) {
+        <span>password most be at least 6 charcters</span>
+      }
+      @else if (passwordinput.errors?.['pattern'] ) {
+        <span>password most be at least one small and one captail charcters and numbers</span>
+      }
     </div>
+  </div>
 
     <div class="col-10 mx-auto">
-      <button type="submit" (click)="Login(usernameinput.value,passwordinput.value)" class="btn btn-dark" [disabled]="login.invalid">Login</button>
+      <button type="submit" (click)="Login(usernameinput.value,passwordinput.value)" class="btn btn-dark All2" [disabled]="login.invalid">Login</button>
     </div>
   </form>
 </div>

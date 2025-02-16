@@ -5,7 +5,6 @@ import { College } from '../models/college';
 import { environment } from '../../environments/environment.development';
 import { Department } from '../models/department';
 import { Year } from '../models/year';
-import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +15,11 @@ export class CollegeServiceService {
  currentDepartment:Observable<Department|null>=this.department.asObservable();
   constructor(
     private http:HttpClient,
-    private acriva:ActivatedRoute
-
   ) {
     this.header={Headers:new HttpHeaders({
       "Content-type":"application/json"
     })}
   }
-
-
 
   //=============== College  Service ==============
   getColleges():Observable<College[]>{
@@ -83,10 +78,6 @@ export class CollegeServiceService {
   updateYear(year:Year):Observable<Year>{
     return this.http.patch<Year>(`${environment.apiUrl}/year/${year.id}`,year,this.header);
   }
-
-
-
-
   setDepartment(depart:Department){
     this.department.next(depart);
   }

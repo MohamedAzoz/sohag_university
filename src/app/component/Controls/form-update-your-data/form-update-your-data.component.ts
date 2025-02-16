@@ -22,7 +22,8 @@ errorpass:string = '';
 username:string='';
 bool:boolean=false;
 select:boolean=false;
-  constructor(
+showPassword: boolean = false;
+ constructor(
     private userService: UserServiceService,
     private CookieService:CookieService,
     private location: Location
@@ -35,6 +36,11 @@ select:boolean=false;
       }
     })
   }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
+  
 checkpassword(pass:string){
   if(this.username!=''){
     if(this.usercurrent?.password==pass)

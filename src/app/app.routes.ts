@@ -4,7 +4,6 @@ import { ErrorComponent } from './component/error/error.component';
 import { MainComponent } from './component/main/main.component';
 import { LoginComponent } from './component/app-home/login/login.component';
 import { CollegeComponent } from './component/college/college.component';
-import { MainDashboardComponent } from './component/Controls/main-dashboard/main-dashboard.component';
 import { FormAddCollegeComponent } from './component/Controls/Admin/form-add-college/form-add-college.component';
 import { FormUpdateCollegeComponent } from './component/Controls/Admin/form-update-college/form-update-college.component';
 import { FormDeleteCollegeComponent } from './component/Controls/Admin/form-delete-college/form-delete-college.component';
@@ -43,7 +42,7 @@ import { FormUpdateUserComponent } from './component/Controls/Admin/form-update-
 import { FormDeleteUserComponent } from './component/Controls/Admin/form-delete-user/form-delete-user.component';
 import { FormAddYourDataComponent } from './component/Controls/form-add-your-data/form-add-your-data.component';
 import { FormUpdateYourDataComponent } from './component/Controls/form-update-your-data/form-update-your-data.component';
-import { NoticesComponent } from './component/Controls/notices/notices.component';
+import { NoticesComponent } from './component/Controls/doctor/notices/notices.component';
 import { UpdateManagerByDoctorComponent } from './component/Controls/doctor/update-manager-by-doctor/update-manager-by-doctor.component';
 import { DeleteManagerByDoctorComponent } from './component/Controls/doctor/delete-manager-by-doctor/delete-manager-by-doctor.component';
 import { FormAddDepartmentComponent } from './component/Controls/Admin/form-add-department/form-add-department.component';
@@ -63,8 +62,8 @@ export const routes: Routes = [
     {path:"college/:id", component:CollegeComponent , title:"College"},
   ]},
   {path:"student", component:StudentDashboardComponent , title:"Student Dashboard",canActivate:[authGuardGuard],children:[
-      {path:"", redirectTo:"studenthome",pathMatch:'full'},
-      {path:"studenthome",component:StudentMainHomeComponent , title:"Student Home",canActivate:[studentGuardGuard]},
+      {path:"", redirectTo:"student",pathMatch:'full'},
+      {path:"student",component:StudentMainHomeComponent , title:"Student",canActivate:[studentGuardGuard]},
 
       {path:"summarymanager",component:SummaryManagerComponent , title:"Summary Manager",canActivate:[studentGuardGuard],children:[
         {path:"", redirectTo:"summaryhome",pathMatch:'full'},
@@ -121,6 +120,7 @@ export const routes: Routes = [
     {path:"doctor",component:DoctorHomeComponent , title:"Doctor",canActivate:[doctorGuardGuard]},
     {path:"updatedoctor",component:UpdateManagerByDoctorComponent , title:"Update Manager",canActivate:[doctorGuardGuard]},
     {path:"deletedoctor",component:DeleteManagerByDoctorComponent , title:"Delete Manager",canActivate:[doctorGuardGuard]},
+    {path:"notices",component:NoticesComponent , title:"Notices",canActivate:[authGuardGuard]},
   ]},
   {path:"updatesummary",component:UpdateSummaryComponent , title:"Update Summary",canActivate:[authGuardGuard]},
   {path:"updatereviews",component:UpdateReviewComponent , title:"Update Review",canActivate:[authGuardGuard]},
@@ -129,6 +129,5 @@ export const routes: Routes = [
 
     {path:"addYourData",component:FormAddYourDataComponent , title:"Add Your Data",canActivate:[authGuardGuard]},
     {path:"updateYourData",component:FormUpdateYourDataComponent , title:"Update Your Data",canActivate:[authGuardGuard]},
-    {path:"notices",component:NoticesComponent , title:"Notices",canActivate:[authGuardGuard]},
   {path:"**",component:ErrorComponent , title:"not found"}
 ];

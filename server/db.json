@@ -9,7 +9,7 @@
     },
     {
       "id": "5467",
-      "name": "Ali",
+      "name": "Ali Ahmed",
       "username": "1234567891011",
       "password": "200445",
       "role": "student"
@@ -22,10 +22,10 @@
       "role": "doctor"
     },
     {
-      "id": "ab5e",
+      "id": "4127",
       "role": "student",
-      "name": "Omer",
-      "username": "4657986231054",
+      "name": "Aya",
+      "username": "1654687865462",
       "password": "200445"
     }
   ],
@@ -37,10 +37,23 @@
       "yearId": "4it"
     },
     {
-      "id": "ba4a",
-      "collegeId": "SCI",
-      "yearId": "7c72",
-      "studentId": "ab5e"
+      "id": "34fa",
+      "collegeId": "CS",
+      "yearId": "1",
+      "studentId": "4127"
+    }
+  ],
+  "notification": [
+    {
+      "id": "Datahttps://drive.google.com/file/d/1hDZnoUrJsPtYi02dlyFhxi0c5pCG0BnI/view?usp=drive_linkitreview",
+      "type": "review",
+      "subjectName": "Data base",
+      "StudentName": "Ali",
+      "StudentCollege": "حاسبات ومعلومات",
+      "StudentYear": "it",
+      "URL_Content": "https://drive.google.com/file/d/1hDZnoUrJsPtYi02dlyFhxi0c5pCG0BnI/view?usp=drive_link",
+      "show": false,
+      "time": "2025-02-12T19:33:18.420Z"
     }
   ],
   "doctor_data": [
@@ -72,7 +85,7 @@
       "id": "E4654",
       "name": "التربية",
       "description": "كلية الآداب بجامعة سوهاج هي إحدى الكليات التي تهدف إلى تقديم تعليم متميز في مجال العلوم الإنسانية والاجتماعية.  تأسست الكلية في عام 2007، وتعد من الكليات الرائدة في تقديم برامج أكاديمية تشمل مجموعة متنوعة من التخصصات الأدبية والإنسانية.",
-      "imge": "372935.svg"
+      "imge": "372937.svg"
     },
     {
       "id": "ARTS",
@@ -261,11 +274,6 @@
   ],
   "department": [
     {
-      "id": "generalEDU",
-      "name": "general",
-      "collegeId": null
-    },
-    {
       "id": "generalARTS",
       "name": "general",
       "collegeId": "ARTS"
@@ -299,11 +307,6 @@
       "id": "0403",
       "collegeId": "COM",
       "name": "عام"
-    },
-    {
-      "id": "5725",
-      "name": "عام",
-      "collegeId": null
     },
     {
       "id": "9fa7",
@@ -410,6 +413,14 @@
       "subjectId": "Data",
       "uploadedBy": "5467",
       "updatedAt": "2025 1 26"
+    },
+    {
+      "id": "1dc3",
+      "title": "Summary1",
+      "subjectId": "Data",
+      "fileUrl": ",l;kjuuiyurytdtr",
+      "uploadedBy": "5467",
+      "updatedAt": "2025-02-13T05:04:12.473Z"
     }
   ],
   "review": [
@@ -428,6 +439,14 @@
       "title": "lectur2025",
       "fileUrl": "jhkhgfhgdf",
       "updatedAt": "2025-02-07T02:41:38.747Z"
+    },
+    {
+      "id": "f141",
+      "title": "Review",
+      "subjectId": "Data",
+      "fileUrl": ",l;kjuuiyurytdtr",
+      "uploadedBy": "5467",
+      "updatedAt": "2025-02-13T05:21:05.234Z"
     }
   ],
   "test": [
@@ -440,13 +459,22 @@
       "updatedAt": "2025-02-07T03:08:25.102Z"
     },
     {
-      "id": "e525",
+      "id": "792f",
+      "title": "math3",
+      "subjectId": "Data",
+      "fileUrl": "https://drive.google.com/file/d/1hDZnoUrJsPtYi02dlyFhxi0c5pCG0BnI/view?usp=drive_link",
+      "year": 2025,
       "uploadedBy": "5467",
-      "title": "lhytresz",
+      "updatedAt": "2025-02-12T19:32:49.593Z"
+    },
+    {
+      "id": "1a3f",
+      "title": "Test",
       "subjectId": "Data",
       "fileUrl": "jhkhgfhgdf",
       "year": 2025,
-      "updatedAt": "2025-02-10T04:29:40.150Z"
+      "uploadedBy": "5467",
+      "updatedAt": "2025-02-13T05:12:38.404Z"
     }
   ],
   "exam": [

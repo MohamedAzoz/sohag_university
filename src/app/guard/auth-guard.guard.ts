@@ -20,7 +20,7 @@ if(!data){
 
 
 //============fake Database========
-if(userAuth.isAuthenticated()){
+if(userAuth.isAuthenticated){
   return true;
 }else{
   router.navigate(['/login']);

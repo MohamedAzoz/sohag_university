@@ -10,6 +10,8 @@ import { environment } from '../../../../../../environments/environment.developm
 import { SubjectServiceService } from '../../../../../service/subject-service.service';
 import { StudentData } from '../../../../../models/student-data';
 import { User } from '../../../../../models/user';
+import { BehaviorSubject } from 'rxjs';
+import { NoticesService } from '../../../../../service/notices.service';
 
 @Component({
   selector: 'app-review-form',
@@ -18,6 +20,7 @@ import { User } from '../../../../../models/user';
   styleUrl: './review-form.component.css'
 })
 export class ReviewFormComponent implements OnInit{
+  private student=new BehaviorSubject<User|null>(null)
  date:Date=new Date
 user:User={} as User
 userd:StudentData|undefined;
@@ -28,76 +31,49 @@ userd:StudentData|undefined;
   bool!:boolean;
  constructor(
   private http:HttpClient,
+  private notices_service:NoticesService,
   private review_service:ReviewService,
   private subject_service:SubjectServiceService,
-  private student_service:StudentService
- ){
-
-  // this.student_service.usercurrent().subscribe((ST)=>{
-  //   if(ST){
-  //     this.user=ST
-  //     this.student_service.setuser(ST);
-  //     // console.log(this.user);
-  //     // console.log(this.user.username);
-  //   }
-  // });
-  //   this.student_service.userData.subscribe((data)=>{
-  //     if(data){
-
-  //       ObservableSubjects=this.subject_service.getSubjects(data.yearId);
-  //       console.log(data);
-  //     }
-
-  //   });
-
-  //   ObservableSubjects.subscribe((s)=>{
-  //     if(s){
-  //       this.subjects=s
-  //       console.log(this.subjects[0]);
-  //     }else{
-  //       this.subjects=[]
-  //       console.log(this.subjects);
-  //     }
-  //   })
-
-  this.student_service.usercurrent().subscribe((ST)=>{
-    if(ST){
-    this.review.uploadedBy=ST.id;
-      student_service.setuser(ST);
-    }
-  });
-  student_service.userData.subscribe((data)=>{
-      if(data){
-        this.subject_service.setSubs(data.yearId);
-        console.log(data);
-      }
-
-    });
-
-    subject_service.currentSubs.subscribe((s)=>{
-      if(s){
-        this.subjects=s
-      }else{
-        this.subjects=[]
-      }
-    })
- }
+  private student_service:StudentService,
+ ){}
   ngOnInit(): void {
+    this.student_service.usercurrent().subscribe((ST)=>{
+      if(ST){
+      this.student.next(ST)
+        this.student_service.setuser(ST);
+      }
+    });
+    this.student_service.userData.subscribe((data)=>{
+        if(data){
+          this.subject_service.setSubs(data.yearId);
+        }
+      });
 
+      this.subject_service.currentSubs.subscribe((s)=>{
+        if(s){
+          this.subjects=s
+        }else{
+          this.subjects=[]
+        }
+      })
     }
 
-onSubmit(){
-  if(this.review){
-    this.review.updatedAt=this.date
-    this.review_service.AddReview(this.review).subscribe((EX)=>{
+onSubmit(review:Review){
+  this.student.subscribe((ST)=>{
+    if(ST){
+      this.review.uploadedBy=ST.id;
+      review.updatedAt=this.date
+    this.review_service.AddReview(review).subscribe((EX)=>{
       if(EX){
         this.message="been Your add successfully";
         this.bool=true;
+        this.notices_service.AddNotification('review',review.subjectId,ST.name,review.fileUrl)
       }else{
         this.message="error in Add";
         this.bool=false;
       }
-    })
-  }
+    });
+    }
+    });
 }
 }

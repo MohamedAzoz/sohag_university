@@ -26,13 +26,14 @@ constructor(
       if(ST){
         this.student=ST
       }
-    })
+    });
     this.exam_service.getExamByStudentId(this.student).subscribe((EX)=>{
       if(EX){
         this.exams=EX
       }
-    })
+    });
   }
+
   DeleteExam(exam:Exam){
     if(confirm("sure this delete")){
       this.exam_service.DeleteExam(exam).subscribe((value)=>{
@@ -43,10 +44,9 @@ constructor(
           this.message="error in Delete";
           this.bool=false;
         }
-      })
+      });
     }
   }
-
     clickExam(id:string){
       this.exam_service.clickExam(id)
     }

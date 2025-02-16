@@ -9,6 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { SubjectServiceService } from '../../../../../service/subject-service.service';
 import { StudentData } from '../../../../../models/student-data';
 import { User } from '../../../../../models/user';
+import { BehaviorSubject } from 'rxjs';
+import { NoticesService } from '../../../../../service/notices.service';
 
 @Component({
   selector: 'app-test-form',
@@ -17,6 +19,7 @@ import { User } from '../../../../../models/user';
   styleUrl: './test-form.component.css'
 })
 export class TestFormComponent implements OnInit{
+ private student=new BehaviorSubject<User|null>(null)
  date:Date=new Date
 user:User={} as User
 userd:StudentData|undefined;
@@ -27,50 +30,48 @@ userd:StudentData|undefined;
   bool!:boolean;
  constructor(
   private http:HttpClient,
+  private notices_service:NoticesService,
   private test_service:TestService,
   private subject_service:SubjectServiceService,
   private student_service:StudentService
- ){
-
-
-  this.student_service.usercurrent().subscribe((ST)=>{
-    if(ST){
-    this.test.uploadedBy=ST.id;
-      student_service.setuser(ST);
-    }
-  });
-  student_service.userData.subscribe((data)=>{
-      if(data){
-        this.subject_service.setSubs(data.yearId);
-        console.log(data);
-      }
-
-    });
-
-    subject_service.currentSubs.subscribe((s)=>{
-      if(s){
-        this.subjects=s
-      }else{
-        this.subjects=[]
-      }
-    })
- }
+ ){}
   ngOnInit(): void {
-
+    this.student_service.usercurrent().subscribe((ST)=>{
+      if(ST){
+      this.student.next(ST)
+        this.student_service.setuser(ST);
+      }
+    });
+    this.student_service.userData.subscribe((data)=>{
+        if(data){
+          this.subject_service.setSubs(data.yearId);
+        }
+      });
+      this.subject_service.currentSubs.subscribe((s)=>{
+        if(s){
+          this.subjects=s
+        }else{
+          this.subjects=[]
+        }
+      })
     }
 
-onSubmit(){
-  if(this.test){
-    this.test.updatedAt=this.date
-    this.test_service.AddTest(this.test).subscribe((EX)=>{
-      if(EX){
+onSubmit(test:Test){
+  this.student.subscribe((ST)=>{
+    if(ST){
+      this.test.uploadedBy=ST.id;
+      test.updatedAt=this.date
+    this.test_service.AddTest(test).subscribe((value)=>{
+      if(value){
         this.message="been Your add successfully";
         this.bool=true;
+        this.notices_service.AddNotification('review',test.subjectId,ST.name,test.fileUrl)
       }else{
         this.message="error in Add";
         this.bool=false;
       }
-    })
-  }
+    });
+    }
+    });
 }
 }

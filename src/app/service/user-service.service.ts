@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { environment } from '../../environments/environment.development';
@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root'
 })
-export class UserServiceService implements OnInit {
+export class UserServiceService {
 header={}
   constructor(
     private http:HttpClient,
@@ -20,14 +20,8 @@ header={}
               "Content-type":"application/json"
             })}
    }
-  ngOnInit(): void {
-
-  }
   getUsers():Observable<User[]>{
     return this.http.get<User[]>(`${environment.apiUrl}/users`)
-  }
-  getuser(username:string):Observable<User[]>{
-    return this.http.get<User[]>(`${environment.apiUrl}/users?username=${username}`)
   }
   getuserone(username:string):Observable<User>{
     return this.http.get<User>(`${environment.apiUrl}/users?username=${username}`)

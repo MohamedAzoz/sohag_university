@@ -21,7 +21,7 @@ import { NoticesService } from '../../../../../service/notices.service';
   styleUrl: './exam-form.component.css'
 })
 export class ExamFormComponent implements OnInit{
-
+ private student=new BehaviorSubject<User|null>(null)
 
  date:Date=new Date
 user:User={} as User
@@ -72,7 +72,7 @@ userd:StudentData|undefined;
   ngOnInit(): void {
     this.student_service.usercurrent().subscribe((ST)=>{
       if(ST){
-      this.exam.uploadedBy=ST.id;
+      this.student.next(ST)
         this.student_service.setuser(ST);
       }
     });
@@ -108,15 +108,21 @@ userd:StudentData|undefined;
 //   }
 
 onSubmit(exam:Exam){
-    exam.updatedAt=this.date
+  this.student.subscribe((ST)=>{
+    if(ST){
+      this.exam.uploadedBy=ST.id;
+      exam.updatedAt=this.date
     this.exam_service.AddExam(exam).subscribe((EX)=>{
       if(EX){
         this.message="been Your add successfully";
         this.bool=true;
+        this.notices_service.AddNotification('exam',exam.subjectId,ST.name,exam.fileUrl)
       }else{
         this.message="error in Add";
         this.bool=false;
       }
+    })
+    }
     })
 
 }

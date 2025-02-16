@@ -14,10 +14,14 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   user: User = {} as User;
   errorMessage = '';
-  constructor(
+showPassword: boolean = false;
+constructor(
     private authService: AuthenticationServiceService,
     private router: Router
   ) {}
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
 
 //============realy databaes========
   /*Login(username: string, password: string): void {

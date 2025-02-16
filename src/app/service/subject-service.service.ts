@@ -74,9 +74,6 @@ private boolenBehaviorSubject=new BehaviorSubject<boolean>(false);
       return this.http.patch<SubjectInface>(`${environment.apiUrl}/subject/${subject.id}`,subject,this.header);
     }
 
-
-
-
     setData(year:Year){
      this.college_Service.currentDepartment.subscribe((v)=>{
         let x= v?.id
@@ -88,6 +85,7 @@ private boolenBehaviorSubject=new BehaviorSubject<boolean>(false);
         }
       })
     }
+    
       getData(){
       return this.yearBehaviorSubject.value;
     }

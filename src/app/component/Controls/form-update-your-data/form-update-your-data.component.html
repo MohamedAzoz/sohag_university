@@ -13,13 +13,16 @@
     }
   </div>
   <div class="col-10 mx-auto">
-    <label for="inputPassword4" class="form-label All1">Password</label>
-    <input
-      type="password"
+    <label for="inputPassword7" class="form-label All1">Password</label>
+    <div class="input-group flex-nowrap">
+      <input
+        [type]="showPassword ? 'text' : 'password'"
       class="form-control"
-      id="inputPassword4"
+      id="inputPassword7"
       required
       name="password"
+      aria-label="Password"
+      aria-describedby="addon-wrapping"
       [(ngModel)]="user.password"
       #passwordinput="ngModel"
       #pass
@@ -29,6 +32,10 @@
         'is-valid':passwordinput.valid
       }"
     />
+    <span class="input-group-text" id="addon-wrapping" (click)="togglePassword()" style="cursor: pointer;">
+      <i [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword" class="fa-solid"></i>
+    </span>
+  </div>
     <div class="invalid-feedback All">
       @if(passwordinput.errors?.['required'] ) {
         <span>password is required</span>
@@ -60,22 +67,30 @@
         }
       </div>
       <div class="col-10 mx-auto">
-        <label for="inputPassword1" class="form-label All1">Update Password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="inputPassword1"
-          required
-          name="Updatepassword"
-          [(ngModel)]="password1"
-          #Updatepasswordinput="ngModel"
-          #pass1
-          minlength="6"
-         pattern="^([a-zA-Z]+|\d+|(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@.]).{6,})$"
-          [ngClass]="{'is-invalid': (Updatepasswordinput.dirty || Updatepasswordinput.touched)&& Updatepasswordinput.invalid,
-            'is-valid':Updatepasswordinput.valid
-          }"
-        />
+        <label for="inputPassword4" class="form-label All2">Update Password</label>
+        <div class="input-group flex-nowrap">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            class="form-control"
+            id="inputPassword4"
+            required
+            aria-label="Password"
+            aria-describedby="addon-wrapping"
+            name="password"
+            [(ngModel)]="user.password"
+            #Updatepasswordinput="ngModel"
+            minlength="6"
+            #pass1
+            pattern="^([a-zA-Z]+|\d+|(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@.]).{6,})$"
+            [ngClass]="{
+              'is-invalid': (Updatepasswordinput.dirty || Updatepasswordinput.touched) && Updatepasswordinput.invalid,
+              'is-valid': Updatepasswordinput.valid
+            }"
+          />
+          <span class="input-group-text" id="addon-wrapping" (click)="togglePassword()" style="cursor: pointer;">
+            <i [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword" class="fa-solid"></i>
+          </span>
+        </div>
         <div class="invalid-feedback All">
           @if (Updatepasswordinput.errors?.['required'] ) {
             <span>password is required</span>
@@ -89,11 +104,14 @@
       </div>
       <div class="col-10 mx-auto">
         <label for="inputPassword2" class="form-label All1">Retype the password</label>
-        <input
-          type="password"
+        <div class="input-group flex-nowrap">
+          <input
+          [type]="showPassword ? 'text' : 'password'"
           class="form-control"
           id="inputPassword2"
           required
+          aria-label="Password"
+          aria-describedby="addon-wrapping"
           name="newpassword"
           [(ngModel)]="password2"
           #newpasswordinput="ngModel"
@@ -104,6 +122,10 @@
             'is-valid':newpasswordinput.valid
           }"
         />
+        <span class="input-group-text" id="addon-wrapping" (click)="togglePassword()" style="cursor: pointer;">
+          <i [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword" class="fa-solid"></i>
+        </span>
+      </div>
         <div class="invalid-feedback All">
           @if (newpasswordinput.errors?.['required'] ) {
             <span>password is required</span>
@@ -127,7 +149,7 @@
   <div class="container my-5 d-flex justify-content-center text-bg-success All1">
     <h3 class="text-center fw-bolder my-1">update passwored is correct</h3>
     </div>
+  }
   <div class="container my-5 d-flex justify-content-center">
-    <button class="btn btn-primary All1" (click)="back()">back</button>
+    <button class="btn btn-primary All1" (click)="back()">go back</button>
   </div>
-}

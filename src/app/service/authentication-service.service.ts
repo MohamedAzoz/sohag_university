@@ -18,6 +18,9 @@ export class AuthenticationServiceService {
 
   private currentUserSubject=new BehaviorSubject<User | null>(null);
   public currentUser=this.currentUserSubject.asObservable();
+  private boolBehavior=new BehaviorSubject<boolean>(false);
+  public current_bool=this.boolBehavior.asObservable();
+
 
   constructor(
     // private Http:HttpClient,
@@ -69,29 +72,33 @@ export class AuthenticationServiceService {
         }
       });
       this.doctor_service.isbool().subscribe((bool)=>{
+        if(bool){
         this.router.navigate(['Doctor']);
+      }
       });
       this.admin_service.isbool().subscribe((bool)=>{
-        this.router.navigate(['Admin']);
+        if(bool){
+          this.router.navigate(['Admin']);
+        }
       })
       this.currentUserSubject.next(user);
       this.CookieService.set("token",user.username);
+      this.boolBehavior.next(true);
     }else{
       this.currentUserSubject.next(null);
+      this.boolBehavior.next(false);
     }
     })
   }
 
-  getCurrentUser():User |null{
-   return this.currentUserSubject.value;
-  }
 
   logout():void{
     this.currentUserSubject.next(null);
     this.CookieService.delete("token");
+    this.boolBehavior.next(false)
   }
 
-isAuthenticated():boolean{
+get isAuthenticated():boolean{
   return (this.currentUserSubject.value)?true:false;
 }
 

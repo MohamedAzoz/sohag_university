@@ -48,7 +48,7 @@ DeleteDataUser(users:StudentData):Observable<StudentData>{
   }
 
   checkStudent(username:string){
-    this.userService.getuser(username).subscribe((users)=>{
+    this.userService.getUsers().subscribe((users)=>{
       let userRole=users.find((user)=>user.username==username && user.role=='student');
       if(userRole){
         this.isStudent.next(true);

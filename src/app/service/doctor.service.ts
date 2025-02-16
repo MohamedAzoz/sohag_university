@@ -1,6 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
 import { UserServiceService } from './user-service.service';
-import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { DoctorData } from '../models/doctor-data';
@@ -80,7 +79,7 @@ updateDataUser (users:DoctorData):Observable<DoctorData>{
      return this.http.patch<DoctorData>(`${environment.apiUrl}/doctor_data/${users.id}`,users,this.header);
   }
   checkDoctor(username:string){
-      this.userService.getuser(username).subscribe((role)=>{
+      this.userService.getUsers().subscribe((role)=>{
         let userRole=role.find((user)=>user.username==username && user.role=='doctor');
         this.isDoctor.next(!!userRole);
         this.user.next(userRole);
@@ -107,9 +106,9 @@ updateDataUser (users:DoctorData):Observable<DoctorData>{
     })
   }
 getcolleges(colleges:string[]){
-    for(let i =0; i < colleges.length; i++) {
+    for(let collegeId of colleges) {
       this.college_service.getColleges().subscribe((data)=>{
-        let college=data.find((v)=>v.id==colleges[i])
+        let college=data.find((v)=>v.id==collegeId)
         if(college){
          let bool=this.colleges.find((b)=>b.id==college.id)
           if(!bool){
@@ -121,9 +120,9 @@ getcolleges(colleges:string[]){
     }
   }
   getDepartments(Departs:string[]){
-    for(let i =0; i < Departs.length; i++) {
+    for(let DepartId of Departs) {
       this.college_service.getDepartment_Doctor().subscribe((data)=>{
-        let Depart=data.find((v)=>v.id==Departs[i])
+        let Depart=data.find((v)=>v.id==DepartId)
         if(Depart){
          let bool=this.Depart_doctor.find((b)=>b.id==Depart.id)
           if(!bool){
@@ -135,9 +134,9 @@ getcolleges(colleges:string[]){
     }
   }
   getyears(years:string[]){
-    for(let i =0; i < years.length; i++) {
+    for(let yearId of years) {
       this.college_service.getYears_Doctor().subscribe((data)=>{
-        let year=data.find((v)=>v.id==years[i])
+        let year=data.find((v)=>v.id==yearId)
         if(year){
          let bool=this.year_doctor.find((b)=>b.id==year.id)
           if(!bool){
@@ -149,9 +148,9 @@ getcolleges(colleges:string[]){
     }
   }
   getsubjects(subjects:string[]){
-    for(let i =0; i < subjects.length; i++) {
+    for(let sub of subjects) {
       this.subject_service.getSubject_Doctor().subscribe((data)=>{
-        let subject=data.find((v)=>v.id==subjects[i])
+        let subject=data.find((v)=>v.id==sub)
         if(subject){
          let bool=this.subject_doctor.find((b)=>b.id==subject.id)
           if(!bool){
@@ -162,45 +161,4 @@ getcolleges(colleges:string[]){
       })
     }
   }
-  // selectSubject(id:string){
-  //   this.subjects_dotor.subscribe((Subjects)=>{
-  //     if(Subjects){
-  //      let Subject=Subjects.find((sub)=>(sub.id==id));
-  //      if(Subject){
-  //       // this.select=true
-  //       this.onesubjectBehavior.next(Subject)
-  //      }else{
-  //       this.onesubjectBehavior.next(undefined)
-  //       // this.select=false
-  //      }
-  //    }
-  //   })
-  //   }
-  //   selectContent(value:string){
-  //     this.onesubject.subscribe((subject)=>{
-  //       if(subject){
-  //         // this.typContent=value
-  //         console.log(subject,value);
-  //         // this.contentBehavior.next(value);
-  //         this.subject_service.setContent_Doctor(value,subject)
-  //        this.subject_service.allContent.subscribe((data)=>{
-  //       if(data && data.length>0){
-  //         // console.log(data);
-  //         // this.bool=true;
-  //         // this.content=data;
-  //       }else{
-  //         // this.bool=false;
-  //         // this.content=[];
-  //       }
-  //     });
-  //   }
-  //     });
-
-  //   }
-  Time_for_Subject(time:Date){
-
-    let date:any;
-    date.push(time);
-    this.NoticeseBehavior.next(date)
-   }
 }
