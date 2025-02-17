@@ -5,16 +5,14 @@
           #collegeForm="ngForm"
           (ngSubmit)="selectCollege(idcollege.value)"
           enctype="multipart/form-data">
-          <h3 class="text-center fw-bolder my-1">select College</h3>
-
             <div class="col-10 d-flex justify-content-evenly">
-              <label for="College" class="form-label" >College </label>
+              <label for="College" class="form-label All2" >College </label>
               <select name="College" id="College" required [(ngModel)]="collegeid" #idcollege>
                 @for (item of colleges; track $index) {
                 <option [value]="item.id">{{ item.name }}</option>
                 }
               </select>
-              <button type="submit" class="btn btn-dark" [disabled]="collegeForm.invalid">
+              <button type="submit" class="btn btn-dark All2" [disabled]="collegeForm.invalid">
                 Ok
               </button>
             </div>
@@ -28,14 +26,14 @@
             (ngSubmit)="selectDepartment(idDept.value)"
             enctype="multipart/form-data"
           >
-            <div class="col-10 d-flex justify-content-evenly">
-              <label for="department" class="form-label">Department </label>
+            <div class="col-10 d-flex justify-content-evenly All2">
+              <label for="department" class="form-label All2">Department </label>
               <select name="department" id="department" required [(ngModel)]="Departid" #idDept>
                 @for (item of departments; track $index) {
                 <option [value]="item.id">{{ item.name }}</option>
                 }
               </select>
-              <button type="submit" class="btn btn-dark" [disabled]="DepartmentForm.invalid">
+              <button type="submit" class="btn btn-dark All2" [disabled]="DepartmentForm.invalid">
                 ok
               </button>
             </div>
@@ -48,14 +46,14 @@
         #yearForm="ngForm"
         (ngSubmit)="selectYear(idyear.value)"
         enctype="multipart/form-data">
-          <div class="col-10 d-flex justify-content-evenly">
-            <label for="College" class="form-label" >Year </label>
+          <div class="col-10 d-flex justify-content-evenly All2">
+            <label for="College" class="form-label All2" >Year </label>
             <select name="College" id="College" required [(ngModel)]="Yearid" #idyear>
               @for (item of years; track $index) {
               <option [value]="item.id">{{ item.name }}</option>
               }
             </select>
-            <button type="submit" class="btn btn-dark" [disabled]="yearForm.invalid">
+            <button type="submit" class="btn btn-dark All2" [disabled]="yearForm.invalid">
               update
             </button>
           </div>
@@ -71,10 +69,10 @@
             enctype="multipart/form-data"
           >
         <div class="col-10 d-flex justify-content-evenly">
-          <label for="name" class="form-label">Name</label>
+          <label for="name" class="form-label All2">Name</label>
           <input
             type="text"
-            class="form-control"
+            class="form-control All2"
             id="name"
             required
             name="name"
@@ -88,7 +86,7 @@
               'is-valid': Titleinput.valid
             }"
           />
-          <div class="invalid-feedback">
+          <div class="invalid-feedback All3">
             @if (Titleinput.errors?.['required'] ) {
             <span>name is required</span>
             } @else if (Titleinput.errors?.['minlength'] ) {
@@ -97,7 +95,7 @@
           </div>
         </div>
         <div class="col-10 mx-auto">
-          <button type="submit" class="btn btn-dark" [disabled]="updatForm.invalid">
+          <button type="submit" class="btn btn-dark All2" [disabled]="updatForm.invalid">
             Update
           </button>
         </div>
@@ -109,6 +107,6 @@
 }
 @if (bool==true) {
   <div class="container my-5 d-flex justify-content-center text-bg-success">
-    <h3 class="text-center fw-bolder my-1">{{message}}</h3>
+    <h3 class="text-center fw-bolder my-1 All2">{{message}}</h3>
     </div>
  }

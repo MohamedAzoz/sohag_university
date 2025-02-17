@@ -17,11 +17,9 @@
     <span class="All1">{{time.subjectName}}</span>
     <span class="All1">{{time.type}}</span>
     <span class="All1">{{time.time| date:'short'}}</span>
-    <a class="btn btn-outline-primary" [href]="time.URL_Content" target="_blank">show</a>
-    <button class="btn btn-outline-dark" (click)="delete(time)"><i class="fa-solid fa-trash"></i></button>
+    <a class="btn btn-outline-primary  All1" [href]="time.URL_Content" target="_blank">show</a>
+    <button class="btn btn-outline-dark  All1" (click)="delete(time)"><i class="fa-solid fa-trash"></i></button>
   </div>
 }
 </div>
-<!-- <div class="container my-5 d-flex justify-content-center">
-  <button class="btn btn-primary All1" (click)="back()">go back</button>
-</div> -->
+

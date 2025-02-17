@@ -2,7 +2,7 @@
   <div class="container w-50 my-5 d-flex flex-column justify-content-center align-items-center shadow-lg color">
 @for (review of reviews; track $index) {
   <div class="col-10 my-2 py-1 text-bg-primary d-flex justify-content-evenly align-items-center">
-    <p>{{review.title}}</p>
+    <p class=" All2">{{review.title}}</p>
     <a class="btn btn-danger All2" [routerLink]="'/updatereviews'" (click)="clickReview(review.id)" title="{{review.title}}">update</a>
     <button class="btn btn-danger All2" (click)="DeleteReview(review)">delete</button>
   </div>

@@ -6,12 +6,12 @@
       (ngSubmit)="onSubmit(summary)"
       enctype="multipart/form-data"
     >
-      <h3 class="text-center fw-bolder my-1">Update summary</h3>
+      <h3 class="text-center fw-bolder my-1 All1">Update summary</h3>
       <div class="col-10 mx-auto">
-        <label for="Title" class="form-label">Title</label>
+        <label for="Title" class="form-label All2">Title</label>
         <input
           type="text"
-          class="form-control"
+          class="form-control All2"
           id="Title"
           required
           name="Title"
@@ -25,7 +25,7 @@
             'is-valid': Titleinput.valid
           }"
         />
-        <div class="invalid-feedback">
+        <div class="invalid-feedback All3">
           @if (Titleinput.errors?.['required'] ) {
           <span>name is required</span>
           } @else if (Titleinput.errors?.['minlength'] ) {
@@ -34,10 +34,10 @@
         </div>
       </div>
       <div class="col-10 mx-auto">
-        <label for="url" class="form-label">url</label>
+        <label for="url" class="form-label All2">url</label>
         <input
           type="text"
-          class="form-control"
+          class="form-control All2"
           id="url"
           required
           name="url"
@@ -50,14 +50,14 @@
             'is-valid': fileinput.valid
           }"
         />
-        <div class="invalid-feedback">
+        <div class="invalid-feedback All3">
           @if (fileinput.errors?.['required'] ) {
           <span>file is required</span>
           }
         </div>
       </div>
       <div class="col-10 mx-auto">
-        <button type="submit" class="btn btn-dark" [disabled]="summaryForm.invalid">
+        <button type="submit" class="btn btn-dark All2" [disabled]="summaryForm.invalid">
           Add summary
         </button>
       </div>
@@ -66,12 +66,12 @@
   }
   @if (bool==true) {
     <div class="container my-5 d-flex justify-content-center text-bg-success">
-      <h3 class="text-center fw-bolder my-1">{{message}}</h3>
+      <h3 class="text-center fw-bolder my-1 All2">{{message}}</h3>
       </div>
   }
   @if (bool2==true) {
     <div class="container my-5 d-flex justify-content-center text-bg-danger">
-      <h3 class="text-center fw-bolder my-1">{{message}}</h3>
+      <h3 class="text-center fw-bolder my-1 All2">{{message}}</h3>
       </div>
   }
   <div class="container my-2 my-md-5 d-flex justify-content-center">

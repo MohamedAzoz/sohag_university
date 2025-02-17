@@ -40,7 +40,6 @@ import { FormSubjectComponent } from './component/Controls/Admin/form-subject/fo
 import { FormAddUserComponent } from './component/Controls/Admin/form-add-user/form-add-user.component';
 import { FormUpdateUserComponent } from './component/Controls/Admin/form-update-user/form-update-user.component';
 import { FormDeleteUserComponent } from './component/Controls/Admin/form-delete-user/form-delete-user.component';
-import { FormAddYourDataComponent } from './component/Controls/form-add-your-data/form-add-your-data.component';
 import { FormUpdateYourDataComponent } from './component/Controls/form-update-your-data/form-update-your-data.component';
 import { NoticesComponent } from './component/Controls/doctor/notices/notices.component';
 import { UpdateManagerByDoctorComponent } from './component/Controls/doctor/update-manager-by-doctor/update-manager-by-doctor.component';
@@ -127,7 +126,6 @@ export const routes: Routes = [
   {path:"updatetests",component:UpdateTestComponent , title:"Update Test",canActivate:[authGuardGuard]},
   {path:"updateexams",component:UpdateExamComponent , title:"Update Exam",canActivate:[authGuardGuard]},
 
-    {path:"addYourData",component:FormAddYourDataComponent , title:"Add Your Data",canActivate:[authGuardGuard]},
     {path:"updateYourData",component:FormUpdateYourDataComponent , title:"Update Your Data",canActivate:[authGuardGuard]},
   {path:"**",component:ErrorComponent , title:"not found"}
 ];

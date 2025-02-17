@@ -5,16 +5,16 @@
     #collegeForm="ngForm"
     (ngSubmit)="selectCollege(id.value)"
     enctype="multipart/form-data">
-    <h3 class="text-center fw-bolder my-1">select College</h3>
+    <h3 class="text-center fw-bolder my-1 All1">Update Subject</h3>
 
-      <div class="col-10 d-flex justify-content-evenly">
-        <label for="College" class="form-label" >College </label>
+      <div class="col-10 d-flex justify-content-evenly All2">
+        <label for="College" class="form-label All2">College </label>
         <select name="College" id="College" required [(ngModel)]="collegeid" #id>
           @for (item of colleges; track $index) {
           <option [value]="item.id">{{ item.name }}</option>
           }
         </select>
-        <button type="submit" class="btn btn-dark" [disabled]="collegeForm.invalid">
+        <button type="submit" class="btn btn-dark All2" [disabled]="collegeForm.invalid">
           Ok
         </button>
       </div>
@@ -27,16 +27,14 @@
     #departForm="ngForm"
     (ngSubmit)="selectDepartment(id2.value)"
     enctype="multipart/form-data">
-    <h3 class="text-center fw-bolder my-1">select Department</h3>
-
-      <div class="col-10 d-flex justify-content-evenly">
-        <label for="Department" class="form-label" >Department </label>
+      <div class="col-10 d-flex justify-content-evenly All2">
+        <label for="Department" class="form-label All2" >Department </label>
         <select name="Department" id="Department" required [(ngModel)]="Departmentid" #id2>
           @for (item of departments; track $index) {
           <option [value]="item.id">{{ item.name }}</option>
           }
         </select>
-         <button type="submit" class="btn btn-dark" [disabled]="departForm.invalid">
+         <button type="submit" class="btn btn-dark All2" [disabled]="departForm.invalid">
           Ok
         </button>
       </div>
@@ -49,16 +47,14 @@
     #yearForm="ngForm"
     (ngSubmit)="selectYear(idYear.value)"
     enctype="multipart/form-data">
-    <h3 class="text-center fw-bolder my-1">select Year</h3>
-
-      <div class="col-10 d-flex justify-content-evenly">
-        <label for="Year" class="form-label" >Year </label>
+      <div class="col-10 d-flex justify-content-evenly All2">
+        <label for="Year" class="form-label All2" >Year </label>
         <select name="Year" id="Year" required [(ngModel)]="Yearid" #idYear>
           @for (item of years; track $index) {
           <option [value]="item.id">{{ item.name }}</option>
           }
         </select>
-         <button type="submit" class="btn btn-dark" [disabled]="yearForm.invalid">
+         <button type="submit" class="btn btn-dark All2" [disabled]="yearForm.invalid">
           Ok
         </button>
       </div>
@@ -71,16 +67,14 @@
     #SubjectForm="ngForm"
     (ngSubmit)="selectSubject(Subject.value)"
     enctype="multipart/form-data">
-    <h3 class="text-center fw-bolder my-1">select Subject</h3>
-
-      <div class="col-10 d-flex justify-content-evenly">
-        <label for="Subject" class="form-label" >Subject </label>
+      <div class="col-10 d-flex justify-content-evenly All2">
+        <label for="Subject" class="form-label All2" >Subject </label>
         <select name="Subject" id="Subject" required [(ngModel)]="Subjectid" #Subject>
           @for (item of subjects; track $index) {
           <option [value]="item.id">{{ item.name }}</option>
           }
         </select>
-         <button type="submit" class="btn btn-dark" [disabled]="SubjectForm.invalid">
+         <button type="submit" class="btn btn-dark All2" [disabled]="SubjectForm.invalid">
           Ok
         </button>
       </div>
@@ -96,22 +90,13 @@
         enctype="multipart/form-data"
       >
       @if (message=='error in Add') {
-       <h3 class="text-center fw-bolder my-1">{{message}}</h3>
+       <h3 class="text-center fw-bolder my-1 All3">{{message}}</h3>
       }
-        <h3 class="text-center fw-bolder my-1">Update subject</h3>
-        <!-- <div class="col-10 mx-auto">
-          <label for="Year" class="form-label">Year </label>
-          <select name="Year" id="Year" required [(ngModel)]="subject.yearId">
-            @for (item of years; track $index) {
-            <option [value]="item.id">{{ item.name }}</option>
-            }
-          </select>
-        </div> -->
         <div class="col-10 mx-auto">
-          <label for="name" class="form-label">Name</label>
+          <label for="name" class="form-label All2">Name</label>
           <input
             type="text"
-            class="form-control"
+            class="form-control All2"
             id="name"
             required
             name="name"
@@ -125,7 +110,7 @@
               'is-valid': Titleinput.valid
             }"
           />
-          <div class="invalid-feedback">
+          <div class="invalid-feedback All3">
             @if (Titleinput.errors?.['required'] ) {
             <span>name is required</span>
             } @else if (Titleinput.errors?.['minlength'] ) {
@@ -134,8 +119,8 @@
           </div>
         </div>
         <div class="col-10 mx-auto">
-          <button type="submit" class="btn btn-dark" [disabled]="examForm.invalid">
-            Add
+          <button type="submit" class="btn btn-dark All2" [disabled]="examForm.invalid">
+            Update
           </button>
         </div>
       </form>

@@ -1,62 +1,43 @@
-@if (departments) {
-<div class="container-ms|md|lg|xl|xxl w-100">
-  <header style="background-color: #0540F2;" class="container-ms|md|lg|xl|xxl w-100 text-light All font1 py-3 py-sm-2 z-2">
-  {{college.name}}
-  </header>
-  <div class="container-fluid d-flex flex-column flex-md-row align-items-center align-items-md-baseline w-100 my-2">
-      <!-- <nav style="background-color: #77A0F2;" class="navbar col-2 col-sm-1 h-100 position-fixed text-light All3 flex-column flex-sm-row justify-content-center z-1">
-          <div class="container-fluid col-12">
-              <ul class="navbar-nav col-12">
-                  <li class="nav-item col-12 All my-5">
-                      <a href="#up" class="nav-link">
-                          <img class="mx-auto d-block imgw rounded-circle" src="png-clipart-long-beach-christian-fellowship-computer-icons-graphy-up-arrow-miscellaneous-angle-thumbnail.png" alt="">
-                      </a>
-                  </li>
-                  <li class="nav-item col-12 All my-5">
-                      <a href="http://193.227.46.42/ZAD_fci/Zad.aspx" target="_blank" class="nav-link">
-                          <img class="mx-auto d-block imgw rounded-circle" src="download.png" alt="">
-                      </a>
-                  </li>
-                  <li class="nav-item col-12 All my-5">
-                      <a href="https://fci.sohag-univ.edu.eg/main/" target="_blank" class="nav-link">
-                          <img class="mx-auto d-block imgw rounded-circle" src="image8-2.jpg">
-                      </a>
-                  </li>
-                  <li class="nav-item col-12 All my-5">
-                      <a href="https://www.facebook.com/groups/419995525365826/" target="_blank" class="nav-link">
-                          <img class="mx-auto d-block imgw rounded-circle" src="2023_Facebook_icon.svg.webp">
-                      </a>
-                  </li>
-              </ul>
-          </div>
-      </nav> -->
-      <div class="container w-100">
-        <div class="container my-1 d-flex justify-content-center flex-column align-items-center bg-dark-subtle">
-          <h2 class="row w-100 d-flex justify-content-center fw-bold my-1 py-2">Departments</h2>
-          <div class="container d-flex justify-content-center align-items-center bg-dark-subtle">
-          @for (depart of departments; track depart) {
-            <div class="flex-fill py-3">
-              <button  (click)="setDepartment(depart)" style="background-color: #77A0F2;"
-                 class="btn text-light w-100">{{depart.name}}</button>
-            </div>
-              }
-        </div>
-        </div>
-          <div class="container w-100 d-flex flex-column flex-md-row-reverse align-items-center align-items-md-stretch justify-content-md-evenly">
-                <app-year class="row col-12 col-md-3"></app-year>
-                <app-subject class="row col-12 col-md-3"></app-subject>
-                <app-subject-content class="row col-12 col-md-3"></app-subject-content>
-                <app-content class="row col-12 col-md-3"></app-content>
-          </div>
-      </div>
-  </div>
-  <footer style="background-color: #152659;" class="text-light All align-items-center w-100 pt-2">
-      <p class="font3 d-flex justify-content-center col-12 align-items-center" style="opacity:0.4;">Copyright&copy;Your Website 2024</p>
-  </footer>
-  </div>
-}@else {
-  <div class="d-flex justify-content-center my-5">
-    <h1 class="text-bg-danger">Database is empty</h1>
-  </div>
-}
+<div class="d-flex flex-column min-vh-100">
 
+  <header style="background-color: #0540F2;" class="text-light All font1 py-3 py-sm-2 z-2">
+
+    <div class="col-3 d-flex justify-content-evenly">
+      <a class="d-flex justify-content-between align-items-center p-1 rounded-1 hov "
+      ><img style="width: 2.8vw" [src]="college.imge" alt="photo"
+      />
+      <span class="title All2"> {{college.name}}</span>
+    </a>
+    </div>
+
+    <a href="" class="hov p-1 rounded-1"
+        ><i class="icwn fa-solid fa-house-chimney"></i
+    ></a>
+  </header>
+
+  <div class="container-fluid flex-grow-1 d-flex flex-column align-items-center">
+    <div class="container my-1 d-flex justify-content-center flex-column align-items-center" style="background-color: #BFBFBF;">
+      <h2 class="my-1 py-2 All2">Departments</h2>
+      <div class="container d-flex justify-content-center align-items-center">
+        @for (depart of departments; track depart) {
+          <div class="flex-fill py-3">
+            <button (click)="setDepartment(depart)" style="background-color: #77A0F2;" class="btn text-light w-100 All2">
+              {{depart.name}}
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="container w-100 d-flex flex-column flex-md-row-reverse align-items-center align-items-md-stretch justify-content-md-evenly">
+      <app-year class="col-12 col-md-3"></app-year>
+      <app-subject class="col-12 col-md-3"></app-subject>
+      <app-subject-content class="col-12 col-md-3"></app-subject-content>
+      <app-content class="col-12 col-md-3"></app-content>
+    </div>
+  </div>
+
+  <footer style="background-color: #152659;" class="text-light text-center w-100 py-2 mt-auto">
+    <p class="font3" style="opacity:0.4;">Copyright&copy;Your Website 2024</p>
+  </footer>
+</div>

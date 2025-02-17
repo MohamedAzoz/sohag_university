@@ -108,12 +108,12 @@
     (ngSubmit)="onSubmit(exam)"
     enctype="multipart/form-data"
   >
-    <h3 class="text-center fw-bolder my-1">Add New Exam</h3>
+    <h3 class="text-center fw-bolder my-1 All1">Add New Exam</h3>
     <div class="col-10 mx-auto">
-      <label for="Title" class="form-label">Title</label>
+      <label for="Title" class="form-label All2">Title</label>
       <input
         type="text"
-        class="form-control"
+        class="form-control All2"
         id="Title"
         required
         placeholder="lecture 1"
@@ -127,7 +127,7 @@
           'is-valid': Titleinput.valid
         }"
       />
-      <div class="invalid-feedback">
+      <div class="invalid-feedback All3">
         @if (Titleinput.errors?.['required'] ) {
         <span>name is required</span>
         } @else if (Titleinput.errors?.['minlength'] ) {
@@ -135,8 +135,8 @@
         }
       </div>
     </div>
-      <div class="col-10 mx-auto">
-          <label for="subject" class="form-label">subject </label>
+      <div class="col-10 mx-auto All2">
+          <label for="subject" class="form-label All2">subject </label>
           <select name="subject" id="subject" required [(ngModel)]="exam.subjectId">
             @for (item of subjects; track $index) {
             <option [value]="item.id">{{ item.name }}</option>
@@ -144,10 +144,10 @@
           </select>
       </div>
     <div class="col-10 mx-auto">
-      <label for="url" class="form-label">url</label>
+      <label for="url" class="form-label All2">url</label>
       <input
         type="text"
-        class="form-control"
+        class="form-control All2"
         id="url"
         required
         name="url"
@@ -159,17 +159,17 @@
           'is-valid': fileinput.valid
         }"
       />
-      <div class="invalid-feedback">
+      <div class="invalid-feedback All3">
         @if (fileinput.errors?.['required'] ) {
         <span>file is required</span>
         }
       </div>
     </div>
     <div class="col-10 mx-auto">
-      <label for="year" class="form-label">year</label>
+      <label for="year" class="form-label All2">year</label>
       <input
         type="number"
-        class="form-control"
+        class="form-control All2"
         id="year"
         placeholder="2025"
         required
@@ -184,7 +184,7 @@
           'is-valid': yearinput.valid
         }"
       />
-      <div class="invalid-feedback">
+      <div class="invalid-feedback All3">
         @if (yearinput.errors?.['required'] ) {
         <span>year is required</span>
         } @else if (yearinput.errors?.['minlength'] ) {
@@ -193,7 +193,7 @@
       </div>
     </div>
     <div class="col-10 mx-auto">
-      <button type="submit" class="btn btn-dark" [disabled]="examForm.invalid">
+      <button type="submit" class="btn btn-dark All2" [disabled]="examForm.invalid">
         Add Exam
       </button>
     </div>
@@ -202,7 +202,7 @@
 }
 @if (bool==true) {
   <div class="container my-5 d-flex justify-content-center text-bg-success">
-    <h3 class="text-center fw-bolder my-1">{{message}}</h3>
+    <h3 class="text-center fw-bolder my-1 All2">{{message}}</h3>
     </div>
  }
 

@@ -7,14 +7,14 @@
       enctype="multipart/form-data"
     >
     @if (message=='error in Add') {
-     <h3 class="text-center fw-bolder my-1">{{message}}</h3>
+     <h3 class="text-center fw-bolder my-1 All3">{{message}}</h3>
     }
-      <h3 class="text-center fw-bolder my-1">Add New Department</h3>
+      <h3 class="text-center fw-bolder my-1 All1">Add New Department</h3>
       <div class="col-10 mx-auto">
-        <label for="name" class="form-label">Name</label>
+        <label for="name" class="form-label All2">Name</label>
         <input
           type="text"
-          class="form-control"
+          class="form-control All2"
           id="name"
           required
           name="name"
@@ -27,7 +27,7 @@
             'is-valid': Titleinput.valid
           }"
         />
-        <div class="invalid-feedback">
+        <div class="invalid-feedback All3">
           @if (Titleinput.errors?.['required'] ) {
           <span>name is required</span>
           } @else if (Titleinput.errors?.['minlength'] ) {
@@ -35,8 +35,8 @@
           }
         </div>
       </div>
-      <div class="col-10 mx-auto">
-        <label for="subject" class="form-label">college </label>
+      <div class="col-10 mx-auto All2">
+        <label for="subject" class="form-label All2">college </label>
         <select name="subject" id="subject" required [(ngModel)]="department.collegeId">
           @for (item of colleges; track $index) {
           <option [value]="item.id">{{ item.name }}</option>
@@ -44,7 +44,7 @@
         </select>
       </div>
       <div class="col-10 mx-auto">
-        <button type="submit" class="btn btn-dark" [disabled]="examForm.invalid">
+        <button type="submit" class="btn btn-dark All2" [disabled]="examForm.invalid">
           Add
         </button>
       </div>
@@ -53,7 +53,7 @@
 }
 @if (bool==true) {
   <div class="container my-5 d-flex justify-content-center text-bg-success">
-    <h3 class="text-center fw-bolder my-1">{{message}}</h3>
+    <h3 class="text-center fw-bolder my-1 All2">{{message}}</h3>
     </div>
     <div class="container my-5 d-flex justify-content-center">
       <button class="btn btn-primary All1" (click)="back()">go Back</button>

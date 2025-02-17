@@ -20,13 +20,6 @@
       "username": "2134567891011",
       "password": "200445",
       "role": "doctor"
-    },
-    {
-      "id": "4127",
-      "role": "student",
-      "name": "Aya",
-      "username": "1654687865462",
-      "password": "200445"
     }
   ],
   "student_data": [
@@ -35,12 +28,6 @@
       "studentId": "5467",
       "collegeId": "CS",
       "yearId": "4it"
-    },
-    {
-      "id": "34fa",
-      "collegeId": "CS",
-      "yearId": "1",
-      "studentId": "4127"
     }
   ],
   "notification": [
@@ -61,18 +48,19 @@
       "id": "all44",
       "doctorId": "5789",
       "collegesId": [
-        "CS",
-        "EDU"
+        "CS"
       ],
       "departmentId": [
         "it",
         "Cs",
+        "general",
         "Network"
       ],
       "yearsId": [
         "4it",
+        "4N",
         "4cs",
-        "4N"
+        "3"
       ],
       "subjectsId": [
         "Data",

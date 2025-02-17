@@ -30,9 +30,9 @@ constructor(
     this.user_service.getUsers().subscribe((data)=>{
       this.users=data.filter((value)=>(value.role===role));
       this.bool1=true;
-     })
+     });
   }
-  DeleteCollege(user:User){
+  DeleteUser(user:User){
     let Sdata:StudentData|undefined;
     let Ddata:DoctorData|undefined;
     this.student_service.getDataUsers().subscribe((value)=>{
