@@ -1,4 +1,5 @@
-import { Component , AfterViewInit, OnInit} from '@angular/core';
+import { Component , AfterViewInit, OnInit, PLATFORM_ID,Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { AppHomeService } from '../../../service/app-home.service';
 import { Carousel } from '../../../models/carousel';
 declare const bootstrap: any;
@@ -12,15 +13,16 @@ declare const bootstrap: any;
 export class CarouselComponent implements OnInit ,AfterViewInit{
   carousels!:Carousel[]
   constructor(
-    private carousel_Service:AppHomeService
-  ){
+    private carousel_Service:AppHomeService,
+    @Inject(PLATFORM_ID) private platformId: Object) {}
 
-  }
-  ngAfterViewInit(): void {
-    const scrollSpy = new bootstrap.ScrollSpy(document.body, {
-      target: '#nav',
-    });
-  }
+    ngAfterViewInit() {
+      if (isPlatformBrowser(this.platformId)) {
+        new bootstrap.ScrollSpy(document.body, {
+          target: '#nav',
+        });
+      }
+    }
   ngOnInit(): void {
    this.carousel_Service.getCarousels().subscribe((data)=>{
       this.carousels=data;

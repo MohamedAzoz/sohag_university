@@ -1,4 +1,5 @@
-import { Component, AfterViewInit, OnInit} from '@angular/core';
+import { Component , AfterViewInit, OnInit, PLATFORM_ID,Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterLink, RouterModule } from '@angular/router';
 import { CollegeServiceService } from '../../../service/college-service.service';
 import { College } from '../../../models/college';
@@ -34,8 +35,9 @@ export class NavbarComponent implements AfterViewInit ,OnInit{
     private admin_service:AdminService,
     private student_service:StudentService,
     private doctor_service:DoctorService,
-    private user_service:UserServiceService
-  ){}
+    private user_service:UserServiceService,
+    @Inject(PLATFORM_ID) private platformId: Object) {}
+
   ngOnInit(): void {
     this.auth_service.current_bool.subscribe((bool)=>{
       this.islook=bool;
@@ -78,12 +80,14 @@ export class NavbarComponent implements AfterViewInit ,OnInit{
     // });
 
   }
-  ngAfterViewInit(): void {
-    // ScrollSpy
-    const scrollSpy = new bootstrap.ScrollSpy(document.body, {
-      target: '#nav',
-    });
-  }
+
+     ngAfterViewInit() {
+       if (isPlatformBrowser(this.platformId)) {
+         new bootstrap.ScrollSpy(document.body, {
+           target: '#nav',
+         });
+       }
+     }
 getUser(id:string){
   let userObservable=new Observable<User|undefined>();
 this.user_service.getUsers().subscribe((users)=>{

@@ -1,9 +1,10 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit ,Inject, PLATFORM_ID} from '@angular/core';
 import { College } from '../../../models/college';
 import { RouterModule } from '@angular/router';
 import { CollegeServiceService } from '../../../service/college-service.service';
-declare const bootstrap: any;
+import { isPlatformBrowser } from '@angular/common';
 
+declare let bootstrap: any;
 
 @Component({
   selector: 'app-colleges',
@@ -14,17 +15,21 @@ declare const bootstrap: any;
 export class CollegesComponent implements OnInit , AfterViewInit{
 colleges!:College[]
 constructor(
-  private college_service:CollegeServiceService
+  private college_service:CollegeServiceService,
+  @Inject(PLATFORM_ID) private platformId: Object
 ){}
 ngOnInit(): void {
   this.college_service.getColleges().subscribe((data)=>{
     this.colleges=data
   })
 }
-ngAfterViewInit(): void {
-  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-  const tooltipList = Array.from(tooltipTriggerList).map(
-    tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl)
-  );
-}
+
+  ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+      tooltipTriggerList.forEach(tooltipTriggerEl => {
+        new bootstrap.Tooltip(tooltipTriggerEl);
+      });
+    }
+  }
 }
