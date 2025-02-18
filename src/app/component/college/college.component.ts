@@ -14,6 +14,7 @@ import { ContentComponent } from '../content/content.component';
   templateUrl: './college.component.html',
   styleUrl: './college.component.css'
 })
+
 export class CollegeComponent implements OnInit {
   departments!:Department[];
   college!:College;
@@ -21,28 +22,29 @@ export class CollegeComponent implements OnInit {
     private college_Service:CollegeServiceService,
     private acriva:ActivatedRoute
   ){
-
   }
-  ngOnInit(): void {
-   this.acriva.paramMap.subscribe((v)=>{
-    const Id=v.get('id')
-if(Id){
-    console.log(Id)
-    this.college_Service.getDepartments(Id).subscribe((Depart)=>{
-       this.departments= Depart
+  ngOnInit() {
+    this.acriva.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
+        this.getCollegeData(id);
+      }
     });
-
-    this.college_Service.getCollege(Id).subscribe((V)=>{
-      this.college=V
-    });
-  }else{
-    console.log("============ error code  =============");
   }
-   });
 
+  getCollegeData(id: string) {
+    this.college_Service.getColleges().subscribe((value)=>{
+      let data=value.find((college)=>(college.id=id))
+        if (data) {
+          this.college = data;
+        } else {
+          console.error('College data is null');
+        }
 
-
+  });
   }
+
+
 
   setDepartment(depart:Department){
     this.college_Service.setDepartment(depart)

@@ -3,7 +3,7 @@ import { HomeComponent } from './component/app-home/home/home.component';
 import { ErrorComponent } from './component/error/error.component';
 import { MainComponent } from './component/main/main.component';
 import { LoginComponent } from './component/app-home/login/login.component';
-import { CollegeComponent } from './component/college/college.component';
+// import { CollegeComponent } from './component/college/college.component';
 import { FormAddCollegeComponent } from './component/Controls/Admin/form-add-college/form-add-college.component';
 import { FormUpdateCollegeComponent } from './component/Controls/Admin/form-update-college/form-update-college.component';
 import { FormDeleteCollegeComponent } from './component/Controls/Admin/form-delete-college/form-delete-college.component';
@@ -58,7 +58,7 @@ export const routes: Routes = [
   {path:"",component:MainComponent,children:[
     {path:"",component:HomeComponent , title:"جامعة سوهاج"},
     {path:"login",component:LoginComponent , title:"Login"},
-    {path:"college/:id", component:CollegeComponent , title:"College"},
+    {path:"college/:id",loadChildren: () => import('./component/college/college.component').then(m => m.CollegeComponent), title:"College"},
   ]},
   {path:"student", component:StudentDashboardComponent , title:"Student Dashboard",canActivate:[authGuardGuard],children:[
       {path:"", redirectTo:"student",pathMatch:'full'},

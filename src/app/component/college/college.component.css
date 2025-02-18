@@ -11,59 +11,15 @@ a{
   text-decoration: none;
   color: #000;
 }
-.All {
+.Flex {
   display: flex;
   justify-content: space-evenly;
 }
 
-.All2 {
+.Flex2 {
   display: flex;
   flex-direction: column;
 }
-.All3{
-  display: flex;
-  justify-content:space-around;
-}
 
-.textc {
-  text-align: center;
-}
 
-@media screen and (max-width:500px) {
-  .font1 {
-      font-size: 4vw;
-      font-weight: bolder;
-  }
 
-  .font2 {
-      font-size: 3.3vw;
-      font-weight: bolder;
-  }
-
-  .font3 {
-      font-size: 3vw;
-      font-weight: bolder;
-  }
-  .imgw{
-      width: 65%;
-  }
-}
-@media screen and (min-width:501px) {
-  .font1 {
-      font-size: 2.2vw;
-      font-weight: bold;
-  }
-
-  .font2 {
-      font-size: 1.9vw;
-      font-weight: bold;
-  }
-
-  .font3 {
-      font-size: 1.6vw;
-      font-weight: bold;
-  }
-  .imgw{
-      width:50%;
-  }
-}

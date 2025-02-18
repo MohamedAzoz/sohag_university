@@ -1,6 +1,6 @@
 <div class="d-flex flex-column min-vh-100">
 
-  <header style="background-color: #0540F2;" class="text-light All font1 py-3 py-sm-2 z-2">
+  <header style="background-color: #0540F2;" class="text-light Flex py-3 py-sm-2 z-2">
 
     <div class="col-3 d-flex justify-content-evenly">
       <a class="d-flex justify-content-between align-items-center p-1 rounded-1 hov "
@@ -21,7 +21,7 @@
       <div class="container d-flex justify-content-center align-items-center">
         @for (depart of departments; track depart) {
           <div class="flex-fill py-3">
-            <button (click)="setDepartment(depart)" style="background-color: #77A0F2;" class="btn text-light w-100 All2">
+            <button (click)="setDepartment(depart)" style="background-color: #77A0F2;" class="btn text-light w-100 Flex2">
               {{depart.name}}
             </button>
           </div>
@@ -38,6 +38,6 @@
   </div>
 
   <footer style="background-color: #152659;" class="text-light text-center w-100 py-2 mt-auto">
-    <p class="font3" style="opacity:0.4;">Copyright&copy;Your Website 2024</p>
+    <p class="All3" style="opacity:0.4;">Copyright&copy;Your Website 2024</p>
   </footer>
 </div>

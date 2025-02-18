@@ -6,10 +6,7 @@
 .d {
     display: none;
 }
-/* .ic{
-    opacity: 0;
-    transition: opacity 0.5s ease-out;
-} */
+
 .icsh{
     opacity: 1;
 }
